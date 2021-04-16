@@ -15,6 +15,19 @@ class CreateCreditRequestsTable extends Migration
     {
         Schema::create('credit_requests', function (Blueprint $table) {
             $table->id();
+            //informacion de credito
+            $table->string('number')->nullable();
+            $table->string('city')->nullable();
+            $table->date('date_request')->nullable();
+            $table->string('type_credit')->nullable();
+            $table->string('amoutn')->nullable();
+            $table->string('reason_invest')->nullable();
+            $table->string('pay')->nullable();
+            $table->boolean('monthly')->nullable();
+            $table->string('plazo')->nullable();
+            $table->bool('variable_fee')->nullable();
+            $table->enum('credit_segment',['Microcrédito','Consumo','Inversión','Vivienda']);
+            
             $table->timestamps();
         });
     }
