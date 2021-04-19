@@ -25,7 +25,7 @@ class CreateCreditRequestsTable extends Migration
             $table->string('pay')->nullable();
             $table->boolean('monthly')->nullable();
             $table->string('plazo')->nullable();
-            $table->bool('variable_fee')->nullable();
+            $table->boolean('variable_fee')->nullable();
             $table->enum('credit_segment',['Microcrédito','Consumo','Inversión','Vivienda']);
             
             $table->timestamps();

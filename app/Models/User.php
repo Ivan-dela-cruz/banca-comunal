@@ -7,11 +7,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
     use HasFactory, Notifiable, SoftDeletes;
-
+    use HasRoles;
 
 
     /**
@@ -19,6 +20,8 @@ class User extends Authenticatable
      *
      * @var array
      */
+    protected $table='users';
+    protected $guard_name = 'web';
     protected $fillable = [
         'name',
         'last_name',
