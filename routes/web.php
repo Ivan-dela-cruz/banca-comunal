@@ -10,7 +10,8 @@ use App\Http\Controllers\{
 use App\Http\Livewire\ShowEvents;
 use App\Http\Livewire\Members\{
     Member,
-    NewMember
+    NewMember,
+    References,
 };
 use App\Http\Livewire\Roles\{
     Roles

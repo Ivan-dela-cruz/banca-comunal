@@ -9,7 +9,7 @@ class Member extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    
+
     protected $table = 'members';
     protected $fillable = [
         'name',
@@ -26,10 +26,14 @@ class Member extends Model
         'acount_number',
         'status'
     ];
-            
+
     public function detail()
     {
         return $this->hasOne(DetailMember::class, 'member_id');
-       
+
+    }
+
+    public function references(){
+        return $this->hasMany(MemberReferences::class, 'member_id');
     }
 }
