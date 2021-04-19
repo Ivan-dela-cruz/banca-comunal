@@ -16,20 +16,20 @@
     <!-- BEGIN: CSS Assets-->
     <link rel="stylesheet" href="{{ mix('dist/css/app.css') }}" />
     <!-- END: CSS Assets-->
-   
+
     @livewireStyles
     @livewireScripts
 </head>
 <!-- END: Head -->
 
 <body class="app">
-   
+
 @section('head')
 @yield('subhead')
 @endsection
 
     <div class="flex">
-    
+
         <nav class="side-nav">
             <a href="" class="intro-x flex items-center pl-5 pt-4">
                 <img alt="User" class="w-6" src="{{ asset('dist/images/logo.svg') }}">
@@ -39,7 +39,7 @@
             </a>
             <div class="side-nav__devider my-6"></div>
             <nav class="side-nav">
-            
+
                 <ul>
                     <li>
                         <a href="" class="side-menu {{ (request()->is('dashboard')) ? 'side-menu--active' : '' }} ">
@@ -65,11 +65,11 @@
                                     <div class="side-menu__title"> Usuarios </div>
                                 </a>
                             </li>
-                        
+
                         </ul>
                     </li>
                     <li>
-                        <a href="javascript:;" 
+                        <a href="javascript:;"
                             class="side-menu @if(request()->is('miembros') || request()->is('nuevo-miembro'))side-menu--active side-menu--open @endif">
                             <div class="side-menu__icon"> <i class="md:text-green-600" data-feather="users"></i> </div>
                             <div class="side-menu__title"> Clientes <i data-feather="chevron-down" class="side-menu__sub-icon"></i> </div>
@@ -87,7 +87,7 @@
                                     <div class="side-menu__title"> Listado </div>
                                 </a>
                             </li>
-                        
+
                         </ul>
                     </li>
                     <li>
@@ -108,7 +108,7 @@
                                     <div class="side-menu__title"> Usuarios </div>
                                 </a>
                             </li>
-                        
+
                         </ul>
                     </li>
                     <li>
@@ -129,7 +129,7 @@
                                     <div class="side-menu__title"> Usuarios </div>
                                 </a>
                             </li>
-                        
+
                         </ul>
                     </li>
                     <li>
@@ -150,7 +150,7 @@
                                     <div class="side-menu__title"> Usuarios </div>
                                 </a>
                             </li>
-                        
+
                         </ul>
                     </li>
                     <li>
@@ -171,7 +171,7 @@
                                     <div class="side-menu__title"> Usuarios </div>
                                 </a>
                             </li>
-                        
+
                         </ul>
                     </li>
                     <li>
@@ -192,7 +192,7 @@
                                     <div class="side-menu__title"> Usuarios </div>
                                 </a>
                             </li>
-                        
+
                         </ul>
                     </li>
                     <li>
@@ -213,7 +213,7 @@
                                     <div class="side-menu__title"> Usuarios </div>
                                 </a>
                             </li>
-                        
+
                         </ul>
                     </li>
                     <li>
@@ -234,7 +234,7 @@
                                     <div class="side-menu__title"> Usuarios </div>
                                 </a>
                             </li>
-                        
+
                         </ul>
                     </li>
                     <li>
@@ -255,10 +255,10 @@
                                     <div class="side-menu__title"> Usuarios </div>
                                 </a>
                             </li>
-                        
+
                         </ul>
                     </li>
-                    
+
                 </ul>
             </nav>
         </nav>
@@ -273,7 +273,7 @@
 
     @include('../layout/components/dark-mode-switcher')
 
-  
+
 
     @yield('script')
 
@@ -281,6 +281,12 @@
     <!-- BEGIN: JS Assets-->
     <script src="{{ mix('dist/js/app.js') }}"></script>
     <!-- END: JS Assets-->
+
+    <script>
+        window.livewire.on('modal-hide', () => {
+            $('#references-modal').modal('hide');
+        });
+    </script>
 </body>
 
 </html>

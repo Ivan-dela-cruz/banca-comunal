@@ -32,12 +32,12 @@ class CreateDetailMembersTable extends Migration
             $table->string('secundary_street')->nullable();
             $table->string('reference_place')->nullable();
             //referencias personales
-            $table->string('name_reference')->nullable();
-            $table->string('last_name_reference')->nullable();
-            $table->string('dni_reference')->nullable();
-            $table->string('relationship')->nullable();
-            $table->string('time_to_meet')->nullable();
-            $table->string('instruction_reference')->nullable();
+//            $table->string('name_reference')->nullable();
+//            $table->string('last_name_reference')->nullable();
+//            $table->string('dni_reference')->nullable();
+//            $table->string('relationship')->nullable();
+//            $table->string('time_to_meet')->nullable();
+//            $table->string('instruction_reference')->nullable();
             $table->softDeletes();
             $table->timestamps();
             $table->string('dato1')->nullable();
