@@ -18,7 +18,7 @@
     <!-- END: CSS Assets-->
    
     @livewireStyles
-    @livewireScripts
+
 </head>
 <!-- END: Head -->
 
@@ -244,7 +244,7 @@
                         </a>
                         <ul class="">
                             <li>
-                                <a href="/members"  class="side-menu">
+                                <a href="/roles"  class="side-menu">
                                     <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
                                     <div class="side-menu__title"> Roles & Permisos </div>
                                 </a>
@@ -278,6 +278,10 @@
     @yield('script')
 
     @livewireScripts
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10">
+    </script>
+    ...
+    <x-livewire-alert::scripts />
     <!-- BEGIN: JS Assets-->
     <script src="{{ mix('dist/js/app.js') }}"></script>
     <!-- END: JS Assets-->
