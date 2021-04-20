@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Member;
+use App\Models\MemberReference;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 use App\Models\User;

@@ -34,12 +34,16 @@ class NewMember extends Component
     ];
     public $pageFrame = 1;
 
-    public $data_id, $name, $last_name, $dni, $passport, $instruction, $marital_status, $birth_date, $email, $phone1, $phone2, $status = true, $url_image, $member_type, $acount_number;
-    public $member_id = null, $name_spouse, $last_name_spouse, $dni_spouse, $passport_spouse, $birth_date_spouse, $email_spouse, $phone1_spouse, $phone2_spouse, $city;
+    public $data_id, $status = true, $url_image, $member_type, $acount_number;
+    public $member_id = null, $city;
     public $canton, $parish, $principal_street, $secundary_street, $reference_place;
     public $members;
     public $modal = false, $input_search = '', $action = 'POST';
 
+    //Personal Data
+    public $name, $last_name, $dni, $passport, $instruction, $marital_status, $birth_date, $email, $phone1, $phone2;
+    //Spouse Data
+    public $name_spouse, $last_name_spouse, $dni_spouse, $passport_spouse, $birth_date_spouse, $email_spouse, $phone1_spouse, $phone2_spouse;
     //References
     public $action_ref = 'POST';
     public $reference_id = null, $name_ref, $last_name_ref, $dni_ref, $relationship_ref, $instruction_ref, $time_to_meet_ref;
@@ -236,6 +240,38 @@ class NewMember extends Component
 
     public function storePersonal()
     {
+
+        $this->validate([
+            'name' => 'required|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u|max:255',
+            'last_name' => 'required|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u|max:255',
+            'dni' => ['required', 'unique:members,dni', 'numeric', 'digits:10'],
+            'passport' => 'numeric',
+            'instruction' => 'required',
+            'marital_status' => 'required',
+            'birth_date' => 'required',
+            'email' => ['required', 'email', 'unique:users,email'],
+            'phone1' => 'required',
+            'phone2' => 'numeric',
+        ], [
+            'name.required' => 'Campo obligatorio.',
+            'last_name.required' => 'Campo obligatorio.',
+            'name.regex' => 'Campo inválido.',
+            'last_name.regex' => 'Campo inválido.',
+            'dni.required' => 'Campo obligatorio.',
+            'dni.unique' => 'La identificación ya existe.',
+            'dni.numeric' => 'Campo obligatorio.',
+            'dni.digits' => 'Campo obligatorio.',
+            'passport.numeric' => 'Campo inválido.',
+            'instruction.required' => 'Campo obligatorio.',
+            'marital_status.required' => 'Campo obligatorio.',
+            'birth_date.required' => 'Campo obligatorio.',
+            'email.required' => 'Campo obligatorio.',
+            'email.email'=>'Campo inválido.',
+            'email.unique'=>'El correo ya existe.',
+            'phone1.required' => 'Campo obligatorio.',
+            'phone2.numeric' => 'Campo inválido.',
+        ]);
+
         $data_member = [
             'name' => $this->name,
             'last_name' => $this->last_name,
@@ -259,11 +295,33 @@ class NewMember extends Component
         } else {
             $member_t->update($data_member);
         }
-        //$this->alert('success','¡Registro ingresado exitosamente!');
+        $this->alert('success', 'Datos Personales registrados con exito.');
     }
 
     public function storeSpouse()
     {
+        $this->validate([
+            'name_spouse' => 'regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u|max:255',
+            'last_name_spouse' => 'regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u|max:255',
+            'dni_spouse' => 'numeric|digits:10',
+            'passport_spouse' => 'numeric',
+            //'birth_date_spouse',
+            'email_spouse' => ['email', 'unique:detail_members,email_spouse'],
+            'phone1_spouse' => 'numeric|digits:10',
+            'phone2_spouse' => 'numeric|digits:10',
+        ],[
+            'name_spouse.regex'=>'Campo inválido.',
+            'last_name_spouse.regex'=>'Campo inválido.',
+            'dni_spouse.numeric' => 'Campo inválido.',
+            'dni_spouse.digits' => 'Campo inválido.',
+            'passport_spouse.numeric' =>'Campo inválido.',
+//            'birth_date_spouse',
+            'email_spouse.email'=>'Campo inválido.',
+            'email_spouse.unique'=>'El correo ya existe.',
+            'phone1_spouse.numeric'=>'Campo inválido.',
+            'phone2_spouse.numeric'=>'Campo inválido.',
+        ]);
+
         $detail = DetailMember::where('member_id', $this->member_id);
         $data_deatil = [
             'member_id' => $this->member_id,
@@ -277,7 +335,7 @@ class NewMember extends Component
             'phone2_spouse' => $this->phone2_spouse
         ];
         $detail->update($data_deatil);
-        //$this->alert('success','¡Registro agregado exitosamente!');
+        $this->alert('success', 'Datos del/la Cónyuge registrados con exito.');
     }
 
     public function storeAddress()
@@ -392,36 +450,45 @@ class NewMember extends Component
             'position' => 'bottom-end']);
     }
 
-    //    public function storeReference()
-//    {
-//        $detail = DetailMember::where('member_id',$this->member_id);
-//        $data_deatil = [
-//            'name_reference'=>$this->name_reference,
-//            'last_name_reference'=>$this->last_name_reference,
-//            'dni_reference'=>$this->dni_reference,
-//            'relationship'=>$this->relationship,
-//            'time_to_meet'=>$this->time_to_meet,
-//            'instruction_reference'=>$this->instruction_reference
-//        ];
-//        $detail->update($data_deatil);
-//        //$this->alert('success', 'Registro agregado con exíto!');
-//    }
 
 #region REFERENCES CRUD
     public function storeReference()
     {
-        $data = [
-            'member_id' => $this->member_id,
-            'name' => $this->name_ref,
-            'last_name' => $this->last_name_ref,
-            'dni' => $this->dni_ref,
-            'relationship' => $this->relationship_ref,
-            'time_to_meet' => $this->time_to_meet_ref,
-            'instruction' => $this->instruction_ref
-        ];
-        MemberReference::create($data);
-        $this->resetInputFieldsRef();
-        $this->alert('success', 'Referencia agregada con exito.',[ 'showCancelButton' =>  false, ]);
+        $this->validate([
+            'name_ref'=>'required|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u|max:255',
+            'last_name_ref'=>'required|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u|max:255',
+            'dni_ref'=>'required|numeric|digits:10',
+            'relationship_ref'=>'required',
+            'instruction_ref'=>'required',
+            'time_to_meet_ref'=>'required',
+        ],[
+            'name_ref.required'=>'Campo obligatoio.',
+            'name_ref.regex'=>'Campo inválido.',
+            'last_name_ref.required'=>'Campo obligatoio.',
+            'dni_ref.required'=>'Campo obligatoio.',
+            'dni_ref.numeric'=>'Campo inválido.',
+            'dni_ref.digits'=>'Campo inválido.',
+            'relationship_ref.required'=>'Campo obligatoio.',
+            'instruction_ref.required'=>'Campo obligatoio.',
+            'time_to_meet_ref.required'=>'Campo obligatoio.',
+        ]);
+        if($this->member_id != null){
+            $data = [
+                'member_id' => $this->member_id,
+                'name' => $this->name_ref,
+                'last_name' => $this->last_name_ref,
+                'dni' => $this->dni_ref,
+                'relationship' => $this->relationship_ref,
+                'time_to_meet' => $this->time_to_meet_ref,
+                'instruction' => $this->instruction_ref
+            ];
+            MemberReference::create($data);
+            $this->resetInputFieldsRef();
+            $this->alert('success', 'Referencia agregada con exito.', ['showCancelButton' => false,]);
+        }else{
+            $this->alert('warning', 'Seleccione o Registre un miembro.', ['showCancelButton' => false,]);
+        }
+
     }
 
     public function editReference($id)
@@ -440,7 +507,6 @@ class NewMember extends Component
 
     public function updateReference()
     {
-        //dd('update');
         $reference = MemberReference::where('id', $this->reference_id);
         $data = [
             'name' => $this->name_ref,
@@ -451,14 +517,14 @@ class NewMember extends Component
             'time_to_meet' => $this->time_to_meet_ref,
         ];
         $reference->update($data);
-        $this->alert('success', 'Referencia actualizada con exito.',[ 'showCancelButton' =>  false, ]);
+        $this->alert('success', 'Referencia actualizada con exito.', ['showCancelButton' => false,]);
         $this->resetInputFieldsRef();
     }
 
     public function deleteReference($id)
     {
         MemberReference::find($id)->delete();
-        $this->alert('success', 'Referencia eliminada con exito.',[ 'showCancelButton' =>  false, ]);
+        $this->alert('success', 'Referencia eliminada con exito.', ['showCancelButton' => false,]);
 
     }
 
@@ -466,15 +532,12 @@ class NewMember extends Component
     {
         $this->action_ref = 'POST';
         $this->reference_id = null;
-        //$this->member_id = null;
         $this->name_ref = '';
         $this->last_name_ref = '';
         $this->dni_ref = '';
         $this->relationship_ref = '';
         $this->instruction_ref = '';
         $this->time_to_meet_ref = '';
-
-//        $this->loadReferences();
     }
 #endregion
 
