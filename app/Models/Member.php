@@ -34,6 +34,6 @@ class Member extends Model
     }
 
     public function references(){
-        return $this->hasMany(MemberReferences::class, 'member_id');
+        return $this->hasMany(MemberReference::class, 'member_id');
     }
 }
