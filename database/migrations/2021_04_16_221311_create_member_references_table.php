@@ -19,9 +19,11 @@ class CreateMemberReferencesTable extends Migration
             $table->string('name')->nullable();
             $table->string('last_name')->nullable();
             $table->string('dni')->nullable();
+            $table->string('age')->nullable();
             $table->string('relationship')->nullable();
             $table->string('instruction')->nullable();
             $table->string('time_to_meet')->nullable();
+            $table->string('phone')->nullable();
             $table->timestamps();
             $table->foreign('member_id')->references('id')->on('members');
         });

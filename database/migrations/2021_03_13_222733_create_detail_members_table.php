@@ -16,6 +16,7 @@ class CreateDetailMembersTable extends Migration
         Schema::create('detail_members', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('member_id');
+
             $table->string('name_spouse')->nullable();
             $table->string('last_name_spouse')->nullable();
             $table->string('dni_spouse')->nullable();
@@ -24,6 +25,16 @@ class CreateDetailMembersTable extends Migration
             $table->string('email_spouse')->nullable();
             $table->string('phone1_spouse')->nullable();
             $table->string('phone2_spouse')->nullable();
+            $table->enum('economic_activity', ['Empleado', 'Independiente']);
+            $table->string('contract_type')->nullable();
+            $table->string('company_name')->nullable();
+            $table->string('company_address')->nullable();
+            $table->string('company_phone')->nullable();
+            $table->string('service_time')->nullable();
+            $table->string('profession_spouse')->nullable();
+            $table->string('actual_charge_spouse')->nullable();
+            $table->string('income_spouse')->nullable();
+
             //datos direcciones
             $table->string('city')->nullable();
             $table->string('canton')->nullable();
