@@ -70,18 +70,22 @@ class RoleSeeder extends Seeder
 
         for ($i = 0; $i < 9; $i++) {
             Member::create([
+                'doc_type' => 'Cédula',
+                'doc_number' => '012345678' . $i,
                 'name' => 'Miembro',
                 'last_name' => 'Miembro',
-                'dni' => '012345678' . $i,
-                'passport' => '012345678' . $i,
                 'instruction' => 'instruction',
+                'birth_place' => 'lugar',
+                'country' => 'pais',
+                'birth_date' => '2000-12-02',
                 'marital_status' => 'soltero',
-//                'birth_date' => '12-12-2020',
+                'gender' => 'Masculino',
                 'email' => 'm' . $i . '@email.com',
                 'phone1' => '0123456789',
                 'phone2' => '0123456789',
+                'residence_address' => 'direccion',
                 'member_type' => 'type',
-                'acount_number' => '012345678' . $i
+                'account_number' => '012345678' . $i
             ]);
         }
 

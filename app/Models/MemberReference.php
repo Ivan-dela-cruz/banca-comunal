@@ -18,9 +18,11 @@ class MemberReference extends Model
         'name',
         'last_name',
         'dni',
+        'age',
         'relationship',
         'instruction',
         'time_to_meet',
+        'phone',
     ];
 
     public function member()

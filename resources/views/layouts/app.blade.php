@@ -92,15 +92,16 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="javascript:;" class="side-menu">
+                        <a href="javascript:;"
+                           class="side-menu @if(request()->is('nueva-solicitud'))side-menu--active side-menu--open @endif">
                             <div class="side-menu__icon"> <i data-feather="box"></i> </div>
                             <div class="side-menu__title"> Solicitud <i data-feather="chevron-down" class="side-menu__sub-icon"></i> </div>
                         </a>
-                        <ul class="">
+                        <ul class="@if(request()->is('nueva-solicitud')))side-menu__sub-open @endif">
                             <li>
-                                <a href="/members"  class="side-menu">
+                                <a href="/nueva-solicitud"  class="side-menu">
                                     <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                                    <div class="side-menu__title"> Roles & Permisos </div>
+                                    <div class="side-menu__title"> Nueva </div>
                                 </a>
                             </li>
                             <li>

@@ -12,18 +12,22 @@ class Member extends Model
 
     protected $table = 'members';
     protected $fillable = [
+        'doc_type',
+        'doc_number',
         'name',
         'last_name',
-        'dni',
-        'passport',
         'instruction',
-        'marital_status',
+        'birth_place',
+        'country',
         'birth_date',
+        'marital_status',
+        'gender',
         'email',
         'phone1',
         'phone2',
+        'residence_address',
         'member_type',
-        'acount_number',
+        'account_number',
         'status'
     ];
 

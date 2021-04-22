@@ -11,12 +11,17 @@ use App\Http\Livewire\ShowEvents;
 use App\Http\Livewire\Members\{
     Member,
     NewMember,
-    References,
+//    References,
 };
 use App\Http\Livewire\Roles\{
     Roles
 };
 use App\Http\Livewire\Users\Users;
+
+use App\Http\Livewire\CreditRequest\{
+   NewRequest,
+};
+
 
 
 /*
@@ -47,8 +52,11 @@ Route::middleware('auth')->group(function() {
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('page/{layout}/{theme}/{pageName}', [PageController::class, 'loadPage'])->name('page');
 
-    //RUTA PARA LOS ROLES 
+    //RUTA PARA LOS ROLES
     Route::get('/roles', Roles::class);
+
+    //CREDIT REQUEST
+    Route::get('/nueva-solicitud', NewRequest::class);
 
 });
 

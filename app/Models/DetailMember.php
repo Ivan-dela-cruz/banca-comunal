@@ -12,6 +12,7 @@ class DetailMember extends Model
     protected $table = 'detail_members';
     protected $fillable = [
         'member_id',
+
         'name_spouse',
         'last_name_spouse',
         'dni_spouse',
@@ -20,6 +21,16 @@ class DetailMember extends Model
         'email_spouse',
         'phone1_spouse',
         'phone2_spouse',
+        'economic_activity',
+        'contract_type',
+        'company_name',
+        'company_address',
+        'company_phone',
+        'service_time',
+        'profession_spouse',
+        'actual_charge_spouse',
+        'income_spouse',
+
         'city',
         'canton',
         'parish',
@@ -36,6 +47,6 @@ class DetailMember extends Model
     public function member()
     {
         return $this->hasOne(Member::class, 'member_id');
-       
+
     }
 }
