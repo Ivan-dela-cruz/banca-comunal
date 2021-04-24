@@ -40,7 +40,7 @@ class CreateDetailMembersTable extends Migration
             $table->string('canton')->nullable();
             $table->string('parish')->nullable();
             $table->string('principal_street')->nullable();
-            $table->string('secundary_street')->nullable();
+            $table->string('secondary_street')->nullable();
             $table->string('reference_place')->nullable();
             //referencias personales
 //            $table->string('name_reference')->nullable();

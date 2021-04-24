@@ -15,6 +15,7 @@ class CreateCreditRequestsTable extends Migration
     {
         Schema::create('credit_requests', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('member_id');
             //step 1
             $table->enum('credit_type', ['Nuevo', 'Refinanciación']);
             $table->string('name_debtor')->nullable();
@@ -85,6 +86,7 @@ class CreateCreditRequestsTable extends Migration
             $table->string('commerce_lng')->nullable();
 
             $table->timestamps();
+            $table->foreign('member_id')->references('id')->on('members');
         });
     }
 

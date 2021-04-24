@@ -35,7 +35,7 @@ class DetailMember extends Model
         'canton',
         'parish',
         'principal_street',
-        'secundary_street',
+        'secondary_street',
         'reference_place',
         'name_reference',
         'last_name_reference',

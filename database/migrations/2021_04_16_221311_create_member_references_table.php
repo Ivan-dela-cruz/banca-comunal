@@ -24,6 +24,7 @@ class CreateMemberReferencesTable extends Migration
             $table->string('instruction')->nullable();
             $table->string('time_to_meet')->nullable();
             $table->string('phone')->nullable();
+            $table->boolean('status')->default(true);
             $table->timestamps();
             $table->foreign('member_id')->references('id')->on('members');
         });
