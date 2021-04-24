@@ -77,7 +77,7 @@ class NewMember extends Component
         $this->data_id = $member->id;
         $this->name = $member->name;
         $this->last_name = $member->last_name;
-        $this->dni = $member->dni;
+        $this->dni = $member->doc_number;
         $this->passport = $member->passport;
         $this->instruction = $member->instruction;
         $this->marital_status = $member->marital_status;
@@ -119,7 +119,7 @@ class NewMember extends Component
 
     public function findMember()
     {
-        $member = Member::where('dni', $this->dni)->first();
+        $member = Member::where('doc_number', $this->dni)->first();
         if (isset($member)) {
             // $this->alert('success','Registro recuperado satisfactoriamente');
             $detail = DetailMember::where('member_id', $member->id)->first();
@@ -196,8 +196,8 @@ class NewMember extends Component
         $data_member = [
             'name' => $this->name,
             'last_name' => $this->last_name,
-            'dni' => $this->dni,
-            'passport' => $this->passport,
+            'doc_number' => $this->dni,
+//            'passport' => $this->passport,
             'instruction' => $this->instruction,
             'marital_status' => $this->marital_status,
             'birth_date' => $this->birth_date,
@@ -205,7 +205,7 @@ class NewMember extends Component
             'phone1' => $this->phone1,
             'phone2' => $this->phone2,
             'member_type' => $this->member_type,
-            'acount_number' => $this->acount_number,
+            'account_number' => $this->acount_number,
             'status' => $this->status,
             'url_image' => $this->url_image
         ];
@@ -244,7 +244,7 @@ class NewMember extends Component
         $this->validate([
             'name' => 'required|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u|max:255',
             'last_name' => 'required|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u|max:255',
-            'dni' => ['required', 'unique:members,dni', 'numeric', 'digits:10'],
+            'dni' => ['required', 'unique:members,doc_number', 'numeric', 'digits:10'],
             'passport' => 'numeric',
             'instruction' => 'required',
             'marital_status' => 'required',
@@ -275,8 +275,8 @@ class NewMember extends Component
         $data_member = [
             'name' => $this->name,
             'last_name' => $this->last_name,
-            'dni' => $this->dni,
-            'passport' => $this->passport,
+            'doc_number' => $this->dni,
+//            'passport' => $this->passport,
             'instruction' => $this->instruction,
             'marital_status' => $this->marital_status,
             'birth_date' => $this->birth_date,
@@ -284,7 +284,7 @@ class NewMember extends Component
             'phone1' => $this->phone1,
             'phone2' => $this->phone2
         ];
-        $member_t = Member::where('dni', $this->dni)->first();
+        $member_t = Member::where('doc_number', $this->dni)->first();
         if (is_null($member_t)) {
             $member_create = Member::create($data_member);
             $this->member_id = $member_create->id;
@@ -346,11 +346,11 @@ class NewMember extends Component
             'canton' => $this->canton,
             'parish' => $this->parish,
             'principal_street' => $this->principal_street,
-            'secundary_street' => $this->secundary_street,
+            'secondary_street' => $this->secundary_street,
             'reference_place' => $this->reference_place
         ];
         $detail->update($data_deatil);
-        //$this->alert('success', 'Registro agregado con exíto!');
+        $this->alert('success', 'Registro agregado con exíto!');
     }
 
     public function storeFinal()
@@ -358,12 +358,12 @@ class NewMember extends Component
         $member_t = Member::find($this->member_id);
         $data_deatil = [
             'member_type' => $this->member_type,
-            'acount_number' => $this->acount_number,
+            'account_number' => $this->acount_number,
             'status' => $this->status,
             'url_image' => $this->url_image
         ];
         $member_t->update($data_deatil);
-        //$this->alert('success','¡Registro agregado exitosamente!');
+        $this->alert('success','¡Registro agregado exitosamente!');
     }
 
     public function edit($id)

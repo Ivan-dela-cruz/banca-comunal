@@ -21,6 +21,9 @@ use App\Http\Livewire\Users\Users;
 use App\Http\Livewire\CreditRequest\{
    NewRequest,
 };
+use App\Http\Livewire\AdvisorVisit\{
+    NewVisit,
+};
 
 
 
@@ -57,6 +60,8 @@ Route::middleware('auth')->group(function() {
 
     //CREDIT REQUEST
     Route::get('/nueva-solicitud', NewRequest::class);
+
+    Route::get('/visita-de-asesor', NewVisit::class);
 
 });
 

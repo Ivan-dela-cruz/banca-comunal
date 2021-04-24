@@ -12,6 +12,7 @@ use Livewire\Component;
 class NewRequest extends Component
 {
     public $action_deal = 'POST';
+    public  $action = 'POST';
 
 
     //step1
@@ -20,10 +21,14 @@ class NewRequest extends Component
     //step2
     public $member_id = null, $doc_type, $doc_number, $name, $last_name, $instruction, $birth_place, $country, $birth_date;
     public $marital_status, $gender, $email, $phone1, $phone2, $residence_address;
+    public $member_type, $account_number, $status_member, $url_image;
 
     //step3
     public $detail_member_id = null, $name_spouse, $last_name_spouse, $dni_spouse, $phone1_spouse, $economic_activity, $contract_type;
     public $company_name, $company_address, $company_phone, $service_time, $profession_spouse, $actual_charge_spouse, $income_spouse;
+
+    public $passport_spouse, $birth_date_spouse, $email_spouse, $phone2_spouse, $city, $canton, $parish, $principal_street;
+    public $secondary_street, $reference_place;
 
     //step4
     public $business_name, $ruc, $business_age, $sales_place, $local_type, $business_time, $business_address, $streets, $number, $business_reference;
@@ -42,12 +47,11 @@ class NewRequest extends Component
     //step 7
     public $living_place_lat, $living_place_lng, $commerce_lay, $commerce_lng;
 
+//    public $action = 'POST';
+
     public function render()
     {
-        $data_reference = MemberReference::where('member_id', $this->member_id)->get();
-//        $this->totalAssets();
-//        $this->totalDebts();
-//        $this->totalPassives();
+        $data_reference = MemberReference::where('member_id', $this->member_id)->where('status',1)->get();
         return view('livewire.credit-request.new-request', compact('data_reference'))
             ->extends('layouts.app')
             ->section('subcontent');
@@ -257,78 +261,42 @@ class NewRequest extends Component
 
     public function storeStep6()
     {
-//        $this->validate([
-//            'accounts_receivable_as' => 'numeric',
-//            'merchandise_as' => 'numeric',
-//            'investment_crops_as' => 'numeric',
-//            'furniture_appliances_as' => 'numeric',
-//            'tools_machines_as' => 'numeric',
-//            'land_as' => 'numeric',
-//            'houses_buildings_as' => 'numeric',
-//            'other_goods_as' => 'numeric',
-//            'total_as' => 'numeric',
-//
-//            'bank_debts_pa' => 'numeric',
-//            'debts_suppliers_pa' => 'numeric',
-//            'debts_warehouses_pa' => 'numeric',
-//            'total_debts_pa' => 'numeric',
-//            'patrimony_pa' => 'numeric',
-//            'total_pa' => 'numeric',
-//
-//            'partner_salary_in' => 'numeric',
-//            'spouse_salary_in' => 'numeric',
-//            'profit_trade_in' => 'numeric',
-//            'leases_received_in' => 'numeric',
-//            'rent_car_in' => 'numeric',
-//            'land_in' => 'numeric',
-//            'other_income_in' => 'numeric',
-//            'total_in' => 'numeric',
-//
-//            'feeding_ex' => 'numeric',
-//            'health_ex' => 'numeric',
-//            'basic_services_ex' => 'numeric',
-//            'education_ex' => 'numeric',
-//            'transport_ex' => 'numeric',
-//            'leases_ex' => 'numeric',
-//            'other_expenses_ex' => 'numeric',
-//            'total_ex' => 'numeric',
-//        ]);
 
         $data = [
-            'accounts_receivable_as'=> $this->accounts_receivable_as,
-            'merchandise_as'=> $this->merchandise_as,
-            'investment_crops_as'=> $this->investment_crops_as,
-            'furniture_appliances_as'=> $this->furniture_appliances_as,
-            'tools_machines_as'=> $this->tools_machines_as,
-            'land_as'=> $this->land_as,
-            'houses_buildings_as'=> $this->houses_buildings_as,
-            'other_goods_as'=> $this->other_goods_as,
-            'total_as'=> $this->total_as,
+            'accounts_receivable_as' => $this->accounts_receivable_as,
+            'merchandise_as' => $this->merchandise_as,
+            'investment_crops_as' => $this->investment_crops_as,
+            'furniture_appliances_as' => $this->furniture_appliances_as,
+            'tools_machines_as' => $this->tools_machines_as,
+            'land_as' => $this->land_as,
+            'houses_buildings_as' => $this->houses_buildings_as,
+            'other_goods_as' => $this->other_goods_as,
+            'total_as' => $this->total_as,
 
-            'bank_debts_pa'=> $this->bank_debts_pa,
-            'debts_suppliers_pa'=> $this->debts_suppliers_pa,
-            'debts_warehouses_pa'=> $this->debts_warehouses_pa,
-            'total_debts_pa'=> $this->total_debts_pa,
-            'patrimony_pa'=> $this->patrimony_pa,
-            'total_pa'=> $this->total_pa,
+            'bank_debts_pa' => $this->bank_debts_pa,
+            'debts_suppliers_pa' => $this->debts_suppliers_pa,
+            'debts_warehouses_pa' => $this->debts_warehouses_pa,
+            'total_debts_pa' => $this->total_debts_pa,
+            'patrimony_pa' => $this->patrimony_pa,
+            'total_pa' => $this->total_pa,
 
-            'partner_salary_in'=> $this->partner_salary_in,
-            'spouse_salary_in'=> $this->spouse_salary_in,
-            'profit_trade_in'=> $this->profit_trade_in,
-            'leases_received_in'=> $this->leases_received_in,
-            'rent_car_in'=> $this->rent_car_in,
-            'land_in'=> $this->land_in,
-            'other_income_in'=> $this->other_income_in,
-            'total_in'=> $this->total_in,
+            'partner_salary_in' => $this->partner_salary_in,
+            'spouse_salary_in' => $this->spouse_salary_in,
+            'profit_trade_in' => $this->profit_trade_in,
+            'leases_received_in' => $this->leases_received_in,
+            'rent_car_in' => $this->rent_car_in,
+            'land_in' => $this->land_in,
+            'other_income_in' => $this->other_income_in,
+            'total_in' => $this->total_in,
 
-            'feeding_ex'=> $this->feeding_ex,
-            'health_ex'=> $this->health_ex,
-            'basic_services_ex'=> $this->basic_services_ex,
-            'education_ex'=> $this->education_ex,
-            'transport_ex'=> $this->transport_ex,
-            'leases_ex'=> $this->leases_ex,
-            'other_expenses_ex'=> $this->other_expenses_ex,
-            'total_ex'=> $this->total_ex,
+            'feeding_ex' => $this->feeding_ex,
+            'health_ex' => $this->health_ex,
+            'basic_services_ex' => $this->basic_services_ex,
+            'education_ex' => $this->education_ex,
+            'transport_ex' => $this->transport_ex,
+            'leases_ex' => $this->leases_ex,
+            'other_expenses_ex' => $this->other_expenses_ex,
+            'total_ex' => $this->total_ex,
         ];
 
         $credit = CreditRequest::find($this->request_id);
@@ -344,21 +312,153 @@ class NewRequest extends Component
 
     }
 
-//    public function totalAssets()
-//    {
-//        $this->total_as = $this->accounts_receivable_as + $this->merchandise_as + $this->investment_crops_as + $this->furniture_appliances_as +
-//            $this->tools_machines_as + $this->land_as + $this->houses_buildings_as + $this->other_goods_as;
-//    }
-//
-//    public function totalDebts()
-//    {
-//        $this->total_debts_pa = $this->bank_debts_pa + $this->debts_suppliers_pa + $this->debts_warehouses_pa;
-//    }
-//
-//    public function totalPassives()
-//    {
-//        $this->total_pa = $this->total_debts_pa + $this->patrimony_pa;
-//    }
+    public function totalAssets()
+    {
+        $this->accounts_receivable_as != ''     && $this->validate(['accounts_receivable_as' => 'numeric',]);
+        $this->merchandise_as != ''             && $this->validate(['merchandise_as' => 'numeric',]);
+        $this->investment_crops_as != ''        && $this->validate(['investment_crops_as' => 'numeric',]);
+        $this->furniture_appliances_as != ''    && $this->validate(['furniture_appliances_as' => 'numeric',]);
+        $this->tools_machines_as != ''          && $this->validate(['tools_machines_as' => 'numeric',]);
+        $this->land_as != ''                    && $this->validate(['land_as' => 'numeric',]);
+        $this->houses_buildings_as != ''        && $this->validate(['houses_buildings_as' => 'numeric',]);
+        $this->other_goods_as != ''             && $this->validate(['other_goods_as' => 'numeric',]);
+
+        $this->total_as =
+            $this->vNumber($this->accounts_receivable_as) +
+            $this->vNumber($this->merchandise_as) +
+            $this->vNumber($this->investment_crops_as) +
+            $this->vNumber($this->furniture_appliances_as) +
+            $this->vNumber($this->tools_machines_as) +
+            $this->vNumber($this->land_as) +
+            $this->vNumber($this->houses_buildings_as) +
+            $this->vNumber($this->other_goods_as);
+
+    }
+
+    public function totalDebts()
+    {
+        $this->bank_debts_pa != ''          && $this->validate(['bank_debts_pa' => 'numeric',]);
+        $this->debts_suppliers_pa != ''     && $this->validate(['debts_suppliers_pa' => 'numeric',]);
+        $this->debts_warehouses_pa != ''    && $this->validate(['debts_warehouses_pa' => 'numeric',]);
+
+        $this->total_debts_pa =
+            $this->vNumber($this->bank_debts_pa) +
+            $this->vNumber($this->debts_suppliers_pa) +
+            $this->vNumber($this->debts_warehouses_pa);
+    }
+
+    public function findMember()
+    {
+        $member = Member::where('doc_number', $this->dni_debtor)->first();
+        if (isset($member)) {
+            // $this->alert('success','Registro recuperado satisfactoriamente');
+            $detail = DetailMember::where('member_id', $member->id)->first();
+            $this->loadData($member, $detail);
+        } else {
+            $this->action = 'POST';
+            // $this->resetInputFields();
+            // $this->alert('warning','No se encontrarón registros asociados');
+        }
+    }
+    public function loadData($member, $detail)
+    {
+        $this->member_id = $member->id;
+        $this->name = $member->name;
+        $this->last_name = $member->last_name;
+        $this->doc_number = $member->doc_number;
+//        $this->passport = $member->passport;
+        $this->instruction = $member->instruction;
+        $this->marital_status = $member->marital_status;
+        $this->birth_date = $member->birth_date;
+        $this->email = $member->email;
+        $this->phone1 = $member->phone1;
+        $this->phone2 = $member->phone2;
+        $this->member_type = $member->member_type;
+        $this->account_number = $member->acount_number;
+        $this->status_member = $member->status;
+        $this->url_image = $member->url_image;
+
+        //LOAD DETAIL
+        $this->member_id = $member->id;
+        $this->name_spouse = $detail->name_spouse;
+        $this->last_name_spouse = $detail->last_name_spouse;
+        $this->dni_spouse = $detail->dni_spouse;
+        $this->passport_spouse = $detail->passport_spouse;
+        $this->birth_date_spouse = $detail->birth_date_spouse;
+        $this->email_spouse = $detail->email_spouse;
+        $this->phone1_spouse = $detail->phone1_spouse;
+        $this->phone2_spouse = $detail->phone2_spouse;
+        $this->city = $detail->city;
+        $this->canton = $detail->canton;
+        $this->parish = $detail->parish;
+        $this->principal_street = $detail->principal_street;
+        $this->secondary_street = $detail->secondary_street;
+        $this->reference_place = $detail->reference_place;
+//        $this->name_reference = $detail->name_reference;
+//        $this->last_name_reference = $detail->last_name_reference;
+//        $this->dni_reference = $detail->dni_reference;
+//        $this->relationship = $detail->relationship;
+//        $this->time_to_meet = $detail->time_to_meet;
+//        $this->instruction_reference = $detail->instruction_reference;
+
+        //CHANGE VALUE ACTION
+        $this->action = 'PUT';
+    }
+
+    public function totalPassives()
+    {
+        $this->total_debts_pa != '' && $this->validate(['total_debts_pa' => 'numeric',]);
+        $this->patrimony_pa != ''   && $this->validate(['patrimony_pa' => 'numeric',]);
+        $this->total_pa =
+            $this->vNumber($this->total_debts_pa) -
+            $this->vNumber($this->patrimony_pa);
+    }
+
+    public function totalIncomes(){
+        $this->partner_salary_in != '' && $this->validate(['partner_salary_in' => 'numeric',]);
+        $this->spouse_salary_in != ''  && $this->validate(['spouse_salary_in' => 'numeric',]);
+        $this->profit_trade_in != ''   && $this->validate(['profit_trade_in' => 'numeric',]);
+        $this->leases_received_in != ''&& $this->validate(['leases_received_in' => 'numeric',]);
+        $this->rent_car_in != ''       && $this->validate(['rent_car_in' => 'numeric',]);
+        $this->land_in != ''           && $this->validate(['land_in' => 'numeric',]);
+        $this->other_income_in != ''   && $this->validate(['other_income_in' => 'numeric',]);
+
+        $this->total_in =
+            $this->vNumber($this->partner_salary_in) +
+            $this->vNumber($this->spouse_salary_in)+
+            $this->vNumber($this->profit_trade_in)+
+            $this->vNumber($this->leases_received_in)+
+            $this->vNumber($this->rent_car_in)+
+            $this->vNumber($this->land_in)+
+            $this->vNumber($this->other_income_in);
+    }
+
+    public function totalExpenses(){
+        $this->feeding_ex != ''          && $this->validate(['feeding_ex' => 'numeric',]);
+        $this->health_ex != ''           && $this->validate(['health_ex' => 'numeric',]);
+        $this->basic_services_ex != ''   && $this->validate(['basic_services_ex' => 'numeric',]);
+        $this->education_ex != ''        && $this->validate(['education_ex' => 'numeric',]);
+        $this->transport_ex != ''        && $this->validate(['transport_ex' => 'numeric',]);
+        $this->leases_ex != ''           && $this->validate(['leases_ex' => 'numeric',]);
+        $this->other_expenses_ex != ''   && $this->validate(['other_expenses_ex' => 'numeric',]);
+
+        $this->total_ex =
+            $this->vNumber($this->feeding_ex) +
+            $this->vNumber($this->health_ex)+
+            $this->vNumber($this->basic_services_ex)+
+            $this->vNumber($this->education_ex)+
+            $this->vNumber($this->transport_ex)+
+            $this->vNumber($this->leases_ex)+
+            $this->vNumber($this->other_expenses_ex);
+    }
+
+    public function vNumber($number)
+    {
+        if (is_numeric($number))
+            return $number;
+        else
+            return 0;
+    }
 
 
     #region CONFIG TEMPLATE

@@ -97,7 +97,7 @@
                             <div class="side-menu__icon"> <i data-feather="box"></i> </div>
                             <div class="side-menu__title"> Solicitud <i data-feather="chevron-down" class="side-menu__sub-icon"></i> </div>
                         </a>
-                        <ul class="@if(request()->is('nueva-solicitud')))side-menu__sub-open @endif">
+                        <ul class="@if(request()->is('nueva-solicitud'))side-menu__sub-open @endif">
                             <li>
                                 <a href="/nueva-solicitud"  class="side-menu">
                                     <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
@@ -105,9 +105,9 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="/users"  class="side-menu">
+                                <a href="/visita-de-asesor"  class="side-menu">
                                     <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                                    <div class="side-menu__title"> Usuarios </div>
+                                    <div class="side-menu__title"> Visita de Asesor </div>
                                 </a>
                             </li>
 

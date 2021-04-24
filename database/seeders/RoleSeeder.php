@@ -83,7 +83,7 @@ class RoleSeeder extends Seeder
                 'email' => 'm' . $i . '@email.com',
                 'phone1' => '0123456789',
                 'phone2' => '0123456789',
-                'residence_address' => 'direccion',
+                'reference_place' => 'direccion',
                 'member_type' => 'type',
                 'account_number' => '012345678' . $i
             ]);
