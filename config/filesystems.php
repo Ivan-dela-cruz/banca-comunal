@@ -45,7 +45,7 @@ return [
 
         'local' => [
             'driver' => 'local',
-            'root' => storage_path('app'),
+            'root' => public_path(),// storage_path('app'),
         ],
 
         'public' => [
@@ -63,6 +63,18 @@ return [
             'bucket' => env('AWS_BUCKET'),
             'url' => env('AWS_URL'),
             'endpoint' => env('AWS_ENDPOINT'),
+        ],
+        'credit-request' => [
+            'driver' => 'local',
+            'root' => public_path('images/credit-request'),
+            'url' => env('APP_URL') . 'public/images/credit-request',
+            'visibility' => 'public',
+        ],
+        'advisor-visit' => [
+            'driver' => 'local',
+            'root' => public_path('images/advisor-visit'),
+            'url' => env('APP_URL') . 'public/images/advisor-visit',
+            'visibility' => 'public',
         ],
 
     ],

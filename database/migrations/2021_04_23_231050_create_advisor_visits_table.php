@@ -46,8 +46,10 @@ class CreateAdvisorVisitsTable extends Migration
             //step 6
             $table->string('living_place_lat')->nullable();
             $table->string('living_place_lng')->nullable();
-            $table->string('commerce_lay')->nullable();
+            $table->string('url_living')->nullable();
+            $table->string('commerce_lat')->nullable();
             $table->string('commerce_lng')->nullable();
+            $table->string('url_commerce')->nullable();
             $table->timestamps();
             $table->foreign('member_id')->references('id')->on('members');
         });
