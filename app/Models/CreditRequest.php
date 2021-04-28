@@ -12,6 +12,7 @@ class CreditRequest extends Model
     protected $table = 'credit_requests';
     protected $fillable = [
         //step1
+        'member_id',
         'credit_type',
         'name_debtor',
         'dni_debtor',
@@ -75,8 +76,10 @@ class CreditRequest extends Model
         //step 7
         'living_place_lat',
         'living_place_lng',
-        'commerce_lay',
+        'url_living',
+        'commerce_lat',
         'commerce_lng',
+        'url_commerce',
     ];
 
 }

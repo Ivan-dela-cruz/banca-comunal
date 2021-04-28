@@ -7,9 +7,11 @@ use App\Models\DetailMember;
 use App\Models\Member;
 use App\Models\MemberReference;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class NewVisit extends Component
 {
+    use WithFileUploads;
     //step1
     public $request_id = null, $credit_type, $name_debtor, $dni_debtor, $amount, $reason_invest, $pay, $deadline, $variable_fee, $credit_segment;
 
@@ -32,9 +34,10 @@ class NewVisit extends Component
     public $instruction_ref, $time_to_meet_ref, $phone_ref;
 
     //step 6
-    public $living_place_lat, $living_place_lng, $commerce_lay, $commerce_lng;
+    public $living_place_lat, $living_place_lng, $commerce_lat, $commerce_lng, $url_living, $url_commerce;
 
     public $action = 'POST';
+    public $check_living = false, $check_commerce = false;
 
     public function render()
     {
@@ -77,7 +80,7 @@ class NewVisit extends Component
         $this->url_image = $member->url_image;
 
         //LOAD DETAIL
-        $this->member_id = $member->id;
+//        $this->member_id = $member->id;
         $this->name_spouse = $detail->name_spouse;
         $this->last_name_spouse = $detail->last_name_spouse;
         $this->dni_spouse = $detail->dni_spouse;
@@ -107,6 +110,7 @@ class NewVisit extends Component
     public function storeStep1()
     {
         $data = [
+            'member_id' => $this->member_id,
             'credit_type' => $this->credit_type,
             'name_debtor' => $this->name_debtor,
             'dni_debtor' => $this->dni_debtor,
@@ -203,6 +207,7 @@ class NewVisit extends Component
     {
 
         $data = [
+            'member_id' => $this->member_id,
             'business_name' => $this->business_name,
             'ruc' => $this->ruc,
             'business_age' => $this->business_age,
@@ -306,6 +311,46 @@ class NewVisit extends Component
 
     #endregion
 
+    public function storeStep6(){
+
+        $pathLiving = '';
+        if ($this->url_living != '') {
+            $this->validate(['url_living' => 'image'], ['url_living.image' => 'La imagen debe ser de formato: .jpg,.jpeg ó .png']);
+            //save image
+            $name = "LIVING-" . time() . '.' . $this->url_living->getClientOriginalExtension();
+            $pathLiving = 'images/credit-request/' . $this->url_living->storeAs('/', $name, 'credit-request');
+        }
+        $pathCommerce = '';
+        if ($this->url_commerce != '') {
+            $this->validate(['url_commerce' => 'image'], ['url_commerce.image' => 'La imagen debe ser de formato: .jpg,.jpeg ó .png']);
+            //save image
+            $name = "COMMERCE-" . time() . '.' . $this->url_commerce->getClientOriginalExtension();
+            $pathCommerce = 'images/advisor-visit/' . $this->url_commerce->storeAs('/', $name, 'advisor-visit');
+        }
+
+        $data = [
+            'member_id' => $this->member_id,
+            'living_place_lat' => $this->living_place_lat ,
+            'living_place_lng' => $this->living_place_lng,
+            'commerce_lat' => $this->commerce_lat,
+            'commerce_lng' => $this->commerce_lng,
+            'url_living' => $pathLiving,
+            'url_commerce' => $pathCommerce,
+
+        ];
+
+        $credit = AdvisorVisit::find($this->request_id);
+        if (isset($credit)) {
+            $credit->update($data);
+            $this->request_id = $credit->id;
+            $this->alert('success', 'Información de la vivienda y comercio actualizada con exito');
+        } else {
+            $c = AdvisorVisit::create($data);
+            $this->request_id = $c->id;
+            $this->alert('success', 'Información de la vivienda y comercio registrada con exito');
+        }
+
+    }
 
     #region CONFIG TEMPLATE
     public $listButtonFrame = [

@@ -13,6 +13,7 @@ class AdvisorVisit extends Model
     protected $table = 'advisor_visits';
     protected $fillable = [
         //step1
+        'member_id',
         'credit_type',
         'name_debtor',
         'dni_debtor',
@@ -40,7 +41,9 @@ class AdvisorVisit extends Model
         //step 7
         'living_place_lat',
         'living_place_lng',
-        'commerce_lay',
+        'commerce_lat',
         'commerce_lng',
+        'url_living',
+        'url_commerce'
     ];
 }
