@@ -24,6 +24,9 @@ use App\Http\Livewire\CreditRequest\{
 use App\Http\Livewire\AdvisorVisit\{
     NewVisit,
 };
+use App\Http\Livewire\Amortization\{
+    AmortizationTable,
+};
 
 
 
@@ -62,6 +65,8 @@ Route::middleware('auth')->group(function() {
     Route::get('/nueva-solicitud', NewRequest::class);
 
     Route::get('/visita-de-asesor', NewVisit::class);
+
+    Route::get('/amortizacion-tabla', AmortizationTable::class);
 
 });
 

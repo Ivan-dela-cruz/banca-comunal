@@ -95,11 +95,11 @@
                     </li>
                     <li>
                         <a href="javascript:;"
-                           class="side-menu @if(request()->is('nueva-solicitud'))side-menu--active side-menu--open @endif">
+                           class="side-menu @if(request()->is('nueva-solicitud') || request()->is('visita-de-asesor'))side-menu--active side-menu--open @endif">
                             <div class="side-menu__icon"> <i data-feather="box"></i> </div>
                             <div class="side-menu__title"> Solicitud <i data-feather="chevron-down" class="side-menu__sub-icon"></i> </div>
                         </a>
-                        <ul class="@if(request()->is('nueva-solicitud'))side-menu__sub-open @endif">
+                        <ul class="@if(request()->is('nueva-solicitud' || request()->is('visita-de-asesor')))side-menu__sub-open @endif">
                             <li>
                                 <a href="/nueva-solicitud"  class="side-menu">
                                     <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
@@ -162,17 +162,11 @@
                             <div class="side-menu__icon"> <i data-feather="box"></i> </div>
                             <div class="side-menu__title"> Amortización <i data-feather="chevron-down" class="side-menu__sub-icon"></i> </div>
                         </a>
-                        <ul class="">
+                        <ul class="@if(request()->is('amortizacion-tabla'))side-menu__sub-open @endif">
                             <li>
-                                <a href="/members"  class="side-menu">
+                                <a href="/amortizacion-tabla"  class="side-menu">
                                     <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                                    <div class="side-menu__title"> Roles & Permisos </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/users"  class="side-menu">
-                                    <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                                    <div class="side-menu__title"> Usuarios </div>
+                                    <div class="side-menu__title"> Tabla </div>
                                 </a>
                             </li>
 
