@@ -1,8 +1,5 @@
 <div>
-
-    <div class="flex items-center mt-8">
-        <h2 class="intro-y text-lg font-medium mr-auto">Solicitud de Credito</h2>
-    </div>
+    <h2 class="intro-y text-lg font-medium mt-10">Solicitud de Credito</h2>
     <div class="intro-y box py-10 sm:py-20 mt-5">
         <div class="wizard flex flex-col lg:flex-row justify-center px-5 sm:px-20">
             <div class="intro-x lg:text-center flex items-center lg:block flex-1 z-10">
