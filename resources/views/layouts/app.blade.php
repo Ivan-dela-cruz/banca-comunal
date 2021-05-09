@@ -272,6 +272,7 @@
     @include('../layout/components/dark-mode-switcher')
 
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
 
     @yield('script')
     @yield('map-script')
@@ -286,6 +287,7 @@
     <!-- END: JS Assets-->
 
     <script>
+        
         window.livewire.on('modal-hide', () => {
             $('#references-modal').modal('hide');
         });
