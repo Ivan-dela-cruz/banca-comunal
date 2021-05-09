@@ -15,6 +15,9 @@ use App\Http\Livewire\Members\{
 use App\Http\Livewire\Roles\{
     Roles
 };
+use App\Http\Livewire\NoteBook\{
+    NoteBooks
+};
 use App\Http\Livewire\Users\Users;
 
 
@@ -48,6 +51,7 @@ Route::middleware('auth')->group(function() {
 
     //RUTA PARA LOS ROLES 
     Route::get('/roles', Roles::class);
+    Route::get('/libretas', NoteBooks::class);
 
 });
 
