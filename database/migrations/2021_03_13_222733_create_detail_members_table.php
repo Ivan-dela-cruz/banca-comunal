@@ -16,6 +16,7 @@ class CreateDetailMembersTable extends Migration
         Schema::create('detail_members', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('member_id');
+
             $table->string('name_spouse')->nullable();
             $table->string('last_name_spouse')->nullable();
             $table->string('dni_spouse')->nullable();
@@ -24,20 +25,30 @@ class CreateDetailMembersTable extends Migration
             $table->string('email_spouse')->nullable();
             $table->string('phone1_spouse')->nullable();
             $table->string('phone2_spouse')->nullable();
+            $table->enum('economic_activity', ['Empleado', 'Independiente']);
+            $table->string('contract_type')->nullable();
+            $table->string('company_name')->nullable();
+            $table->string('company_address')->nullable();
+            $table->string('company_phone')->nullable();
+            $table->string('service_time')->nullable();
+            $table->string('profession_spouse')->nullable();
+            $table->string('actual_charge_spouse')->nullable();
+            $table->string('income_spouse')->nullable();
+
             //datos direcciones
             $table->string('city')->nullable();
             $table->string('canton')->nullable();
             $table->string('parish')->nullable();
             $table->string('principal_street')->nullable();
-            $table->string('secundary_street')->nullable();
+            $table->string('secondary_street')->nullable();
             $table->string('reference_place')->nullable();
             //referencias personales
-            $table->string('name_reference')->nullable();
-            $table->string('last_name_reference')->nullable();
-            $table->string('dni_reference')->nullable();
-            $table->string('relationship')->nullable();
-            $table->string('time_to_meet')->nullable();
-            $table->string('instruction_reference')->nullable();
+//            $table->string('name_reference')->nullable();
+//            $table->string('last_name_reference')->nullable();
+//            $table->string('dni_reference')->nullable();
+//            $table->string('relationship')->nullable();
+//            $table->string('time_to_meet')->nullable();
+//            $table->string('instruction_reference')->nullable();
             $table->softDeletes();
             $table->timestamps();
             $table->string('dato1')->nullable();

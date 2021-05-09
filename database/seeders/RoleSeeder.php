@@ -2,8 +2,11 @@
 
 namespace Database\Seeders;
 
+
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use App\Models\Member;
+use App\Models\MemberReference;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Hash;
@@ -63,6 +66,40 @@ class RoleSeeder extends Seeder
         $user_password = Hash::make('root1234');
         $user2 = User::create(['name' => 'admin', 'email' => 'admin@gmail.com', 'password' => $user_password,]);
         $user2->assignRole('Administrador');
+
+
+        for ($i = 0; $i < 9; $i++) {
+            Member::create([
+                'doc_type' => 'Cédula',
+                'doc_number' => '012345678' . $i,
+                'name' => 'Miembro',
+                'last_name' => 'Miembro',
+                'instruction' => 'instruction',
+                'birth_place' => 'lugar',
+                'country' => 'pais',
+                'birth_date' => '2000-12-02',
+                'marital_status' => 'soltero',
+                'gender' => 'Masculino',
+                'email' => 'm' . $i . '@email.com',
+                'phone1' => '0123456789',
+                'phone2' => '0123456789',
+                'reference_place' => 'direccion',
+                'member_type' => 'type',
+                'account_number' => '012345678' . $i
+            ]);
+        }
+
+        for ($i = 0; $i < 20; $i++) {
+            MemberReference::create([
+                'member_id' => rand(1, 9),
+                'name' => 'Reference '.$i,
+                'last_name' => 'Reference',
+                'dni' => '013345678' . $i,
+                'relationship' => 'Reference',
+                'instruction' => 'instruction',
+                'time_to_meet' => '1 year 2 days',
+            ]);
+        }
 
     }
 }

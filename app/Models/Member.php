@@ -9,27 +9,35 @@ class Member extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    
+
     protected $table = 'members';
     protected $fillable = [
+        'doc_type',
+        'doc_number',
         'name',
         'last_name',
-        'dni',
-        'passport',
         'instruction',
-        'marital_status',
+        'birth_place',
+        'country',
         'birth_date',
+        'marital_status',
+        'gender',
         'email',
         'phone1',
         'phone2',
+        'residence_address',
         'member_type',
-        'acount_number',
+        'account_number',
         'status'
     ];
-            
+
     public function detail()
     {
         return $this->hasOne(DetailMember::class, 'member_id');
-       
+
+    }
+
+    public function references(){
+        return $this->hasMany(MemberReference::class, 'member_id');
     }
 }

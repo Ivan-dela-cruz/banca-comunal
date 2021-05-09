@@ -10,7 +10,8 @@ use App\Http\Controllers\{
 use App\Http\Livewire\ShowEvents;
 use App\Http\Livewire\Members\{
     Member,
-    NewMember
+    NewMember,
+//    References,
 };
 use App\Http\Livewire\Roles\{
     Roles
@@ -19,6 +20,17 @@ use App\Http\Livewire\NoteBook\{
     NoteBooks
 };
 use App\Http\Livewire\Users\Users;
+
+use App\Http\Livewire\CreditRequest\{
+   NewRequest,
+};
+use App\Http\Livewire\AdvisorVisit\{
+    NewVisit,
+};
+use App\Http\Livewire\Amortization\{
+    AmortizationTable,
+};
+
 
 
 /*
@@ -49,9 +61,16 @@ Route::middleware('auth')->group(function() {
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('page/{layout}/{theme}/{pageName}', [PageController::class, 'loadPage'])->name('page');
 
-    //RUTA PARA LOS ROLES 
+    //RUTA PARA LOS ROLES
     Route::get('/roles', Roles::class);
     Route::get('/libretas', NoteBooks::class);
+
+    //CREDIT REQUEST
+    Route::get('/nueva-solicitud', NewRequest::class);
+
+    Route::get('/visita-de-asesor', NewVisit::class);
+
+    Route::get('/amortizacion-tabla', AmortizationTable::class);
 
 });
 
