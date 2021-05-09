@@ -7,10 +7,10 @@
                     @foreach($roles as $role)
                         <div class="w-full sm:w-auto flex ">
                             @can('update_role')
-                                <a wire:ignore href="javascript:void(0);"  wire:click.prevent="edit({{ $role->id }})"
+                                <a href="javascript:void(0);"  wire:click.prevent="edit({{ $role->id }})"
                                     class="flex items-center px-0 py-2 rounded-md truncate">
                                     <span class="w-5 h-5 flex items-center justify-center">
-                                        <i class="w-4 h-4 md:text-green-600" data-feather="edit"></i>
+                                        <i class="w-4 h-4 md:text-green-600 fas fa-pen" ></i>
                                     </span>
                                 </a>
                             @endcan
@@ -20,7 +20,7 @@
                                         <a href="javascript:void(0);"  wire:click.prevent="delete({{ $role->id }})"
                                         class="flex items-center px-0 py-2 rounded-md truncate">
                                             <span class="w-5 h-5 flex items-center justify-center">
-                                                <i class="w-4 h-4 md:text-yellow-600" data-feather="trash"></i>
+                                                <i class="w-4 h-4 md:text-red-600 fas fa-check-double"></i>
                                             </span>
                                         </a>
                                     @endcan
@@ -29,7 +29,7 @@
                                         <a href="javascript:void(0);"  wire:click.prevent="confirmDelete({{ $role->id }})"
                                         class="flex items-center px-0 py-2 rounded-md truncate">
                                             <span class="w-5 h-5 flex items-center justify-center">
-                                                <i class="w-4 h-4 md:text-red-600" data-feather="trash"></i>
+                                                <i class="w-4 h-4 md:text-yellow-600 fas fa-trash-alt"></i>
                                             </span>
                                         </a>
                                     @endcan
@@ -53,7 +53,7 @@
             <!-- BEGIN: Inbox Filter -->
             <div class="intro-y flex flex-col-reverse sm:flex-row items-center">
                 <div class="w-full sm:w-auto relative mr-auto mt-3 sm:mt-0">
-                    <i class="w-4 h-4 absolute my-auto inset-y-0 ml-3 left-0 z-10 text-gray-700 dark:text-gray-300" data-feather="search"></i>
+                    <i class="w-4 h-4 absolute my-auto inset-y-0 ml-3 left-0 z-10 text-gray-700 dark:text-gray-300 fas fa-search" ></i>
                     <input type="text" class="input w-full sm:w-64 box px-10 text-gray-700 dark:text-gray-300 placeholder-theme-13" placeholder="Search mail">
                 </div>
                 <div class="w-full sm:w-auto flex">
@@ -62,29 +62,31 @@
                             @can('create_role')
                             <button wire:click.prevent="store()" class="dropdown-toggle button px-2 box text-green-700 dark:text-green-300">
                                 <span class="w-5 h-5 flex items-center justify-center">
-                                    <i class="w-4 h-4" data-feather="save"></i>
+                                    <i class="w-4 h-4 fas fa-check"></i>
                                 </span>
                             </button>
                             @endcan
+                            <button  wire:click.prevent="resetInputFields()" class="dropdown-toggle button px-2 box text-gray-700 dark:text-gray-300">
+                                <span class="w-5 h-5 flex items-center justify-center">
+                                    <i class="w-4 h-4 fas fa-plus"></i>
+                                </span>
+                            </button>
                         @else
                             @can('update_role')
-                            <button   wire:click.prevent="update()"  class="dropdown-toggle button px-2 box text-red-700 dark:text-red-300">
+                            <button   wire:click.prevent="update()"  class="dropdown-toggle button px-2 box text-yellow-700 dark:text-yellow-700">
                                 <span class="w-5 h-5 flex items-center justify-center">
-                                    <i class="w-4 h-4" data-feather="save"></i>
+                                    <i class="w-4 h-4 fas fa-sync-alt"></i>
                                 </span>
                             </button>
                             @endcan
+                            <button  wire:click.prevent="resetInputFields()"  class="dropdown-toggle button px-2 box text-red-700 dark:text-red-300">
+                                <span class="w-5 h-5 flex items-center justify-center">
+                                    <i class="w-4 h-4 fas fa-times"></i>
+                                </span>
+                            </button>
                         @endif
-                        <button  wire:click.prevent="resetInputFields()"  class="dropdown-toggle button px-2 box text-red-700 dark:text-red-300">
-                            <span class="w-5 h-5 flex items-center justify-center">
-                                <i class="w-4 h-4" data-feather="x"></i>
-                            </span>
-                        </button>
-                        <button  wire:click.prevent="resetInputFields()" class="dropdown-toggle button px-2 box text-gray-700 dark:text-gray-300">
-                            <span class="w-5 h-5 flex items-center justify-center">
-                                <i class="w-4 h-4" data-feather="plus"></i>
-                            </span>
-                        </button>
+                        
+                        
                     </div>
                 </div>
             </div>

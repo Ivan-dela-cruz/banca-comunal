@@ -8,7 +8,6 @@ use Livewire\WithPagination;
 class Member extends Component
 {
     use WithPagination;
-   
     public function render()
     {
         $members = MemberData::orderBy('name','ASC')->paginate(6);
