@@ -12,11 +12,11 @@
                         <div class="p-5">
                             <div>
                                 <label>Cédula</label>
-                                <input wire:model="dni" type="text" class="input w-full border mt-2 @error('dni')  border-red-400 @enderror" placeholder="Número de Documento">
+                                <input wire:keyup.enter="findMember()" wire:model="dni" type="text" class="input w-full border mt-2 @error('dni')  border-red-400 @enderror" placeholder="Número de Documento">
                             </div>
                             <div class="mt-3">
                                 <label>Nombre(s)</label>
-                                <input wire:model="name" type="text" class="input w-full border mt-2 @error('name')  border-red-400 @enderror" placeholder="Nombre(s)">
+                                <input wire:model="name" type="text" class="input w-full border mt-2 @error('name')  border-red-400 @enderror" placeholder="Nombre(s)" {{$action === 'STORE' ? 'readonly' : ''}}>
                             </div>
                         </div>
                     </div>
@@ -25,15 +25,15 @@
                         <div class="p-5">
                             <div>
                                 <label>Dirección</label>
-                                <input wire:model="address" type="text" class="input w-full border mt-2 @error('address')  border-red-400 @enderror" placeholder="Dirección">
+                                <input wire:model="address" type="text" class="input w-full border mt-2 @error('address')  border-red-400 @enderror" placeholder="Dirección" {{$action === 'STORE' ? 'readonly' : ''}}>
                             </div>
                             <div class="mt-3">
                                 <label>Teléfono</label>
-                                <input wire:model="phone" type="text" class="input w-full border mt-2 @error('phone')  border-red-400 @enderror" placeholder="Teléfono">
+                                <input wire:model="phone" type="text" class="input w-full border mt-2 @error('phone')  border-red-400 @enderror" placeholder="Teléfono" {{$action === 'STORE' ? 'readonly' : ''}}>
                             </div>
                         </div>
                     </div>
-                  
+
                 </div>
 
             </div>
@@ -64,7 +64,7 @@
                             </div>
                         </div>
                     </div>
-                
+
                     <div class="col-span-12 lg:col-span-6 xxl:col-span-6">
                         <div class="p-5">
                             <div>
@@ -77,11 +77,12 @@
                             </div>
                             <div class="mt-3">
                                 <label>Tipo de Credito</label>
-                                <input type="text" class="input w-full border mt-2" placeholder="">
+                                <input wire:model ="credit_type" type="text" class="input w-full border mt-2 @error('credit_type')  border-red-400 @enderror" placeholder="">
+
                             </div>
                         </div>
                     </div>
-                  
+
                 </div>
 
             </div>
@@ -107,10 +108,10 @@
                                 <label>Fecha de Vencimiento</label>
                                 <input wire:model="due_date" type="date" class="input w-full border mt-2 " readonly>
                             </div>
-                            
+
                         </div>
                     </div>
-                  
+
                 </div>
 
             </div>
@@ -153,15 +154,24 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                        </div>
-                    </div> 
-                    <div class="intro-y col-span-12 flex items-center justify-center sm:justify-end mt-5 p-5">
-                        <button wire:click.prevent="store()" class="button w-24 justify-center block bg-theme-1 text-white ml-2">Guardar</button>
-                    </div>
-                </div>
-               
 
-                
+                            <div class="intro-y col-span-12 flex items-center justify-center sm:justify-end p-5">
+                                @if($action === 'PRINT')
+                                    <button wire:click.prevent="print()" class="button w-24 justify-center block bg-theme-9 text-white ml-2">Imprimir</button>
+                                @endif
+                                @if($action === 'STORE')
+                                    <button wire:click.prevent="store()" class="button w-24 justify-center block bg-theme-1 text-white ml-2">Guardar</button>
+                                @endif
+                                    <button wire:click.prevent="resetInputFields()" class="button w-24 justify-center block bg-theme-6 text-white ml-2">Limpiar</button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
             </div>
         </div>
     </div>
