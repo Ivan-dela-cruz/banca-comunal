@@ -15,7 +15,17 @@ class CreateDetailAmortizationsTable extends Migration
     {
         Schema::create('detail_amortizations', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('amortization_id');
+            $table->string('period')->nullable();
+            $table->date('payment_date')->nullable();
+            $table->string('amount')->nullable();
+            $table->string('interest')->nullable();
+            $table->string('dividing')->nullable();
+            $table->string('total_payment')->nullable();
+            $table->string('balance')->nullable();
             $table->timestamps();
+            $table->foreign('amortization_id')->references('id')->on('amortizations');
+
         });
     }
 
