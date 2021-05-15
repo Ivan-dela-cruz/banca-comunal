@@ -1,36 +1,10 @@
 <div>
-  
-    <div class="intro-y flex items-center mt-8">
-        <h2 class="text-lg font-medium mr-auto">Libreta de Ahorros</h2>
-    </div>
-    <div class="grid grid-cols-12 gap-6 mt-5">
-        <div class="intro-y col-span-12 lg:col-span-12">
-            <div class="intro-y box p-5">
-                <div>
-                    <label>Cliente</label>
-                    <input type="text" class="input w-full border mt-2" placeholder="Ingrese cédula de identidad">
-                </div>
-                <div>
-                    <label>Número de cuenta</label>
-                    <input type="text" class="input w-full border mt-2" placeholder="Ingrese el número de cuenta">
-                </div>
-                <div class="mt-3">
-                    <label>Estado</label>
-                    <div class="mt-2">
-                        <input type="checkbox" class="input input--switch border">
-                    </div>
-                </div>
-                <div class="text-right mt-5">
-                    <button type="button" class="button w-24 border dark:border-dark-5 text-gray-700 dark:text-gray-300 mr-1">Cancel</button>
-                    <button type="button" class="button w-24 bg-theme-1 text-white">Save</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- BEGIN: Weekly Top Products -->
+    <div class="grid grid-cols-12 gap-6">
+        <div class="col-span-12 xxl:col-span-9 grid grid-cols-12 gap-6">
+            <!-- BEGIN: Weekly Top Products -->
             <div class="col-span-12 mt-6">
                 <div class="intro-y block sm:flex items-center h-10">
-                    <h2 class="text-lg font-medium truncate mr-5">Detalle de transacciones</h2>
+                    <h2 class="text-lg font-medium truncate mr-5">Libretas</h2>
                     <div class="flex items-center sm:ml-auto mt-3 sm:mt-0">
                         <button class="ml-3 button box flex items-center text-gray-700 dark:text-gray-300">
                             <i data-feather="file-text" class="hidden sm:block w-4 h-4 mr-2"></i> Export to PDF
@@ -41,35 +15,45 @@
                     <table class="table table-report sm:mt-2">
                         <thead>
                             <tr>
-                                <th class="whitespace-no-wrap">N°</th>
-                                <th class="whitespace-no-wrap">Fecha</th>
-                                <th class="whitespace-no-wrap">Detalle</th>
-                                <th class="text-center whitespace-no-wrap">Deposito</th>
+                                <th class="whitespace-no-wrap">Emisión</th>
+                                <th class="whitespace-no-wrap">Cliente</th>
+                                <th class="whitespace-no-wrap">Tipo</th>
+                                <th class="text-center whitespace-no-wrap">N° Libreta</th>
+                                <th class="text-center whitespace-no-wrap">Depositos</th>
                                 <th class="text-center whitespace-no-wrap">Retiro</th>
                                 <th class="text-center whitespace-no-wrap">Saldo</th>
+                                <th class="text-center whitespace-no-wrap">Estado</th>
                                 <th class="text-center whitespace-no-wrap">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                           <p hidden> {{ $cont=1 }}</p>
                             @foreach (array_slice($fakers, 0, 2) as $faker)
                                 <tr class="intro-x">
-                                    <td class="w-auto text-center">
-                                       <span> {{ $cont ++ }}</span>
+                                    <td class="w-40">
+                                       <span> {{ $faker['dates'][0] }}</span>
                                     </td>
                                     <td>
-                                        <span>{{ $faker['dates'][0] }}</span>
+                                        <a href="" class="font-medium whitespace-no-wrap">{{ $faker['users'][0]['name'] }}</a>
+                                        <div class="text-gray-600 text-xs whitespace-no-wrap">1750474049</div>
                                     </td>
                                     <td class="w-40">
-                                        <a href="" class="font-medium whitespace-no-wrap">{{ $faker['products'][0]['name'] }}</a>
+                                        <span> Ahorros </span>
                                      </td>
-                                     <td class="w-40 text-center">
-                                        <span> 100 </span>
+                                     <td class="w-40">
+                                        <span> LBA-0002 </span>
                                      </td>
-                                    <td class="text-center">0</td>
-                                    <td class="w-40 text-center">
-                                        <span> 400 </span>
+                                    <td class="text-center">500</td>
+                                    <td class="w-40">
+                                        <span> 700</span>
                                      </td>
+                                     <td class="w-40">
+                                        <span> 200 </span>
+                                     </td>
+                                    <td class="w-40">
+                                        <div class="flex items-center justify-center {{ $faker['true_false'][0] ? 'text-theme-9' : 'text-theme-6' }}">
+                                            <i data-feather="check-square" class="w-4 h-4 mr-2"></i> {{ $faker['true_false'][0] ? 'Active' : 'Inactive' }}
+                                        </div>
+                                    </td>
                                     <td class="table-report__action w-56">
                                         <div class="flex justify-center items-center">
                                             <a class="flex items-center mr-3" href="">
@@ -132,4 +116,6 @@
                 </div>
             </div>
             <!-- END: Weekly Top Products -->
+        </div>
+    </div>
 </div>
