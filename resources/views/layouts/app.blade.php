@@ -60,13 +60,19 @@
                             <li>
                                 <a href="/members"  class="side-menu">
                                     <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                                    <div class="side-menu__title"> Roles & Permisos </div>
+                                    <div class="side-menu__title"> Caja General </div>
                                 </a>
                             </li>
                             <li>
                                 <a href="/users"  class="side-menu">
                                     <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                                    <div class="side-menu__title"> Usuarios </div>
+                                    <div class="side-menu__title"> Caja Chica </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/users"  class="side-menu">
+                                    <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
+                                    <div class="side-menu__title"> Historial </div>
                                 </a>
                             </li>
 
@@ -98,7 +104,7 @@
                         <a href="javascript:;"
                            class="side-menu @if(request()->is('nueva-solicitud') || request()->is('visita-de-asesor'))side-menu--active side-menu--open @endif">
                             <div class="side-menu__icon"> <i data-feather="box"></i> </div>
-                            <div class="side-menu__title"> Solicitud <i data-feather="chevron-down" class="side-menu__sub-icon"></i> </div>
+                            <div class="side-menu__title"> Solicitudes <i data-feather="chevron-down" class="side-menu__sub-icon"></i> </div>
                         </a>
                         <ul class="@if(request()->is('nueva-solicitud' || request()->is('visita-de-asesor')))side-menu__sub-open @endif">
                             <li>
@@ -108,9 +114,29 @@
                                 </a>
                             </li>
                             <li>
+                                <a href="/listado-solicitudes"  class="side-menu">
+                                    <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
+                                    <div class="side-menu__title"> Solicitudes Créditos </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;" class="side-menu">
+                            <div class="side-menu__icon"> <i data-feather="box"></i> </div>
+                            <div class="side-menu__title"> Vistas <i data-feather="chevron-down" class="side-menu__sub-icon"></i> </div>
+                        </a>
+                        <ul class="">
+                            <li>
                                 <a href="/visita-de-asesor"  class="side-menu">
                                     <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                                    <div class="side-menu__title"> Visita de Asesor </div>
+                                    <div class="side-menu__title"> Nueva </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/listado-solicitudes"  class="side-menu">
+                                    <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
+                                    <div class="side-menu__title"> Listado de Visitas </div>
                                 </a>
                             </li>
 
@@ -123,15 +149,36 @@
                         </a>
                         <ul class="">
                             <li>
-                                <a href="/members"  class="side-menu">
+                                <a href="/nuevo-credito"  class="side-menu">
                                     <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                                    <div class="side-menu__title"> Roles & Permisos </div>
+                                    <div class="side-menu__title"> Nuevo </div>
                                 </a>
                             </li>
                             <li>
-                                <a href="/users"  class="side-menu">
+                                <a href="/creditos"  class="side-menu">
                                     <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                                    <div class="side-menu__title"> Usuarios </div>
+                                    <div class="side-menu__title"> Listado </div>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;" class="side-menu">
+                            <div class="side-menu__icon"> <i data-feather="box"></i> </div>
+                            <div class="side-menu__title"> Libretas <i data-feather="chevron-down" class="side-menu__sub-icon"></i> </div>
+                        </a>
+                        <ul class="">
+                            <li>
+                                <a href="/nueva-libreta"  class="side-menu">
+                                    <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
+                                    <div class="side-menu__title"> Nueva </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/libretas"  class="side-menu">
+                                    <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
+                                    <div class="side-menu__title"> Listado de libretas </div>
                                 </a>
                             </li>
 
@@ -146,13 +193,13 @@
                             <li>
                                 <a href="/members"  class="side-menu">
                                     <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                                    <div class="side-menu__title"> Roles & Permisos </div>
+                                    <div class="side-menu__title"> Nuevo </div>
                                 </a>
                             </li>
                             <li>
                                 <a href="/users"  class="side-menu">
                                     <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                                    <div class="side-menu__title"> Usuarios </div>
+                                    <div class="side-menu__title"> Listado </div>
                                 </a>
                             </li>
 
@@ -176,43 +223,15 @@
                     <li>
                         <a href="javascript:;" class="side-menu">
                             <div class="side-menu__icon"> <i data-feather="box"></i> </div>
-                            <div class="side-menu__title"> Cajas <i data-feather="chevron-down" class="side-menu__sub-icon"></i> </div>
+                            <div class="side-menu__title"> Cupos <i data-feather="chevron-down" class="side-menu__sub-icon"></i> </div>
                         </a>
                         <ul class="">
                             <li>
                                 <a href="/members"  class="side-menu">
                                     <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                                    <div class="side-menu__title"> Roles & Permisos </div>
+                                    <div class="side-menu__title"> Cupos de socios </div>
                                 </a>
                             </li>
-                            <li>
-                                <a href="/users"  class="side-menu">
-                                    <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                                    <div class="side-menu__title"> Usuarios </div>
-                                </a>
-                            </li>
-
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:;" class="side-menu">
-                            <div class="side-menu__icon"> <i data-feather="box"></i> </div>
-                            <div class="side-menu__title"> Vistas <i data-feather="chevron-down" class="side-menu__sub-icon"></i> </div>
-                        </a>
-                        <ul class="">
-                            <li>
-                                <a href="/members"  class="side-menu">
-                                    <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                                    <div class="side-menu__title"> Roles & Permisos </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/users"  class="side-menu">
-                                    <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                                    <div class="side-menu__title"> Usuarios </div>
-                                </a>
-                            </li>
-
                         </ul>
                     </li>
                     <li>
@@ -224,13 +243,13 @@
                             <li>
                                 <a href="/members"  class="side-menu">
                                     <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                                    <div class="side-menu__title"> Roles & Permisos </div>
+                                    <div class="side-menu__title"> Nuevo </div>
                                 </a>
                             </li>
                             <li>
                                 <a href="/users"  class="side-menu">
                                     <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                                    <div class="side-menu__title"> Usuarios </div>
+                                    <div class="side-menu__title"> Listado </div>
                                 </a>
                             </li>
 

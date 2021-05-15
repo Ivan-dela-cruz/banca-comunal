@@ -17,12 +17,14 @@ use App\Http\Livewire\Roles\{
     Roles
 };
 use App\Http\Livewire\NoteBook\{
-    NoteBooks
+    NoteBooks,
+    NoteBooksList
 };
 use App\Http\Livewire\Users\Users;
 
 use App\Http\Livewire\CreditRequest\{
    NewRequest,
+   ListRequests
 };
 use App\Http\Livewire\AdvisorVisit\{
     NewVisit,
@@ -31,8 +33,10 @@ use App\Http\Livewire\Amortization\{
     AmortizationTable,
 };
 
-
-
+use App\Http\Livewire\Credit\{
+    Credits,
+    NewCredit
+ };
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -63,14 +67,22 @@ Route::middleware('auth')->group(function() {
 
     //RUTA PARA LOS ROLES
     Route::get('/roles', Roles::class);
-    Route::get('/libretas', NoteBooks::class);
 
     //CREDIT REQUEST
     Route::get('/nueva-solicitud', NewRequest::class);
+    Route::get('/listado-solicitudes', ListRequests::class);
 
     Route::get('/visita-de-asesor', NewVisit::class);
 
     Route::get('/amortizacion-tabla', AmortizationTable::class);
+
+    //CREDITOS
+    Route::get('/creditos', Credits::class);
+    Route::get('/nuevo-credito', NewCredit::class);
+
+    //LIBRETAS
+    Route::get('/nueva-libreta', NoteBooks::class);
+    Route::get('/libretas', NoteBooksList::class);
 
 });
 
