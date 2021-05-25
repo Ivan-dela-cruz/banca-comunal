@@ -33,6 +33,7 @@ class CreateMembersTable extends Migration
             $table->string('account_number')->nullable();
             $table->boolean('status')->default(true);
             $table->string('url_image')->nullable();
+            $table->string('residence_address')->nullable();
             $table->softDeletes();
             $table->timestamps();
 

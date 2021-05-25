@@ -40,4 +40,9 @@ class Member extends Model
     public function references(){
         return $this->hasMany(MemberReference::class, 'member_id');
     }
+    public function account()
+    {
+        return $this->hasOne(AccountClient::class, 'member_id');
+
+    }
 }
