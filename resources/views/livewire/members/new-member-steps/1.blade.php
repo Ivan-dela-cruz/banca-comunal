@@ -14,7 +14,7 @@
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
             <div class="mb-2">Identificación <span class="text-theme-6">*</span></div>
-            <input wire:keydown.enter="findMember()"  wire:model="dni" type="text" class="input w-full border flex-1" placeholder="Cédula de identidad">
+            <input   wire:model="dni" type="text" class="input w-full border flex-1" placeholder="Cédula de identidad">
             @error('dni') <li class="text-theme-6">{{$message}}</li>  @enderror
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">

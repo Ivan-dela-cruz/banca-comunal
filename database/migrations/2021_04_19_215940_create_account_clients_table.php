@@ -28,7 +28,7 @@ class CreateAccountClientsTable extends Migration
             $table->double('value2')->nullable();
             $table->double('value3')->nullable();
             $table->double('value4')->nullable();
-            $table->enum('status',['activo','inactivo','bloqueado','revision'])->default('revision');
+            $table->enum('status',['activo','inactivo','bloqueado','revision'])->default('activo');
             $table->timestamps();
         });
     }

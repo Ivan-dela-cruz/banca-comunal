@@ -17,6 +17,7 @@ class CreateCreditRequestsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('member_id');
             //step 1
+            $table->string('code')->nullable();
             $table->enum('credit_type', ['Nuevo', 'Refinanciación']);
             $table->string('name_debtor')->nullable();
             $table->string('dni_debtor')->nullable();

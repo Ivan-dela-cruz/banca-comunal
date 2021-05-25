@@ -7,6 +7,8 @@ use Livewire\Component;
 use Illuminate\Support\Collection;
 use App\Models\DetailMember;
 use App\Models\Member;
+use App\Models\ConfigTable;
+use App\Models\AccountClient;
 
 class NewMember extends Component
 {
@@ -34,7 +36,7 @@ class NewMember extends Component
     ];
     public $pageFrame = 1;
 
-    public $data_id, $status = true, $url_image, $member_type, $acount_number;
+    public $data_id, $status = true, $url_image, $member_type="cliente", $acount_number;
     public $member_id = null, $city;
     public $canton, $parish, $principal_street, $secundary_street, $reference_place;
     public $members;
@@ -48,6 +50,10 @@ class NewMember extends Component
     public $action_ref = 'POST';
     public $reference_id = null, $name_ref, $last_name_ref, $dni_ref, $relationship_ref, $instruction_ref, $time_to_meet_ref;
 
+    //INPUT SEARCH VALUEs
+    public $search_member = "",$block_account=false;
+    //DATA ACCOUNT
+    public $serie_ac,$secuence_ac, $number_ac;
     public function selectFrame($id)
     {
         for ($i = 1; $i <= count($this->listButtonFrame); $i++) {
@@ -65,13 +71,40 @@ class NewMember extends Component
 
     public function render()
     {
-
         $data_reference = MemberReference::where('member_id', $this->member_id)->get();
+        $this->getLastNumber();
+        $this->getAccount();
+       
         return view('livewire.members.new-member', compact('data_reference'))
             ->extends('layouts.app')
             ->section('subcontent');
     }
 
+    public function getAccount()
+    {
+        $account = AccountClient::where('member_id', $this->member_id)->first();
+        if($account){
+            $this->block_account = true;
+            return;
+        }
+        
+        $this->block_account = false;
+    }
+    public function getLastNumber()
+    {
+        $re_last = ConfigTable::where('identifier', $this->member_type)->first();
+        if($re_last){
+            $codeAux = strval($re_last->complemenet+$re_last->secuence+1);
+            $codeAux= ltrim($codeAux, '1');
+            $this->serie_ac=$re_last->serie;
+            $this->secuence_ac=$re_last->secuence+1;
+            $this->number_ac=($re_last->serie)."".($codeAux);
+            $this->acount_number =  $this->number_ac;
+            return;
+        }
+        $this->acount_number = 0;
+       
+    }
     public function loadData($member, $detail)
     {
         $this->data_id = $member->id;
@@ -115,17 +148,23 @@ class NewMember extends Component
 
         //CHANGE VALUE ACTION
         $this->action = 'PUT';
+        
     }
 
     public function findMember()
     {
-        $member = Member::where('doc_number', $this->dni)->first();
+        $member = Member::where('doc_number', $this->search_member)->first();
         if (isset($member)) {
             // $this->alert('success','Registro recuperado satisfactoriamente');
             $detail = DetailMember::where('member_id', $member->id)->first();
             $this->loadData($member, $detail);
+            $this->getAccount();
+            $this->alert('success', 'Datos cargados exitosamente!');
         } else {
             $this->action = 'POST';
+            $this->block_account = false;
+            $this->resetInputFields();
+            $this->alert('warning', 'No se encontrarón registros!');
             // $this->resetInputFields();
             // $this->alert('warning','No se encontrarón registros asociados');
         }
@@ -356,6 +395,7 @@ class NewMember extends Component
     public function storeFinal()
     {
         $member_t = Member::find($this->member_id);
+        $account= $member_t->account();
         $data_deatil = [
             'member_type' => $this->member_type,
             'account_number' => $this->acount_number,
@@ -363,6 +403,19 @@ class NewMember extends Component
             'url_image' => $this->url_image
         ];
         $member_t->update($data_deatil);
+
+        if($account){ 
+            AccountClient::create([
+                'member_id'=>$this->member_id,
+                'code'=>$this->serie_ac,
+                'number'=>$this->acount_number,
+                'sec'=>$this->secuence_ac,
+                'type'=>$this->member_type
+            ]);
+            $config =  ConfigTable::where('identifier',$this->member_type)->first();
+            $config->secuence = $this->secuence_ac;
+            $config->save();
+        }
         $this->alert('success','¡Registro agregado exitosamente!');
     }
 

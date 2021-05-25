@@ -29,9 +29,9 @@
                     <div class="intro-x mt-2 text-gray-500 xl:hidden text-center">Sistema de administración de activos. Gestiona tus recursos desde cualquir lugar</div>
                     <div class="intro-x mt-8">
                         <form id="login-form">
-                            <input type="text" id="input-email" class="intro-x login__input input input--lg border border-gray-300 block" placeholder="Email" value="contato@marioguimaraes.com.br">
+                            <input type="text" id="input-email" class="intro-x login__input input input--lg border border-gray-300 block" placeholder="Email" value="superadmin@gmail.com">
                             <div id="error-email" class="login__input-error w-5/6 text-theme-6 mt-2"></div>
-                            <input type="password" id="input-password" class="intro-x login__input input input--lg border border-gray-300 block mt-4" placeholder="Password" value="password">
+                            <input type="password" id="input-password" class="intro-x login__input input input--lg border border-gray-300 block mt-4" placeholder="Password" value="superadmin">
                             <div id="error-password" class="login__input-error w-5/6 text-theme-6 mt-2"></div>
                         </form>
                     </div>

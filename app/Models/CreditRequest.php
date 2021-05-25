@@ -12,6 +12,7 @@ class CreditRequest extends Model
     protected $table = 'credit_requests';
     protected $fillable = [
         //step1
+        'code',
         'member_id',
         'credit_type',
         'name_debtor',

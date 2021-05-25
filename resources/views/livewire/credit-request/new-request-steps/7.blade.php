@@ -94,14 +94,6 @@
             @this.set('commerce_lng', lng);
             });
 
-            // Create the initial InfoWindow.
-            // let infoWindow = new google.maps.InfoWindow({
-            //     content: "Haga clic en el mapa para marcar el lugar.",
-            //     position: initLatLng,
-            // });
-
-            // infoWindow.open(mapCommerce);
-            // infoWindow.open(mapLiving);
 
         }
 

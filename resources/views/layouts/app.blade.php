@@ -97,7 +97,12 @@
                                     <div class="side-menu__title"> Listado </div>
                                 </a>
                             </li>
-
+                            <li>
+                                <a href="/listado-cuentas"  class="side-menu">
+                                    <div class="side-menu__icon md:text-green-400"> <i data-feather="layers"></i> </div>
+                                    <div class="side-menu__title"> Cuentas </div>
+                                </a>
+                            </li>
                         </ul>
                     </li>
                     <li>

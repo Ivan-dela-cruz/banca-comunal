@@ -37,6 +37,9 @@ use App\Http\Livewire\Credit\{
     Credits,
     NewCredit
  };
+ use App\Http\Livewire\Accounts\{
+    Accounts
+ };
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -83,6 +86,9 @@ Route::middleware('auth')->group(function() {
     //LIBRETAS
     Route::get('/nueva-libreta', NoteBooks::class);
     Route::get('/libretas', NoteBooksList::class);
+
+    //ACCOUNTS
+    Route::get('/listado-cuentas', Accounts::class);
 
 });
 
