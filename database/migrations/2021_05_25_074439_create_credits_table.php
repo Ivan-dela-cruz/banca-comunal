@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMemberIncomeContributionsTable extends Migration
+class CreateCreditsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,18 @@ class CreateMemberIncomeContributionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('member_income_contributions', function (Blueprint $table) {
+        Schema::create('credits', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('member_id')->nullable();
-            $table->date('date')->nullable();
+            $table->unsignedBigInteger('visit_id')->nullable();
+            $table->unsignedBigInteger('request_id')->nullable();
+            $table->unsignedBigInteger('amortization_id')->nullable();
+            $table->integer('term')->nullable();
+            $table->date('first_pay')->nullable();
             $table->double('amount')->nullable();
+            $table->double('fixed_free')->nullable();
             $table->double('balance')->nullable();
-            $table->string('description')->nullable();
-            $table->boolean('status')->nullable();
+            $table->enum('status',['aprovado','anulado','revision'])->default('revision');
             $table->timestamps();
         });
     }
@@ -32,6 +36,6 @@ class CreateMemberIncomeContributionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('member_income_contributions');
+        Schema::dropIfExists('credits');
     }
 }

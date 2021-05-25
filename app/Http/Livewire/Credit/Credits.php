@@ -3,12 +3,13 @@
 namespace App\Http\Livewire\Credit;
 
 use Livewire\Component;
-
+use App\Models\Credits as Credit;
 class Credits extends Component
 {
     public function render()
     {
-        return view('livewire.credit.credits')
+        $credits = Credit::all();
+        return view('livewire.credit.credits',compact('credits'))
         ->extends('layouts.app')
         ->section('subcontent');;
     }

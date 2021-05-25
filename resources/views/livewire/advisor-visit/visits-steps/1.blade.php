@@ -3,6 +3,11 @@
     <input hidden wire:model="member_id" type="text" class="input w-full border flex-1" placeholder="">
     <div class="grid grid-cols-12 gap-4 row-gap-5 mt-5">
         <div class="intro-y col-span-12 sm:col-span-6">
+            <div class="mb-2">Código<span class="text-theme-6">*</span></div>
+            <input disabled wire:model="code" type="text" class="input w-full border flex-1" placeholder="">
+            @error('code') <li class="text-theme-6">{{$message}}</li>  @enderror
+        </div>
+        <div class="intro-y col-span-12 sm:col-span-6">
             <div class="mb-2">Crédito <span class="text-theme-6">*</span></div>
             {{--            <input  type="text" class="input w-full border flex-1" placeholder="Nuevo o Refinanciación">--}}
 
@@ -46,7 +51,12 @@
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
             <div class="mb-2">Cuota Variable <span class="text-theme-6">*</span></div>
-            <input wire:model="variable_fee" type="text" class="input w-full border flex-1" placeholder="">
+            <div class="sm:mt-2"> 
+                <select wire:model="variable_fee" class="input w-full border flex-1">
+                    <option value="0">Fija</option>
+                    <option value="1">Variable</option>
+                </select> 
+            </div>
             @error('variable_fee') <li class="text-theme-6">{{$message}}</li>  @enderror
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">

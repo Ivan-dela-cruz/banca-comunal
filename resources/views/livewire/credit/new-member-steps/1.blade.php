@@ -3,7 +3,7 @@
     <div class="grid grid-cols-12 gap-4 row-gap-5 mt-5">
         <div class="intro-y col-span-12 sm:col-span-6">
             <div class="mb-2">Código </div>
-            <input wire:model="acount_number" type="text" class="input w-full border flex-1" placeholder="Ingrese codigo de la solicitud">
+            <input wire:keyup.enter="findRequest()" wire:model="code_request" type="text" class="input w-full border flex-1" placeholder="Ingrese codigo de la solicitud">
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
             <div class="mb-2">Estado solicitud</div>

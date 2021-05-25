@@ -87,7 +87,6 @@ class CreateCreditRequestsTable extends Migration
             $table->string('commerce_lat')->nullable();
             $table->string('commerce_lng')->nullable();
             $table->string('url_commerce')->nullable();
-
             $table->timestamps();
             $table->foreign('member_id')->references('id')->on('members');
         });

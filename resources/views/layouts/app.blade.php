@@ -129,7 +129,7 @@
                     <li>
                         <a href="javascript:;" class="side-menu">
                             <div class="side-menu__icon"> <i data-feather="box"></i> </div>
-                            <div class="side-menu__title"> Vistas <i data-feather="chevron-down" class="side-menu__sub-icon"></i> </div>
+                            <div class="side-menu__title"> Visitas Asesor <i data-feather="chevron-down" class="side-menu__sub-icon"></i> </div>
                         </a>
                         <ul class="">
                             <li>
@@ -139,9 +139,24 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="/listado-solicitudes"  class="side-menu">
+                                <a href="/listado-visitas"  class="side-menu">
                                     <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
                                     <div class="side-menu__title"> Listado de Visitas </div>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;" class="side-menu">
+                            <div class="side-menu__icon"> <i data-feather="box"></i> </div>
+                            <div class="side-menu__title"> Aportes <i data-feather="chevron-down" class="side-menu__sub-icon"></i> </div>
+                        </a>
+                        <ul class="">
+                            <li>
+                                <a href="/aportes-socios"  class="side-menu">
+                                    <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
+                                    <div class="side-menu__title"> Aportes socios</div>
                                 </a>
                             </li>
 
@@ -189,7 +204,24 @@
 
                         </ul>
                     </li>
+                    
                     <li>
+                        <a href="javascript:;" class="side-menu">
+                            <div class="side-menu__icon"> <i data-feather="box"></i> </div>
+                            <div class="side-menu__title"> Simulador <i data-feather="chevron-down" class="side-menu__sub-icon"></i> </div>
+                        </a>
+                        <ul class="@if(request()->is('amortizacion-tabla'))side-menu__sub-open @endif">
+                            <li>
+                                <a href="/amortizacion-tabla"  class="side-menu">
+                                    <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
+                                    <div class="side-menu__title"> Tabla </div>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+                     {{-- 
+                        <li>
                         <a href="javascript:;" class="side-menu">
                             <div class="side-menu__icon"> <i data-feather="box"></i> </div>
                             <div class="side-menu__title"> Pagos <i data-feather="chevron-down" class="side-menu__sub-icon"></i> </div>
@@ -213,21 +245,6 @@
                     <li>
                         <a href="javascript:;" class="side-menu">
                             <div class="side-menu__icon"> <i data-feather="box"></i> </div>
-                            <div class="side-menu__title"> Amortización <i data-feather="chevron-down" class="side-menu__sub-icon"></i> </div>
-                        </a>
-                        <ul class="@if(request()->is('amortizacion-tabla'))side-menu__sub-open @endif">
-                            <li>
-                                <a href="/amortizacion-tabla"  class="side-menu">
-                                    <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                                    <div class="side-menu__title"> Tabla </div>
-                                </a>
-                            </li>
-
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:;" class="side-menu">
-                            <div class="side-menu__icon"> <i data-feather="box"></i> </div>
                             <div class="side-menu__title"> Cupos <i data-feather="chevron-down" class="side-menu__sub-icon"></i> </div>
                         </a>
                         <ul class="">
@@ -239,7 +256,8 @@
                             </li>
                         </ul>
                     </li>
-                    <li>
+                   
+                         <li>
                         <a href="javascript:;" class="side-menu">
                             <div class="side-menu__icon"> <i data-feather="box"></i> </div>
                             <div class="side-menu__title"> Empleados <i data-feather="chevron-down" class="side-menu__sub-icon"></i> </div>
@@ -260,6 +278,8 @@
 
                         </ul>
                     </li>
+                         --}}
+                   
                     <li>
                         <a href="javascript:;" class="side-menu">
                             <div class="side-menu__icon"> <i data-feather="box"></i> </div>
@@ -272,12 +292,15 @@
                                     <div class="side-menu__title"> Roles & Permisos </div>
                                 </a>
                             </li>
-                            <li>
+                            {{-- 
+                                <li>
                                 <a href="/users"  class="side-menu">
                                     <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
                                     <div class="side-menu__title"> Usuarios </div>
                                 </a>
                             </li>
+                                 --}}
+                            
 
                         </ul>
                     </li>

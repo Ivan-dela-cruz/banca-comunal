@@ -45,4 +45,19 @@ class Member extends Model
         return $this->hasOne(AccountClient::class, 'member_id');
 
     }
+    public function creditRequests()
+    {
+        return $this->hasMany(CreditRequest::class, 'member_id');
+
+    }
+    public function visits()
+    {
+        return $this->hasMany(AdvisorVisit::class, 'member_id');
+
+    }
+    public function incomes_contribution()
+    {
+        return $this->hasMany(MemberIncomeContribution::class, 'member_id');
+
+    }
 }

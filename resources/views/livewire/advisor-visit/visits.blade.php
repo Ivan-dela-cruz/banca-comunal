@@ -4,7 +4,7 @@
             <!-- BEGIN: General Report -->
             <div class="col-span-12 mt-8">
                 <div class="intro-y flex items-center h-10">
-                    <h2 class="text-lg font-medium truncate mr-5">Solicitudes de crédito </h2>
+                    <h2 class="text-lg font-medium truncate mr-5">Visitas del asesor </h2>
                     <button wire:click.prevent="refresh()" class="ml-auto flex button text-white bg-theme-9 shadow-md ">
                         <i class="fas fa-redo-alt"></i>
                    </button>
@@ -81,7 +81,7 @@
             <!-- BEGIN: Weekly Top Products -->
             <div class="col-span-12 mt-6">
                 <div class="intro-y block sm:flex items-center h-10">
-                    <h2 class="text-lg font-medium truncate mr-5">Solicitudes ingresadas </h2>
+                    <h2 class="text-lg font-medium truncate mr-5">Vistas realizadas </h2>
                    
                     <div class="flex items-center sm:ml-auto mt-3 sm:mt-0">
                        
@@ -175,3 +175,4 @@
         </div>
     </div>
 </div>
+

@@ -81,6 +81,12 @@ class CreditRequest extends Model
         'commerce_lat',
         'commerce_lng',
         'url_commerce',
+        'status'
     ];
 
+    public function member()
+    {
+        return $this->belongsTo(Member::class, 'member_id');
+
+    }
 }

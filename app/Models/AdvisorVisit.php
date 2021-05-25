@@ -14,6 +14,7 @@ class AdvisorVisit extends Model
     protected $fillable = [
         //step1
         'member_id',
+        'code',
         'credit_type',
         'name_debtor',
         'dni_debtor',
@@ -44,6 +45,12 @@ class AdvisorVisit extends Model
         'commerce_lat',
         'commerce_lng',
         'url_living',
-        'url_commerce'
+        'url_commerce',
+        'status'
     ];
+    public function member()
+    {
+        return $this->belongsTo(Member::class, 'member_id');
+
+    }
 }

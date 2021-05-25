@@ -8,15 +8,16 @@ use App\Models\Member;
 use App\Models\MemberReference;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use App\Models\ConfigTable;
 
 class NewVisit extends Component
 {
     use WithFileUploads;
     //step1
-    public $request_id = null, $credit_type, $name_debtor, $dni_debtor, $amount, $reason_invest, $pay, $deadline, $variable_fee, $credit_segment;
+    public $request_id = null, $credit_type, $name_debtor, $dni_debtor, $amount, $reason_invest, $pay, $deadline, $variable_fee=0, $credit_segment;
 
     //step2
-    public $member_id = null, $doc_type, $doc_number, $name, $last_name, $instruction, $birth_place, $country, $birth_date;
+    public $member_id = null,$code,$status, $doc_type, $doc_number, $name, $last_name, $instruction, $birth_place, $country, $birth_date;
     public $marital_status, $gender, $email, $phone1, $phone2, $residence_address;
     public $member_type, $account_number, $status_member, $url_image;
 
@@ -38,15 +39,29 @@ class NewVisit extends Component
 
     public $action = 'POST';
     public $check_living = false, $check_commerce = false;
-
+    //CONFIG TABLE
+    public $secuence_tab = 0;
     public function render()
     {
+        $this->getLastNumber();
         $data_reference = MemberReference::where('member_id', $this->member_id)->where('status',1)->get();
         return view('livewire.advisor-visit.new-visit', compact('data_reference'))
             ->extends('layouts.app')
             ->section('subcontent');
     }
+    public function getLastNumber()
+    {
+        $re_last = ConfigTable::where('identifier', 'visitas')->first();
+        if($re_last){
+            $this->secuence_tab = $re_last->secuence+1;
+            $codeAux = strval($re_last->complemenet+$re_last->secuence+1);
+            $codeAux= ltrim($codeAux, '1');
+            $this->code=($re_last->serie)."".($codeAux);
+            return;
+        }
+        $this->code = 0;
 
+    }
     public function findMember()
     {
         $member = Member::where('doc_number', $this->dni_debtor)->first();
@@ -54,6 +69,7 @@ class NewVisit extends Component
             // $this->alert('success','Registro recuperado satisfactoriamente');
             $detail = DetailMember::where('member_id', $member->id)->first();
             $this->loadData($member, $detail);
+            $this->alert('success','¡Datos del cliente cargados con exíto!');
         } else {
             $this->action = 'POST';
             // $this->resetInputFields();
@@ -111,6 +127,7 @@ class NewVisit extends Component
     {
         $data = [
             'member_id' => $this->member_id,
+            'code'=>$this->code,
             'credit_type' => $this->credit_type,
             'name_debtor' => $this->name_debtor,
             'dni_debtor' => $this->dni_debtor,

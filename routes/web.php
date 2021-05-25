@@ -27,7 +27,7 @@ use App\Http\Livewire\CreditRequest\{
    ListRequests
 };
 use App\Http\Livewire\AdvisorVisit\{
-    NewVisit,
+    NewVisit,Visits
 };
 use App\Http\Livewire\Amortization\{
     AmortizationTable,
@@ -39,6 +39,12 @@ use App\Http\Livewire\Credit\{
  };
  use App\Http\Livewire\Accounts\{
     Accounts
+ };
+ use App\Http\Livewire\Incomes\{
+    MemberContributions
+ };
+ use App\Http\Livewire\Dashboard\{
+    Index
  };
 /*
 |--------------------------------------------------------------------------
@@ -59,7 +65,8 @@ Route::middleware('loggedin')->group(function() {
 });
 
 Route::middleware('auth')->group(function() {
-    Route::get('/', [PageController::class, 'loadPage'])->name('dashboard');
+   // Route::get('/', [PageController::class, 'loadPage'])->name('dashboard');
+   Route::get('/', Index::class)->name('dashboard');
     Route::get('/eventos', ShowEvents::class)->name('events');
     Route::get('/miembros', Member::class)->name('members');
     Route::get('/nuevo-miembro', NewMember::class)->name('new-member');
@@ -75,7 +82,9 @@ Route::middleware('auth')->group(function() {
     Route::get('/nueva-solicitud', NewRequest::class);
     Route::get('/listado-solicitudes', ListRequests::class);
 
+    //VISITAS
     Route::get('/visita-de-asesor', NewVisit::class);
+    Route::get('/listado-visitas', Visits::class);
 
     Route::get('/amortizacion-tabla', AmortizationTable::class);
 
@@ -89,6 +98,8 @@ Route::middleware('auth')->group(function() {
 
     //ACCOUNTS
     Route::get('/listado-cuentas', Accounts::class);
+    //APORTES
+    Route::get('/aportes-socios', MemberContributions::class);
 
 });
 
