@@ -5,7 +5,7 @@
             <div class="col-span-12 mt-5">
                 <div class="intro-y block sm:flex items-center h-10">
                     <h2 class="text-lg font-medium truncate mr-5">Cuentas </h2>
-                   
+
                     <div class="flex items-center sm:ml-auto mt-3 sm:mt-0">
                         <button wire:click.prevent="refresh()" class="button text-white bg-theme-9 shadow-md mr-2 ml-2">
                             <i class="fas fa-redo-alt"></i>
@@ -16,7 +16,7 @@
                                 <i class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0 fa fa-search" ></i>
                             </div>
                         </div>
-                        
+
                         <div class="intro-y col-span-12 sm:col-span-6 ml-2">
                             <select  wire:model="member_type" class="input w-full border flex-1">
                                 <option value="Todos">Todos</option>
@@ -28,15 +28,15 @@
                         <button class="ml-3 button box flex items-center text-gray-700 dark:text-gray-300">
                             <i class="hidden sm:block w-4 h-4 mr-2 fas fa-file"></i> Export to PDF
                         </button>
-                        
+
                     </div>
-                   
+
                 </div>
                 <div class="intro-y overflow-auto lg:overflow-visible mt-8 sm:mt-0">
                     <table class="table table-report sm:mt-2">
                         <thead>
                             <tr>
-                               
+
                                 <th class="whitespace-no-wrap">Cliente</th>
                                 <th class="whitespace-no-wrap">Tipo</th>
                                 <th class="text-center whitespace-no-wrap">Cuenta</th>
@@ -50,7 +50,7 @@
                         <tbody>
                            @foreach ($accounts as $a)
                                 <tr class="intro-x">
-                                    
+
                                     <td>
                                         <a href="" class="font-medium whitespace-no-wrap">{{ $a->member->last_name }} {{ $a->member->name }}</a>
                                         <div class="text-gray-600 text-xs whitespace-no-wrap">{{ $a->member->doc_number }}</div>
@@ -89,13 +89,13 @@
                                             {{ $a->status }}
                                         </div>
                                         @endif
-                                        
+
                                     </td>
                                     <td class="table-report__action w-56">
                                         <div class="flex justify-center items-center">
-                                            <a wire.click="edit({{ $a->id }})" class="flex items-center mr-3"
-                                            data-toggle="modal" 
-                                            data-target="#references-modal">
+                                            <a href="javascript:void(0);" wire:click="edit({{ $a->id }})" class="flex items-center mr-3"
+                                            data-toggle="modal"
+                                            data-target="#accountModal">
                                                 <i data-feather="check-square" class="w-4 h-4 mr-1"></i> Edit
                                             </a>
                                             <a class="flex items-center text-theme-6" href="">
@@ -105,7 +105,7 @@
                                     </td>
                                 </tr>
                            @endforeach
-                            
+
                         </tbody>
                     </table>
                 </div>
@@ -158,6 +158,6 @@
             <!-- END: Weekly Top Products -->
         </div>
     </div>
-   
+
 
 </div>

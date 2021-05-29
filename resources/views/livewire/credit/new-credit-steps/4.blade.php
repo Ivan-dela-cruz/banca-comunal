@@ -1,4 +1,4 @@
-<div {{  $visibleFrame["5"]?'':'hidden' }} class="px-5 sm:px-20 mt-10 pt-10 border-t border-gray-200 dark:border-dark-5">
+<div {{  $visibleFrame["4"]?'':'hidden' }} class="px-5 sm:px-20 mt-10 pt-10 border-t border-gray-200 dark:border-dark-5">
     <div class="font-medium text-base"> Detalle final</div>
     <div class="grid grid-cols-12 gap-4 row-gap-5 mt-5">
         <div class="intro-y col-span-12 sm:col-span-6">
@@ -27,9 +27,9 @@
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
             <div class="mb-2">Fecha primer pago </div>
-           
-            <input disabled type="text" class="input w-full border flex-1" placeholder="" 
-            value="@foreach($data_table as $data){{ $data['payment_date'] }} @break @endforeach">
+
+            <input disabled type="text" class="input w-full border flex-1" placeholder=""
+                   value="@foreach($data_table as $data){{ $data['payment_date'] }} @break @endforeach">
         </div>
         <div class="intro-y col-span-12 flex items-center justify-center sm:justify-end mt-5">
             <button wire:click.prevent="storeCredit()" class="button w-24 justify-center block bg-theme-1 text-white ml-2">Guardar</button>

@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 
+use App\Models\AccountClient;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Member;
@@ -68,7 +69,8 @@ class RoleSeeder extends Seeder
         $user2->assignRole('Administrador');
 
 
-        for ($i = 0; $i < 9; $i++) {
+        //0545223000001
+        for ($i = 1; $i < 10; $i++) {
             Member::create([
                 'doc_type' => 'Cédula',
                 'doc_number' => '012345678' . $i,
@@ -84,15 +86,25 @@ class RoleSeeder extends Seeder
                 'phone1' => '0123456789',
                 'phone2' => '0123456789',
                 'reference_place' => 'direccion',
-                'member_type' => 'type',
-                'account_number' => '012345678' . $i
+                'member_type' => 'cliente',
+                'account_number' => '054522300000' . $i
+            ]);
+        }
+
+        for ($i = 1; $i < 10; $i++) {
+            AccountClient::create([
+                'member_id'=> $i,
+                'code'=> '0545223',
+                'number' => '054522300000' . $i,
+                'sec' => '1',
+                'type' => 'cliente',
             ]);
         }
 
         for ($i = 0; $i < 20; $i++) {
             MemberReference::create([
                 'member_id' => rand(1, 9),
-                'name' => 'Reference '.$i,
+                'name' => 'Reference ' . $i,
                 'last_name' => 'Reference',
                 'dni' => '013345678' . $i,
                 'relationship' => 'Reference',

@@ -29,7 +29,7 @@ class CreateMembersTable extends Migration
             $table->string('phone1')->nullable();
             $table->string('phone2')->nullable();
             $table->string('reference_place')->nullable();
-            $table->string('member_type')->nullable();
+            $table->enum('member_type',['cliente','socio','socio fundador'])->default('cliente');
             $table->string('account_number')->nullable();
             $table->boolean('status')->default(true);
             $table->string('url_image')->nullable();

@@ -36,7 +36,7 @@
             <div class="sm:mt-2"> <select wire:model="local_type" class="input w-full border flex-1">
                     <option value="">Seleccione</option>
                     <option value="Propio">Propio</option>
-                    <option value="Arrendado">Arrendado</option>
+                    <option value="Arriendo">Arriendo</option>
                     <option value="Familiares">Familiares</option>
                     <option value="Otro">Otro</option>
                 </select> </div>

@@ -2,7 +2,10 @@
 
 namespace App\Http\Livewire\Credit;
 
+use App\Models\AdvisorVisit;
+use App\Models\Attachment;
 use App\Models\MemberReference;
+use Carbon\Carbon;
 use Livewire\Component;
 use Illuminate\Support\Collection;
 use App\Models\DetailMember;
@@ -11,17 +14,21 @@ use App\Models\Credits;
 use App\Models\Amortization;
 use App\Models\DetailAmortization;
 use App\Models\CreditRequest;
+use Livewire\WithFileUploads;
 
 class NewCredit extends Component
 {
+    use WithFileUploads;
+
     public $amortization_id = null;
     public $credit_type = '';
     public $action = 'PRINT';
-    public   $address, $phone;
+    public $address, $phone;
     public $code_request = "";
+    public $code_visit = "";
 
     //Amortizacion
-    public $amount = null, $status_cred="revision", $visit_id, $request_id;
+    public $amount = null, $status_cred = "revision", $visit_id, $request_id;
     public $interest_rate = 4;
     public $term = null; //plazo meses
     public $fixed_free = null;
@@ -33,9 +40,17 @@ class NewCredit extends Component
 
     public $count = 1;
 
+    public $dni, $name;
 
+    public $credit_req, $amount_req, $term_req, $name_req, $last_name_req, $doc_number_req, $phone_req, $date_req;
+    public $credit_visit, $amount_visit, $term_visit, $name_visit, $last_name_visit, $doc_number_visit, $phone_visit, $date_visit;
 
-    public function mount(){
+    public $credit_id = null;
+    public $action_doc = 'POST';
+    public $doc_id = null, $name_doc, $description_doc, $url_doc, $status_doc = 1;
+
+    public function mount()
+    {
         $this->settlement_date = date('Y-m-d');
     }
 
@@ -70,35 +85,22 @@ class NewCredit extends Component
     public $members;
     public $modal = false, $input_search = '';
 
-    //Personal Data
-    public $name, $last_name, $dni, $passport, $instruction, $marital_status, $birth_date, $email, $phone1, $phone2;
-    //Spouse Data
-    public $name_spouse, $last_name_spouse, $dni_spouse, $passport_spouse, $birth_date_spouse, $email_spouse, $phone1_spouse, $phone2_spouse;
-    //References
-    public $action_ref = 'POST';
-    public $reference_id = null, $name_ref, $last_name_ref, $dni_ref, $relationship_ref, $instruction_ref, $time_to_meet_ref;
-
-
-    public function selectFrame($id)
-    {
-        for ($i = 1; $i <= count($this->listButtonFrame); $i++) {
-            if ($id == $i) {
-                $this->listButtonFrame[$i] = "button text-white bg-theme-1";
-                $this->listTextFrame[$i] = "font-medium text-base lg:mt-3 ml-3 lg:mx-auto";
-                $this->visibleFrame[$i] = true;
-            } else {
-                $this->listButtonFrame[$i] = "button text-gray-600 bg-gray-200 dark:bg-dark-1";
-                $this->listTextFrame[$i] = "text-base lg:mt-3 ml-3 lg:mx-auto text-gray-700 dark:text-gray-600";
-                $this->visibleFrame[$i] = false;
-            }
-        }
-    }
+    public $list_requests = [];
+    public $list_visits = [];
+    public $list_docs = [];
 
     public function render()
     {
+        $this->list_requests = CreditRequest::orderBy('created_at', 'ASC')->get();
+        $this->list_visits = AdvisorVisit::orderBy('created_at', 'ASC')->get();
+        if ($this->credit_id != null) {
+            $credit = Credits::find($this->credit_id);
+//            dd($credit->attachments['id']);
+            $this->list_docs = $credit->attachments;
+        }
 
-        $data_reference = MemberReference::where('member_id', $this->member_id)->get();
-        return view('livewire.credit.new-credit', compact('data_reference'))
+//        $data_reference = MemberReference::where('member_id', $this->member_id)->get();
+        return view('livewire.credit.new-credit')
             ->extends('layouts.app')
             ->section('subcontent');
     }
@@ -106,39 +108,80 @@ class NewCredit extends Component
     public function storeCredit()
     {
         $first_date = "";
-        foreach($this->data_table as $data)
-        {
-            $first_date =  $data['payment_date'] ;
+        foreach ($this->data_table as $data) {
+            $first_date = $data['payment_date'];
             break;
         }
-        
+
         $data = [
-            'member_id'=>$this->member_id,
-            'visit_id'=>$this->visit_id,
-            'request_id'=>$this->request_id,
-            'amortization_id'=>$this->amortization_id,
-            'term'=>$this->term,
-            'first_pay'=>$first_date,
-            'amount'=>$this->amount,
-            'fixed_free'=>$this->fixed_free,
-            'balance'=>0,
-            'status'=>$this->status_cred
+            'member_id' => $this->member_id,
+            'visit_id' => $this->visit_id,
+            'request_id' => $this->request_id,
+            'amortization_id' => $this->amortization_id,
+            'term' => $this->term,
+            'first_pay' => $first_date,
+            'amount' => $this->amount,
+            'fixed_free' => $this->fixed_free,
+            'balance' => 0,
+            'status' => $this->status_cred
         ];
-      
+
         $credit_result = Credits::create($data);
+        $this->credit_id = $credit_result->id;
         $this->alert('success', 'Crédito registrado con exíto.');
     }
 
-public function findRequest()
-{
-    $resul = CreditRequest::where('code',$this->code_request)->first();
-    if($resul){
-        $this->request_id = $resul->id;
-        $this->alert('success', 'Solicitud recupedara con exíto.');
-    }else{
-        $this->alert('warning', 'No se encontrarón registros');
+    public function findRequest($code_request = '')
+    {
+        $this->code_request = $this->code_request != '' ? $this->code_request : $code_request;
+        $result = CreditRequest::where('code', $this->code_request)->first();
+        $this->dni = $result->member->doc_number;
+        if ($result) {
+            $this->request_id = $result->id;
+            $this->setDataRequest($result);
+            $this->findMember();
+            $this->alert('success', 'Solicitud recupedara con exíto.');
+        } else {
+            $this->alert('warning', 'No se encontrarón registros');
+        }
     }
-}
+
+    public function findVisit($code_visit = '')
+    {
+        $this->code_visit = $this->code_visit != '' ? $this->code_visit : $code_visit;
+        $result = AdvisorVisit::where('code', $this->code_visit)->first();
+        if ($result) {
+            $this->visit_id = $result->id;
+            $this->setDataVisit($result);
+            $this->alert('success', 'Visita recupedara con exíto.');
+        } else {
+            $this->alert('warning', 'No se encontrarón registros');
+        }
+    }
+
+    public function setDataRequest($req)
+    {
+        $this->credit_req = $req->credit_type;
+        $this->amount_req = $req->amount;
+        $this->term_req = $req->deadline;
+        $this->doc_number_req = $req->member->doc_number;
+        $this->name_req = $req->member->name;
+        $this->last_name_req = $req->member->last_name;
+        $this->phone_req = $req->member->phone1;
+        $this->date_req = Carbon::parse($req->created_at)->format('Y-m-d');
+    }
+
+    public function setDataVisit($visit)
+    {
+        $this->credit_visit = $visit->credit_type;
+        $this->amount_visit = $visit->amount;
+        $this->term_visit = $visit->deadline;
+        $this->doc_number_visit = $visit->member->doc_number;
+        $this->name_visit = $visit->member->name;
+        $this->last_name_visit = $visit->member->last_name;
+        $this->phone_visit = $visit->member->phone1;
+        $this->date_visit = Carbon::parse($visit->created_at)->format('Y-m-d');
+    }
 
     public function store()
     {
@@ -200,9 +243,8 @@ public function findRequest()
                     'balance' => $data['balance'],
                 ]);
             }
-            $this->alert('succes', 'Información Registrada con exito.');
+            $this->alert('success', 'Información Registrada con exito.');
         }
-
 
 
     }
@@ -228,7 +270,7 @@ public function findRequest()
         $this->name = $member->name . " " . $member->last_name;
         $this->phone = $member->phone1;
         $this->address = $detail->principal_street . " " . $detail->secondary_street;
-       
+
         $this->action = 'STORE';
     }
 
@@ -335,4 +377,129 @@ public function findRequest()
         else
             return 1;
     }
+
+    public function selectFrame($id)
+    {
+        for ($i = 1; $i <= count($this->listButtonFrame); $i++) {
+            if ($id == $i) {
+                $this->listButtonFrame[$i] = "button text-white bg-theme-1";
+                $this->listTextFrame[$i] = "font-medium text-base lg:mt-3 ml-3 lg:mx-auto";
+                $this->visibleFrame[$i] = true;
+            } else {
+                $this->listButtonFrame[$i] = "button text-gray-600 bg-gray-200 dark:bg-dark-1";
+                $this->listTextFrame[$i] = "text-base lg:mt-3 ml-3 lg:mx-auto text-gray-700 dark:text-gray-600";
+                $this->visibleFrame[$i] = false;
+            }
+        }
+    }
+
+    //ATTACHMENTS
+    public function storeDoc()
+    {
+        $this->Validate([
+            'name_doc' => 'required',
+            'description_doc' => 'required',
+            'url_doc' => 'required',
+        ], [
+            'name_doc.required' => 'Campo obligatorio.',
+            'description_doc.required' => 'Campo obligatorio.',
+            'url_doc.required' => 'Campo obligatorio.',
+        ]);
+
+
+        if ($this->credit_id != null) {
+            $credit = Credits::find($this->credit_id);
+            //save doc
+            $name = "file-" . time() . '.' . $this->url_doc->getClientOriginalExtension();
+            $path = 'docs/attachments/' . $this->url_doc->storeAs('/', $name, 'attachments');
+
+
+            $doc = new Attachment([
+                'name_doc' => $this->name_doc,
+                'description_doc' => $this->description_doc,
+                'url_doc' => $path,
+                'status' => $this->status_doc
+            ]);
+
+            $credit->attachments()->save($doc);
+
+            $this->alert('success', 'Anexo registrado con éxito.');
+            $this->resetInputFieldsDoc();
+        } else {
+            $this->alert('error', 'Registre un crédito.');
+            $this->resetInputFieldsDoc();
+        }
+
+
+    }
+
+    public function editDoc($id)
+    {
+        $this->action_doc = 'PUT';
+
+        $doc = Attachment::find($id);
+//        dd($doc);
+        $this->doc_id = $doc->id;
+        $this->name_doc = $doc->name_doc;
+        $this->description_doc = $doc->description_doc;
+        $this->url_doc = $doc->url_doc;
+    }
+
+    public function updateDoc()
+    {
+        $doc = Attachment::find($this->doc_id);
+        $this->Validate([
+            'name_doc' => 'required',
+            'description_doc' => 'required',
+            'url_doc' => 'required',
+        ], [
+            'name_doc.required' => 'Campo obligatorio.',
+            'description_doc.required' => 'Campo obligatorio.',
+            'url_doc.required' => 'Campo obligatorio.',
+        ]);
+
+
+        if ($this->credit_id != null) {
+            if ($this->url_doc != $doc->url_doc) {
+                $name = "file-" . time() . '.' . $this->url_doc->getClientOriginalExtension();
+                $path = 'docs/attachments/' . $this->url_doc->storeAs('/', $name, 'attachments');
+            } else {
+                $path = $doc->url_doc;
+            }
+
+
+            $data = [
+                'name_doc' => $this->name_doc,
+                'description_doc' => $this->description_doc,
+                'url_doc' => $path,
+                'status' => $this->status_doc
+            ];
+
+            $doc->update($data);
+
+            $this->alert('success', 'Anexo actualizado con éxito.');
+            $this->resetInputFieldsDoc();
+        } else {
+            $this->alert('error', 'Registre un crédito.');
+            $this->resetInputFieldsDoc();
+        }
+    }
+
+    public function deleteDoc($id)
+    {
+        $doc = Attachment::find($id);
+        $doc->delete();
+        $this->alert('success', 'Anexo eliminado con éxito.');
+        $this-> resetInputFieldsDoc();
+    }
+
+    public function resetInputFieldsDoc()
+    {
+        $this->action_doc = 'POST';
+        $this->doc_id = null;
+        $this->name_doc = '';
+        $this->description_doc = '';
+        $this->url_doc = null;
+    }
+
 }

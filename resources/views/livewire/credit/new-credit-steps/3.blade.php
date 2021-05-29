@@ -1,4 +1,4 @@
-<div {{  $visibleFrame["2"]?'':'hidden' }} class="px-5 sm:px-20 mt-10 pt-10 border-t border-gray-200 dark:border-dark-5">
+<div {{  $visibleFrame["3"]?'':'hidden' }} class="px-5 sm:px-20 mt-10 pt-10 border-t border-gray-200 dark:border-dark-5">
     <h2 class="intro-y text-lg font-medium mt-10">Tabla de Amortización Francés</h2>
     <div class="grid grid-cols-12 gap-6 mt-5">
         <div class="col-span-12 lg:col-span-12 xxl:col-span-12">
@@ -12,11 +12,11 @@
                         <div class="p-5">
                             <div>
                                 <label>Cédula</label>
-                                <input wire:keyup.enter="findMember()" wire:model="dni" type="text" class="input w-full border mt-2 @error('dni')  border-red-400 @enderror" placeholder="Número de Documento">
+                                <input wire:keyup.enter="findMember()" wire:model="dni" type="text" class="input w-full border mt-2 @error('dni')  border-red-400 @enderror" placeholder="Número de Documento" readonly disabled>
                             </div>
                             <div class="mt-3">
                                 <label>Nombre(s)</label>
-                                <input wire:model="name" type="text" class="input w-full border mt-2 @error('name')  border-red-400 @enderror" placeholder="Nombre(s)" {{$action === 'STORE' ? 'readonly' : ''}}>
+                                <input wire:model="name" type="text" class="input w-full border mt-2 @error('name')  border-red-400 @enderror" placeholder="Nombre(s)" {{$action === 'STORE' ? 'readonly' : ''}} readonly disabled>
                             </div>
                         </div>
                     </div>
@@ -25,11 +25,11 @@
                         <div class="p-5">
                             <div>
                                 <label>Dirección</label>
-                                <input wire:model="address" type="text" class="input w-full border mt-2 @error('address')  border-red-400 @enderror" placeholder="Dirección" {{$action === 'STORE' ? 'readonly' : ''}}>
+                                <input wire:model="address" type="text" class="input w-full border mt-2 @error('address')  border-red-400 @enderror" placeholder="Dirección" {{$action === 'STORE' ? 'readonly' : ''}} readonly disabled>
                             </div>
                             <div class="mt-3">
                                 <label>Teléfono</label>
-                                <input wire:model="phone" type="text" class="input w-full border mt-2 @error('phone')  border-red-400 @enderror" placeholder="Teléfono" {{$action === 'STORE' ? 'readonly' : ''}}>
+                                <input wire:model="phone" type="text" class="input w-full border mt-2 @error('phone')  border-red-400 @enderror" placeholder="Teléfono" {{$action === 'STORE' ? 'readonly' : ''}} readonly disabled>
                             </div>
                         </div>
                     </div>

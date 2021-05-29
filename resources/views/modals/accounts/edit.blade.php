@@ -1,4 +1,4 @@
-<div wire:ignore.self class="modal" id="references-modal">
+<div wire:ignore.self class="modal" id="accountModal">
     <div class="modal__content modal__content--xl">
         <div class="flex items-center px-5 py-5 sm:py-3 border-b border-gray-200">
             <h2 class="font-medium text-base mr-auto">Editar cuenta </h2>
@@ -36,7 +36,7 @@
                             <option value="revision">Revisión</option>
                         </select>
                     </div>
-                
+
                     <div  class="intro-y col-span-12 flex items-center justify-center sm:justify-end mt-5">
                         <button wire:click.prevent="storeFinal()" class="button w-24 justify-center block bg-theme-1 text-white ml-2">Guardar</button>
                     </div>
