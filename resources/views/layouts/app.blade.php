@@ -11,13 +11,15 @@
     <meta name="keywords" content="admin template, Midone admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="LEFT4CODE">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
-    <script src="path/to/dist/feather.js"></script>
+{{--    <script src="path/to/dist/feather.js"></script>--}}
     @yield('head')
 
     <!-- BEGIN: CSS Assets-->
     <link rel="stylesheet" href="{{ mix('dist/css/app.css') }}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
     <!-- END: CSS Assets-->
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
     @yield('map-head')
 
@@ -107,11 +109,12 @@
                     </li>
                     <li>
                         <a href="javascript:;"
-                           class="side-menu @if(request()->is('nueva-solicitud') || request()->is('visita-de-asesor'))side-menu--active side-menu--open @endif">
+                           class="side-menu @if(request()->is('nueva-solicitud') || request()->is('listado-solicitudes'))side-menu--active side-menu--open @endif">
                             <div class="side-menu__icon"> <i data-feather="box"></i> </div>
                             <div class="side-menu__title"> Solicitudes <i data-feather="chevron-down" class="side-menu__sub-icon"></i> </div>
                         </a>
-                        <ul class="@if(request()->is('nueva-solicitud' || request()->is('visita-de-asesor')))side-menu__sub-open @endif">
+                        <ul class="@if(request()->is('nueva-solicitud') || request()->is('listado-solicitudes'))side-menu__sub-open @endif">
+{{--                        <ul>--}}
                             <li>
                                 <a href="/nueva-solicitud"  class="side-menu">
                                     <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
@@ -127,11 +130,12 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="javascript:;" class="side-menu">
+                        <a href="javascript:;" class="side-menu  @if(request()->is('visita-de-asesor') || request()->is('listado-visitas'))side-menu--active side-menu--open @endif">
                             <div class="side-menu__icon"> <i data-feather="box"></i> </div>
                             <div class="side-menu__title"> Visitas Asesor <i data-feather="chevron-down" class="side-menu__sub-icon"></i> </div>
                         </a>
-                        <ul class="">
+                        <ul class="@if(request()->is('visita-de-asesor') || request()->is('listado-visitas'))side-menu__sub-open @endif">
+{{--                        <ul>--}}
                             <li>
                                 <a href="/visita-de-asesor"  class="side-menu">
                                     <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
@@ -184,6 +188,27 @@
                         </ul>
                     </li>
                     <li>
+                        <a href="javascript:;" class="side-menu @if(request()->is('deposito') || request()->is('retiro'))side-menu--active side-menu--open @endif">
+                            <div class="side-menu__icon"> <i data-feather="box"></i> </div>
+                            <div class="side-menu__title"> Transacciones <i data-feather="chevron-down" class="side-menu__sub-icon"></i> </div>
+                        </a>
+                        <ul class="@if(request()->is('deposito') || request()->is('retiro'))side-menu__sub-open @endif">
+                            <li>
+                                <a href="{{route('deposit')}}"  class="side-menu">
+                                    <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
+                                    <div class="side-menu__title"> Deposito </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{route('retreats')}}"  class="side-menu">
+                                    <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
+                                    <div class="side-menu__title"> Retiro </div>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li>
                         <a href="javascript:;" class="side-menu">
                             <div class="side-menu__icon"> <i data-feather="box"></i> </div>
                             <div class="side-menu__title"> Libretas <i data-feather="chevron-down" class="side-menu__sub-icon"></i> </div>
@@ -204,7 +229,7 @@
 
                         </ul>
                     </li>
-                    
+
                     <li>
                         <a href="javascript:;" class="side-menu">
                             <div class="side-menu__icon"> <i data-feather="box"></i> </div>
@@ -220,7 +245,7 @@
 
                         </ul>
                     </li>
-                     {{-- 
+                     {{--
                         <li>
                         <a href="javascript:;" class="side-menu">
                             <div class="side-menu__icon"> <i data-feather="box"></i> </div>
@@ -256,7 +281,7 @@
                             </li>
                         </ul>
                     </li>
-                   
+
                          <li>
                         <a href="javascript:;" class="side-menu">
                             <div class="side-menu__icon"> <i data-feather="box"></i> </div>
@@ -279,7 +304,7 @@
                         </ul>
                     </li>
                          --}}
-                   
+
                     <li>
                         <a href="javascript:;" class="side-menu">
                             <div class="side-menu__icon"> <i data-feather="box"></i> </div>
@@ -292,7 +317,7 @@
                                     <div class="side-menu__title"> Roles & Permisos </div>
                                 </a>
                             </li>
-                            {{-- 
+                            {{--
                                 <li>
                                 <a href="/users"  class="side-menu">
                                     <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
@@ -300,7 +325,7 @@
                                 </a>
                             </li>
                                  --}}
-                            
+
 
                         </ul>
                     </li>
@@ -323,7 +348,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
 
     @yield('script')
-    @yield('map-script')
+
 
     @livewireScripts
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10">
@@ -333,9 +358,9 @@
     <!-- BEGIN: JS Assets-->
     <script src="{{ mix('dist/js/app.js') }}"></script>
     <!-- END: JS Assets-->
-
+    @yield('map-script')
     <script>
-        
+
         window.livewire.on('modal-hide', () => {
             $('#references-modal').modal('hide');
         });

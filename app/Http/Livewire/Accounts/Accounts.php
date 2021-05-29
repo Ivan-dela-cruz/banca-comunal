@@ -14,7 +14,7 @@ class Accounts extends Component
     //EDIT MODAL
     public $member_type_modal,$acount_number_modal,$status_modal;
 
-    //MEMBER 
+    //MEMBER
     public $member_id, $block_account=false, $names_modal, $doc_number_modal;
     public $serie_ac, $secuence_ac, $number_ac;
 public $vass= "nill";
@@ -83,6 +83,6 @@ public $vass= "nill";
     }
     public function storeFinal()
     {
-        
+
     }
 }

@@ -27,7 +27,8 @@ use App\Http\Livewire\CreditRequest\{
    ListRequests
 };
 use App\Http\Livewire\AdvisorVisit\{
-    NewVisit,Visits
+    NewVisit,
+    Visits
 };
 use App\Http\Livewire\Amortization\{
     AmortizationTable,
@@ -45,6 +46,11 @@ use App\Http\Livewire\Credit\{
  };
  use App\Http\Livewire\Dashboard\{
     Index
+ };
+
+ use App\Http\Livewire\Transations\{
+   Deposits,
+   Retreats
  };
 /*
 |--------------------------------------------------------------------------
@@ -79,12 +85,12 @@ Route::middleware('auth')->group(function() {
     Route::get('/roles', Roles::class);
 
     //CREDIT REQUEST
-    Route::get('/nueva-solicitud', NewRequest::class);
-    Route::get('/listado-solicitudes', ListRequests::class);
+    Route::get('/nueva-solicitud', NewRequest::class)->name('new-request');
+    Route::get('/listado-solicitudes', ListRequests::class)->name('request-list');
 
     //VISITAS
-    Route::get('/visita-de-asesor', NewVisit::class);
-    Route::get('/listado-visitas', Visits::class);
+    Route::get('/visita-de-asesor', NewVisit::class)->name('advisor-visit');
+    Route::get('/listado-visitas', Visits::class)->name('visit-list');
 
     Route::get('/amortizacion-tabla', AmortizationTable::class);
 
@@ -100,6 +106,10 @@ Route::middleware('auth')->group(function() {
     Route::get('/listado-cuentas', Accounts::class);
     //APORTES
     Route::get('/aportes-socios', MemberContributions::class);
+
+    //TRANSACCIONES
+    Route::get('/deposito', Deposits::class)->name('deposit');
+    Route::get('/retiro', Retreats::class)->name('retreats');
 
 });
 

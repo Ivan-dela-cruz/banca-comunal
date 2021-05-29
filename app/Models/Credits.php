@@ -36,4 +36,9 @@ class Credits extends Model
         return $this->belongsTo(CreditRequest::class, 'request_id');
 
     }
+
+    public function attachments()
+    {
+        return $this->morphMany(Attachment::class, 'attachmentable');
+    }
 }

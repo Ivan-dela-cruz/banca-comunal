@@ -83,7 +83,11 @@ public $secuence_tab = 0;
     }
     public function storeStep1()
     {
-      
+
+        $this->validate([
+           'credit_type' => 'required',
+        ]);
+
         $data = [
             'member_id' => $this->member_id,
             'code'=>$this->code,
@@ -117,6 +121,11 @@ public $secuence_tab = 0;
 
     public function storeStep2()
     {
+        $this->validate([
+           'doc_type' => 'required',
+        ],[
+            'doc_type.required' => 'Campo obligatorio.'
+        ]);
         $data = [
             'doc_type' => $this->doc_type,
             'doc_number' => $this->doc_number,
@@ -149,6 +158,11 @@ public $secuence_tab = 0;
 
     public function storeStep3()
     {
+        $this->validate([
+            'economic_activity' => 'required'
+        ],[
+            'economic_activity.required' => 'Campo obligatorio.'
+        ]);
         $data = [
             'member_id' => $this->member_id,
             'name_spouse' => $this->name_spouse,
@@ -165,7 +179,7 @@ public $secuence_tab = 0;
             'actual_charge_spouse' => $this->actual_charge_spouse,
             'income_spouse' => $this->income_spouse,
         ];
-        if ($this->member_id = !null) {
+        if ($this->member_id != null) {
             $detail = DetailMember::where('member_id', $this->member_id)->first();
             if (isset($detail)) {
                 $detail->update($data);
@@ -184,6 +198,7 @@ public $secuence_tab = 0;
 
     public function storeStep4()
     {
+//        dd($this->member_id);
 
         $data = [
             'member_id' => $this->member_id,
@@ -422,6 +437,8 @@ public $secuence_tab = 0;
     public function findMember()
     {
         $member = Member::where('doc_number', $this->dni_debtor)->first();
+        $this->member_id = $member->id;
+//        dd($this->member_id);
         if (isset($member)) {
             // $this->alert('success','Registro recuperado satisfactoriamente');
             $detail = DetailMember::where('member_id', $member->id)->first();
@@ -436,7 +453,7 @@ public $secuence_tab = 0;
 
     public function loadData($member, $detail)
     {
-        $this->member_id = $member->id;
+//        $this->member_id = $member->id;
         $this->name = $member->name;
         $this->last_name = $member->last_name;
         $this->doc_number = $member->doc_number;
@@ -567,6 +584,9 @@ public $secuence_tab = 0;
 
     public function selectFrame($id)
     {
+        if($id == 5){
+            $this->emit('loadMap');
+        }
         for ($i = 1; $i <= count($this->listButtonFrame); $i++) {
             if ($id == $i) {
                 $this->listButtonFrame[$i] = "button text-white bg-theme-1";

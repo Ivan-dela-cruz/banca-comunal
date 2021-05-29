@@ -77,6 +77,13 @@ return [
             'visibility' => 'public',
         ],
 
+        'attachments' => [
+            'driver' => 'local',
+            'root' => public_path('docs/attachments'),
+            'url' => env('APP_URL') . 'public/docs/attachments',
+            'visibility' => 'public',
+        ],
+
     ],
 
     /*

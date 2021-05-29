@@ -65,6 +65,7 @@ class NewVisit extends Component
     public function findMember()
     {
         $member = Member::where('doc_number', $this->dni_debtor)->first();
+        $this->member_id = $member->id;
         if (isset($member)) {
             // $this->alert('success','Registro recuperado satisfactoriamente');
             $detail = DetailMember::where('member_id', $member->id)->first();
@@ -79,7 +80,7 @@ class NewVisit extends Component
 
     public function loadData($member, $detail)
     {
-        $this->member_id = $member->id;
+//        $this->member_id = $member->id;
         $this->name = $member->name;
         $this->last_name = $member->last_name;
         $this->doc_number = $member->doc_number;
@@ -203,7 +204,7 @@ class NewVisit extends Component
             'actual_charge_spouse' => $this->actual_charge_spouse,
             'income_spouse' => $this->income_spouse,
         ];
-        if ($this->member_id = !null) {
+        if ($this->member_id != null) {
             $detail = DetailMember::where('member_id', $this->member_id)->first();
             if (isset($detail)) {
                 $detail->update($data);

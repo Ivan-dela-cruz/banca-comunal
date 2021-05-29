@@ -48,4 +48,77 @@
         @include('livewire.credit-request.new-request-steps.7')
     </div>
 
+    @section('map-script')
+        <script
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDY_2V-J-h-ePbRzXc0M9tU3xzX1c7YF1U&callback=initMap&libraries=&v=weekly"
+            async
+        ></script>
+
+        <script>
+            let mapLiving, mapCommerce;
+            let markersLiving = [], markersCommerce = [];
+            let initLatLng = {lat: -0.93521, lng: -78.61554};
+
+            function initMap() {
+                mapLiving = new google.maps.Map(document.getElementById("mapLiving"), {
+                    zoom: 8,
+                    center: initLatLng,
+                });
+                mapCommerce = new google.maps.Map(document.getElementById("mapCommerce"), {
+                    zoom: 8,
+                    center: initLatLng,
+                });
+
+                // Configure the click listener.
+                mapLiving.addListener("click", (event) => {
+                    let latlng = event.latLng.toJSON();
+                    let {lat, lng} = latlng;
+                    console.log('LIVING',latlng);
+
+                    deleteMarkers(markersLiving);
+                    addMarker(event.latLng, mapLiving, markersLiving);
+
+                    //enviar datos al backend
+                @this.set('living_place_lat', lat);
+                @this.set('living_place_lng', lng);
+                });
+
+                mapCommerce.addListener("click", (event) => {
+                    let latlng = event.latLng.toJSON();
+                    let {lat, lng} = latlng;
+                    console.log('COMMERCE',latlng);
+
+                    deleteMarkers(markersCommerce);
+                    addMarker(event.latLng, mapCommerce, markersCommerce);
+
+                    //enviar datos al backend
+                @this.set('commerce_lat', lat);
+                @this.set('commerce_lng', lng);
+                });
+
+
+            }
+
+            function addMarker(location, map, markerL) {
+                const marker = new google.maps.Marker({
+                    position: location,
+                    map: map,
+                });
+                markerL.push(marker);
+            }
+
+            function setMapOnAll(map, marker) {
+                for (let i = 0; i < marker.length; i++) {
+                    marker[i].setMap(map);
+                }
+            }
+
+            function deleteMarkers(markers) {
+                setMapOnAll(null, markers);
+                markers = [];
+            }
+
+        </script>
+    @endsection
+
 </div>
