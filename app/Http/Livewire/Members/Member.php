@@ -15,4 +15,6 @@ class Member extends Component
         ->extends('layouts.app')
         ->section('subcontent');
     }
+
+    
 }

@@ -245,7 +245,6 @@
 
                         </ul>
                     </li>
-                     {{--
                         <li>
                         <a href="javascript:;" class="side-menu">
                             <div class="side-menu__icon"> <i data-feather="box"></i> </div>
@@ -303,7 +302,7 @@
 
                         </ul>
                     </li>
-                         --}}
+                   
 
                     <li>
                         <a href="javascript:;" class="side-menu">
@@ -317,14 +316,14 @@
                                     <div class="side-menu__title"> Roles & Permisos </div>
                                 </a>
                             </li>
-                            {{--
+                          
                                 <li>
-                                <a href="/users"  class="side-menu">
+                                <a href="/usuarios"  class="side-menu">
                                     <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
                                     <div class="side-menu__title"> Usuarios </div>
                                 </a>
                             </li>
-                                 --}}
+                                
 
 
                         </ul>

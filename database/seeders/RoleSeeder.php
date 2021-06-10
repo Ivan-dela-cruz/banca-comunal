@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 
 use App\Models\AccountClient;
+use App\Models\ConfigTable;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Member;
@@ -98,6 +99,10 @@ class RoleSeeder extends Seeder
                 'number' => '054522300000' . $i,
                 'sec' => '1',
                 'type' => 'cliente',
+            ]);
+            $config = ConfigTable::where('identifier','cliente')->first();
+            $config->update([
+                'secuence'=>$i
             ]);
         }
 

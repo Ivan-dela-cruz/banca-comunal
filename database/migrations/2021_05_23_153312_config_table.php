@@ -32,6 +32,6 @@ class ConfigTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('config_table');
     }
 }
