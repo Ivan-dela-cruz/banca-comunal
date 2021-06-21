@@ -12,6 +12,7 @@
         <div class="intro-y col-span-12 lg:col-span-6">
             <!-- BEGIN: Form Layout -->
             <div class="intro-y box p-5">
+
                 <div>
                     <label>Product Name</label>
                     <input type="text" class="input w-full border mt-2" placeholder="Input text">

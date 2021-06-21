@@ -20,5 +20,6 @@ class ConfigSeeder extends Seeder
         ConfigTable::create(['identifier'=>'socio','serie'=>'0545222','complemenet'=>1000000,'secuence'=>0]);
         ConfigTable::create(['identifier'=>'socio fundador','serie'=>'0545221','complemenet'=>1000000,'secuence'=>0]);
         ConfigTable::create(['identifier'=>'libreta','serie'=>'L001','complemenet'=>1000000,'secuence'=>0]);
+        ConfigTable::create(['identifier'=>'pago','serie'=>'PC001','complemenet'=>1000000,'secuence'=>0]);
     }
 }
