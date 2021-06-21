@@ -52,6 +52,9 @@ use App\Http\Livewire\Credit\{
    Deposits,
    Retreats
  };
+ use App\Http\Livewire\Payment\{
+    Payments
+  };
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -111,6 +114,9 @@ Route::middleware('auth')->group(function() {
     Route::get('/deposito', Deposits::class)->name('deposit');
     Route::get('/retiro', Retreats::class)->name('retreats');
 
+    //PAYMENTS
+    Route::get('/nuevo-pago', Payments::class)->name('nuevo-pago');
+    
 });
 
 

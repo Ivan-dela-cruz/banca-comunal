@@ -18,11 +18,11 @@ class CreateDetailAmortizationsTable extends Migration
             $table->unsignedBigInteger('amortization_id');
             $table->string('period')->nullable();
             $table->date('payment_date')->nullable();
-            $table->string('amount')->nullable();
-            $table->string('interest')->nullable();
-            $table->string('dividing')->nullable();
-            $table->string('total_payment')->nullable();
-            $table->string('balance')->nullable();
+            $table->double('amount')->nullable();
+            $table->double('interest')->nullable();
+            $table->double('dividing')->nullable();
+            $table->double('total_payment')->nullable();
+            $table->double('balance')->nullable();
             $table->timestamps();
             $table->foreign('amortization_id')->references('id')->on('amortizations');
 

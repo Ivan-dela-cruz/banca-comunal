@@ -10,6 +10,8 @@ class Users extends Component
 {
     public $name,$last_name,$url_image,$phone,$address,$email,$password,$confirm_password,$gender="Masculino",$status=true,$user_id;
     public $action = "POST";
+    public $visbibleForm=true;
+    public $chageStatus;
     public function render()
     {
         $users = User::orderBy('name','ASC')->get();
@@ -32,6 +34,7 @@ class Users extends Component
             $this->status = $user->status;
             $this->user_id = $user_id;
             $this->action = "PUT";
+            $this->visbibleForm=false;
             $this->alert('success', 'Registro cargados exitosamente');
             return;
         }
@@ -83,14 +86,19 @@ class Users extends Component
 
     public function delete($user_id)
     {
-     
         $user = User::find($user_id);
         if($user){
-            $user->delete();
-            $this->alert('success', 'Registro eliminado exitosamente');
+            $text = $user->status?"desactivado":"activado";
+            $user->status = $user->status?false:true;
+            $user->save();
+            $this->alert('success', 'Registro '.$text.' exitosamente');
             return;
         }
-        $this->alert('success', 'No se encontrarón registros para eliminar');
+        $this->alert('success', 'No se encontrarón registros para ejecutar acción');
+    }
+    public function open()
+    {   $this->resetFields();
+        $this->visbibleForm=false;
     }
     public function resetFields()
     {
@@ -106,6 +114,7 @@ class Users extends Component
         $this->status=true;
         $this->user_id="";
         $this->action = "POST";
+        $this->visbibleForm=true;
     }
     public function validation()
     {
@@ -148,9 +157,8 @@ class Users extends Component
                 'status' => 'required',
                 'phone' => 'required|digits:10|numeric',
                 'address' => 'required',
-                'email' => ['required', 'string', 'email',Rule::unique('users')->ignore($this->user)],
-                'password' => 'min:8|required_with:confirm_password|same:confirm_password',
-                'confirm_password' => 'min:8',
+                'email' => ['required', 'string', 'email',Rule::unique('users')->ignore($this->user_id)],
+               
             ], [
                 'name.required' => 'Campo obligatorio.',
                 'last_name.required' => 'Campo obligatorio.',

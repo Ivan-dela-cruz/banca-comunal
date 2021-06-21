@@ -65,17 +65,21 @@ class NewVisit extends Component
     public function findMember()
     {
         $member = Member::where('doc_number', $this->dni_debtor)->first();
-        $this->member_id = $member->id;
-        if (isset($member)) {
-            // $this->alert('success','Registro recuperado satisfactoriamente');
-            $detail = DetailMember::where('member_id', $member->id)->first();
-            $this->loadData($member, $detail);
-            $this->alert('success','¡Datos del cliente cargados con exíto!');
-        } else {
-            $this->action = 'POST';
-            // $this->resetInputFields();
-            // $this->alert('warning','No se encontrarón registros asociados');
+        if($member){
+            $this->member_id = $member->id;
+            if (isset($member)) {
+                // $this->alert('success','Registro recuperado satisfactoriamente');
+                $detail = DetailMember::where('member_id', $member->id)->first();
+                $this->loadData($member, $detail);
+                $this->alert('success','¡Datos del cliente cargados con exíto!');
+            } else {
+                $this->action = 'POST';
+                // $this->resetInputFields();
+                // $this->alert('warning','No se encontrarón registros asociados');
+            }
+            return;
         }
+        $this->alert('warning','No se encontrarón registros asociados');
     }
 
     public function loadData($member, $detail)

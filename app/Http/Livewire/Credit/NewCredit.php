@@ -14,6 +14,7 @@ use App\Models\Credits;
 use App\Models\Amortization;
 use App\Models\DetailAmortization;
 use App\Models\CreditRequest;
+use App\Models\ConfigTable;
 use Livewire\WithFileUploads;
 
 class NewCredit extends Component
@@ -49,6 +50,7 @@ class NewCredit extends Component
     public $action_doc = 'POST';
     public $doc_id = null, $name_doc, $description_doc, $url_doc, $status_doc = 1;
 
+    public $code_credit;
     public function mount()
     {
         $this->settlement_date = date('Y-m-d');
@@ -88,16 +90,19 @@ class NewCredit extends Component
     public $list_requests = [];
     public $list_visits = [];
     public $list_docs = [];
+    public $search_member;
 
     public function render()
     {
-        $this->list_requests = CreditRequest::orderBy('created_at', 'ASC')->get();
-        $this->list_visits = AdvisorVisit::orderBy('created_at', 'ASC')->get();
+        $this->list_requests = CreditRequest::where('member_id',$this->member_id)->orderBy('created_at', 'ASC')->get();
+        $this->list_visits = AdvisorVisit::where('member_id',$this->member_id)->orderBy('created_at', 'ASC')->get();
+
         if ($this->credit_id != null) {
             $credit = Credits::find($this->credit_id);
 //            dd($credit->attachments['id']);
             $this->list_docs = $credit->attachments;
         }
+        $this->code_credit = $this->getLastNumber();
 
 //        $data_reference = MemberReference::where('member_id', $this->member_id)->get();
         return view('livewire.credit.new-credit')
@@ -105,6 +110,7 @@ class NewCredit extends Component
             ->section('subcontent');
     }
 
+ 
     public function storeCredit()
     {
         $first_date = "";
@@ -112,8 +118,9 @@ class NewCredit extends Component
             $first_date = $data['payment_date'];
             break;
         }
-
+        $this->code_credit = $this->getLastNumber();
         $data = [
+            'code'=>$this->code_credit,
             'member_id' => $this->member_id,
             'visit_id' => $this->visit_id,
             'request_id' => $this->request_id,
@@ -243,7 +250,7 @@ class NewCredit extends Component
                     'balance' => $data['balance'],
                 ]);
             }
-            $this->alert('success', 'Información Registrada con exito.');
+            $this->alert('success', 'Amortización registrada con exíto.');
         }
 
 
@@ -251,15 +258,17 @@ class NewCredit extends Component
 
     public function findMember()
     {
-        $member = Member::where('doc_number', $this->dni)->first();
+        $member = Member::where('doc_number', $this->search_member)->first();
         if (isset($member)) {
             // $this->alert('success','Registro recuperado satisfactoriamente');
             $detail = DetailMember::where('member_id', $member->id)->first();
             $this->acount_number = $member->account_number;
             $this->loadData($member, $detail);
+            $this->alert('success', 'Datos cargados satisfactoriamente');
         } else {
             $this->action = 'POST';
             // $this->resetInputFields();
+            $this->member_id="";
             $this->alert('warning', 'No se encontrarón registros asociados');
         }
     }
@@ -500,6 +509,19 @@ class NewCredit extends Component
         $this->name_doc = '';
         $this->description_doc = '';
         $this->url_doc = null;
+    }
+    public function getLastNumber()
+    {
+        $re_last = ConfigTable::where('identifier', 'credito')->first();
+        if($re_last){
+            $codeAux = strval($re_last->complemenet+$re_last->secuence+1);
+            $codeAux= ltrim($codeAux, '1');
+            $serie_ac=$re_last->serie;
+            $secuence_ac=$re_last->secuence+1;
+            $number_ac=($re_last->serie)."".($codeAux);
+            return  $number_ac;
+        }
+        return "".datetime();
     }
 
 }

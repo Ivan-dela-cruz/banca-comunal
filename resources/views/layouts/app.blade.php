@@ -220,13 +220,6 @@
                                     <div class="side-menu__title"> Nueva </div>
                                 </a>
                             </li>
-                            <li>
-                                <a href="/libretas"  class="side-menu">
-                                    <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                                    <div class="side-menu__title"> Listado de libretas </div>
-                                </a>
-                            </li>
-
                         </ul>
                     </li>
 
@@ -252,7 +245,7 @@
                         </a>
                         <ul class="">
                             <li>
-                                <a href="/members"  class="side-menu">
+                                <a href="/nuevo-pago"  class="side-menu">
                                     <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
                                     <div class="side-menu__title"> Nuevo </div>
                                 </a>

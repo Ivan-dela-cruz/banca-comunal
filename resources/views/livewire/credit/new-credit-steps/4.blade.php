@@ -2,6 +2,10 @@
     <div class="font-medium text-base"> Detalle final</div>
     <div class="grid grid-cols-12 gap-4 row-gap-5 mt-5">
         <div class="intro-y col-span-12 sm:col-span-6">
+            <div class="mb-2">Código de crédito </div>
+            <input disabled wire:model="code_credit" type="text" class="input w-full border flex-1" placeholder="">
+        </div>
+        <div class="intro-y col-span-12 sm:col-span-6">
             <div class="mb-2">Estado de crédito</div>
             <select  wire:model="status_cred" class="input w-full border flex-1">
                 <option value="aprovado">Aprobado</option>
@@ -9,6 +13,7 @@
                 <option value="anulado">Anulado</option>
             </select>
         </div>
+        
         <div class="intro-y col-span-12 sm:col-span-6">
             <div class="mb-2">Número de cuenta </div>
             <input disabled wire:model="acount_number" type="text" class="input w-full border flex-1" placeholder="">

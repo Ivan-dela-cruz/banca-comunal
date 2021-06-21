@@ -1,6 +1,18 @@
 <div>
     <div class="flex items-center mt-8">
         <h2 class="intro-y text-lg font-medium mr-auto">Nuevo crédito</h2>
+        <div class="intro-y col-span-12 flex flex-wrap sm:flex-no-wrap items-center mt-2">
+            <button title="Presiona para limpiar los formularios" class="tooltip button text-white bg-theme-9 shadow-md mr-2">
+                 <i class="fas fa-redo-alt"></i>
+            </button>
+            
+            <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
+                <div class="w-56 relative text-gray-700 dark:text-gray-300">
+                    <input wire:keydown.enter="findMember()" wire:model="search_member" type="text" class="input w-56 box pr-10 placeholder-theme-13" placeholder="Buscar ">
+                    <i class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0 fa fa-search" ></i>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="intro-y box py-10 sm:py-20 mt-5">
         <div class="wizard flex flex-col lg:flex-row justify-center px-5 sm:px-20">
