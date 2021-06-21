@@ -270,7 +270,8 @@
                                         <span class=" text-theme-6 ">{{number_format( $det->interest_pay,$numberDecimals,'.',',')}}</span>
                                     </td>
                                     <td class="w-20 text-center">
-                                        <button wire:click.prevent="getItemPay({{$det->id}})" class="button px-2 mr-1 mb-2 bg-theme-12 text-white">
+                                        <button wire:click.prevent="getItemPay({{$det->id}})" 
+                                            class="button px-2 mr-1 mb-2 {{$det->status=='atrasado' || $det->status=='cancelado'?'bg-theme-9':'bg-theme-12'  }} text-white">
                                             <span class="w-5 h-5 flex items-center justify-center">
                                                 <i class="w-3 h-3 fas fa-check-circle"></i>
                                             </span>
