@@ -1,5 +1,5 @@
 <div>
-    <h2 class="intro-y text-lg font-medium mt-10">Visita de Asesor</h2>
+    <h2 class="intro-y text-lg font-medium mt-10">Actualizar Visita de Asesor</h2>
     <div class="intro-y box py-10 sm:py-20 mt-5">
         <div class="wizard flex flex-col lg:flex-row justify-center px-5 sm:px-20">
             <div class="intro-x lg:text-center flex items-center lg:block flex-1 z-10">
@@ -42,21 +42,35 @@
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDY_2V-J-h-ePbRzXc0M9tU3xzX1c7YF1U&callback=initMap&libraries=&v=weekly"
             async
         ></script>
-
         <script>
             let mapLiving, mapCommerce;
             let markersLiving = [], markersCommerce = [];
             let initLatLng = {lat: -0.93521, lng: -78.61554};
 
+            let txtLatLiving = $('#txtLatLiving').val();
+            let txtLngLiving = $('#txtLngLiving').val();
+            // console.log('liv-lat: '+txtLatLiving);
+            // console.log('liv-lng: '+txtLngLiving);
+            let latLngLiving = {lat: parseFloat(txtLatLiving), lng: parseFloat(txtLngLiving)};
+
+            let txtLatCommerce = $('#txtLatCommerce').val();
+            let txtLngCommerce = $('#txtLngCommerce').val();
+            // console.log('commerce-lat: '+txtLatCommerce);
+            // console.log('commerce-lng: '+txtLngCommerce);
+            let latLngCommerce = {lat: parseFloat(txtLatCommerce), lng: parseFloat(txtLngCommerce)};
+
             function initMap() {
                 mapLiving = new google.maps.Map(document.getElementById("mapLiving"), {
                     zoom: 8,
-                    center: initLatLng,
+                    center: latLngLiving === '' ? initLatLng : latLngLiving,
                 });
                 mapCommerce = new google.maps.Map(document.getElementById("mapCommerce"), {
                     zoom: 8,
-                    center: initLatLng,
+                    center:  latLngCommerce === '' ? initLatLng : latLngCommerce,
                 });
+
+                addMarker(latLngLiving, mapLiving, markersLiving);
+                addMarker(latLngCommerce, mapCommerce, markersCommerce);
 
                 // Configure the click listener.
                 mapLiving.addListener("click", (event) => {
@@ -68,10 +82,15 @@
                     addMarker(event.latLng, mapLiving, markersLiving);
 
                     //enviar datos al backend
-                @this.set('living_place_lat', lat);
-                @this.set('living_place_lng', lng);
+                    if (latLngLiving === '') {
+                    @this.set('living_place_lat', lat);
+                    @this.set('living_place_lng', lng);
+                    } else {
+                        console.log('edit living');
+                    @this.set('living_place_lat_edit', lat);
+                    @this.set('living_place_lng_edit', lng);
+                    }
                 });
-
                 mapCommerce.addListener("click", (event) => {
                     let latlng = event.latLng.toJSON();
                     let {lat, lng} = latlng;
@@ -81,10 +100,24 @@
                     addMarker(event.latLng, mapCommerce, markersCommerce);
 
                     //enviar datos al backend
-                @this.set('commerce_lat', lat);
-                @this.set('commerce_lng', lng);
+                    if(latLngCommerce === ''){
+                    @this.set('commerce_lat', lat);
+                    @this.set('commerce_lng', lng);
+                    }else{
+                        console.log('edit commerce')
+                    @this.set('commerce_lat_edit', lat);
+                    @this.set('commerce_lng_edit', lng);
+                    }
                 });
 
+                // Create the initial InfoWindow.
+                // let infoWindow = new google.maps.InfoWindow({
+                //     content: "Haga clic en el mapa para marcar el lugar.",
+                //     position: initLatLng,
+                // });
+
+                // infoWindow.open(mapCommerce);
+                // infoWindow.open(mapLiving);
 
             }
 
