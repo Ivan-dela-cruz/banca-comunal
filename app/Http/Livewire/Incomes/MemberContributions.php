@@ -5,14 +5,24 @@ namespace App\Http\Livewire\Incomes;
 use Livewire\Component;
 use App\Models\Member;
 use App\Models\MemberIncomeContribution;
+use Livewire\WithPagination;
 
 class MemberContributions extends Component
 {
+    use WithPagination;
+
+    protected $queryString = [
+        'search' => ['except' => ''],
+        'perPage' => ['except' => '10'],
+    ];
+    public $perPage = '10';
+    public $search = '';
+
     public $description, $data_id = 0, $doc_number, $number_account, $date, $amount, $status = true, $member_id = 0, $names = "", $action = 'POST';
 
     public function render()
     {
-        $incomes = MemberIncomeContribution::where('member_id', $this->member_id)->get();
+        $incomes = MemberIncomeContribution::where('member_id', $this->member_id)->paginate($this->perPage);
         return view('livewire.incomes.member-contributions', compact('incomes'))
             ->extends('layouts.app')
             ->section('subcontent');

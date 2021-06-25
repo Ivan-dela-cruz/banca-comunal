@@ -36,6 +36,7 @@ class NewCredit extends Component
     public $period = null; //periodo dias
     public $payment_date = '';
     public $data_table = [];
+    public $data_table_back = [];
     public $settlement_date; //fecha de liquidacion
     public $due_date = '';//fecha de vencimiento
 
@@ -110,7 +111,7 @@ class NewCredit extends Component
             ->section('subcontent');
     }
 
- 
+
     public function storeCredit()
     {
         $first_date = "";
@@ -222,7 +223,7 @@ class NewCredit extends Component
             $this->amortization_id = $amortization->id;
             $details = DetailAmortization::where('amortization_id', $this->amortization_id);
             $details->delete();
-            foreach ($this->data_table as $data) {
+            foreach ($this->data_table_back as $data) {
                 $details = DetailAmortization::create([
                     'amortization_id' => $this->amortization_id,
                     'period' => $data['period'],
@@ -238,7 +239,7 @@ class NewCredit extends Component
         } else {
             $a = Amortization::create($data);
             $this->amortization_id = $a->id;
-            foreach ($this->data_table as $data) {
+            foreach ($this->data_table_back as $data) {
                 $details = DetailAmortization::create([
                     'amortization_id' => $a->id,
                     'period' => $data['period'],
@@ -295,6 +296,7 @@ class NewCredit extends Component
         $this->settlement_date = date('Y-m-d');
         $this->due_date = null;
         $this->data_table = [];
+        $this->data_table_back = [];
 
         $this->member_id = null;
         $this->dni = '';
@@ -314,7 +316,8 @@ class NewCredit extends Component
         }
 
 
-        $list = new Collection();
+        $list_front = new Collection();
+        $list_back = new Collection();
 
         $balance[0] = $amount;
         $a[0] = $amount;
@@ -330,7 +333,7 @@ class NewCredit extends Component
 
             $date[$i] = date("Y-m-d", strtotime($payment_date . "+ " . $i . " month"));
 
-            $item = [
+            $item_frontend = [
                 'bg' => ($i % 2 == 0 ? 'bg-gray-200 dark:bg-dark-1' : ''),
                 'period' => $period[$i],
                 'payment_date' => $date[$i],
@@ -340,12 +343,25 @@ class NewCredit extends Component
                 'total_payment' => number_format($total_payment[$i], 2),
                 'balance' => number_format($balance[$i], 2),
             ];
-            $list->push($item);
+
+            $item_backend = [
+                'bg' => ($i % 2 == 0 ? 'bg-gray-200 dark:bg-dark-1' : ''),
+                'period' => $period[$i],
+                'payment_date' => $date[$i],
+                'amount' => number_format($a[$i], 2,".",""),
+                'interest' => number_format($interest[$i], 2,".",""),
+                'dividing' => number_format($dividing[$i], 2,".",""),
+                'total_payment' => number_format($total_payment[$i], 2,".",""),
+                'balance' => number_format($balance[$i], 2,".",""),
+            ];
+            $list_front->push($item_frontend);
+            $list_back->push($item_backend);
 
         }
         $this->due_date = date("Y-m-d", strtotime($date_ . "+ " . $term . " month"));
 
-        $this->data_table = $list;
+        $this->data_table = $list_front;
+        $this->data_table_back = $list_back;
 
     }
 

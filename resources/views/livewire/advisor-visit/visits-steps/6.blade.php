@@ -1,4 +1,5 @@
-<div {{  $visibleFrame["6"]?'':'hidden' }} class="px-5 sm:px-20 mt-10 pt-10 border-t border-gray-200 dark:border-dark-5">
+<div
+    {{  $visibleFrame["6"]?'':'hidden' }} class="px-5 sm:px-20 mt-10 pt-10 border-t border-gray-200 dark:border-dark-5">
 
     <div class="grid grid-cols-12 gap-6">
         <div class="intro-y col-span-12 lg:col-span-6">
@@ -12,8 +13,9 @@
                 </div>
                 <div class="intro-y box p-5 mt-12 sm:mt-5 visible" {{$check_living === true ? '' : 'hidden'}}>
                     <div class="intro-y col-span-12 sm:col-span-6">
-                        <input  wire:model="url_living" type="file" class="input w-full border flex-1">
-                        @error('url_living') <li class="text-theme-6">{{$message}}</li>  @enderror
+                        <input wire:model="url_living" type="file" class="input w-full border flex-1">
+                        @error('url_living')
+                        <li class="text-theme-6">{{$message}}</li> @enderror
                     </div>
                 </div>
                 <div class="intro-y box p-5 mt-12 sm:mt-5 visible" {{$check_living === false ? '' : 'hidden'}}>
@@ -33,8 +35,9 @@
                 </div>
                 <div class="intro-y box p-5 mt-12 sm:mt-5 visible" {{$check_commerce === true ? '' : 'hidden'}}>
                     <div class="intro-y col-span-12 sm:col-span-6">
-                        <input  wire:model="url_commerce" type="file" class="input w-full border flex-1">
-                        @error('url_commerce') <li class="text-theme-6">{{$message}}</li>  @enderror
+                        <input wire:model="url_commerce" type="file" class="input w-full border flex-1">
+                        @error('url_commerce')
+                        <li class="text-theme-6">{{$message}}</li> @enderror
                     </div>
                 </div>
                 <div class="intro-y box p-5 mt-12 sm:mt-5" {{$check_commerce === false ? '' : 'hidden'}}>
@@ -44,95 +47,28 @@
         </div>
     </div>
 
+    @if($action === 'PUT')
+        <input type="hidden" id="txtLatLiving"
+               value="{{is_null($living_place_lat_edit) ? $living_place_lat : $living_place_lat_edit}}">
+        <input type="hidden" id="txtLngLiving"
+               value="{{is_null($living_place_lng_edit) ? $living_place_lng : $living_place_lng_edit}}">
+
+        <input type="hidden" id="txtLatCommerce"
+               value="{{is_null($commerce_lat_edit) ? $commerce_lat : $commerce_lat_edit}}">
+        <input type="hidden" id="txtLngCommerce"
+               value="{{is_null($commerce_lng_edit) ? $commerce_lng : $commerce_lng_edit}}">
+    @endif
     <div class="grid grid-cols-12 gap-4 row-gap-5 mt-5">
         <div class="intro-y col-span-12 flex items-center justify-center sm:justify-end mt-5">
-            <button wire:click.prevent="storeStep6()" class="button w-24 justify-center block bg-theme-1 text-white ml-2">Guardar</button>
+            <button wire:click.prevent="storeStep6()"
+                    class="button w-24 justify-center block bg-theme-1 text-white ml-2">Guardar
+            </button>
         </div>
     </div>
     {{--    @include('modals.members.references')--}}
 
 </div>
 
-@section('map-head')
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-    <script>
-        let mapLiving, mapCommerce;
-        let markersLiving = [], markersCommerce = [];
-        let initLatLng = {lat: -0.93521, lng: -78.61554};
 
-        function initMap() {
-            mapLiving = new google.maps.Map(document.getElementById("mapLiving"), {
-                zoom: 8,
-                center: initLatLng,
-            });
-            mapCommerce = new google.maps.Map(document.getElementById("mapCommerce"), {
-                zoom: 8,
-                center: initLatLng,
-            });
-
-            // Configure the click listener.
-            mapLiving.addListener("click", (event) => {
-                let latlng = event.latLng.toJSON();
-                let {lat, lng} = latlng;
-                console.log('LIVING',latlng);
-
-                deleteMarkers(markersLiving);
-                addMarker(event.latLng, mapLiving, markersLiving);
-
-                //enviar datos al backend
-            @this.set('living_place_lat', lat);
-            @this.set('living_place_lng', lng);
-            });
-            mapCommerce.addListener("click", (event) => {
-                let latlng = event.latLng.toJSON();
-                let {lat, lng} = latlng;
-                console.log('COMMERCE',latlng);
-
-                deleteMarkers(markersCommerce);
-                addMarker(event.latLng, mapCommerce, markersCommerce);
-
-                //enviar datos al backend
-            @this.set('commerce_lat', lat);
-            @this.set('commerce_lng', lng);
-            });
-
-            // Create the initial InfoWindow.
-            // let infoWindow = new google.maps.InfoWindow({
-            //     content: "Haga clic en el mapa para marcar el lugar.",
-            //     position: initLatLng,
-            // });
-
-            // infoWindow.open(mapCommerce);
-            // infoWindow.open(mapLiving);
-
-        }
-
-        function addMarker(location, map, markerL) {
-            const marker = new google.maps.Marker({
-                position: location,
-                map: map,
-            });
-            markerL.push(marker);
-        }
-
-        function setMapOnAll(map, marker) {
-            for (let i = 0; i < marker.length; i++) {
-                marker[i].setMap(map);
-            }
-        }
-
-        function deleteMarkers(markers) {
-            setMapOnAll(null, markers);
-            markers = [];
-        }
-
-    </script>
-@endsection
-@section('map-script')
-    <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAsOiysBXKLrpekzOv7YtPlevaZyCVACag&callback=initMap&libraries=&v=weekly"
-        async
-    ></script>
-@endsection
 
 

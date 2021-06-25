@@ -24,10 +24,12 @@ use App\Http\Livewire\Users\Users;
 
 use App\Http\Livewire\CreditRequest\{
    NewRequest,
+    EditRequest,
    ListRequests
 };
 use App\Http\Livewire\AdvisorVisit\{
     NewVisit,
+    EditVisit,
     Visits
 };
 use App\Http\Livewire\Amortization\{
@@ -89,10 +91,12 @@ Route::middleware('auth')->group(function() {
 
     //CREDIT REQUEST
     Route::get('/nueva-solicitud', NewRequest::class)->name('new-request');
+    Route::get('/editar-solicitud/{id}', EditRequest::class)->name('update-request');
     Route::get('/listado-solicitudes', ListRequests::class)->name('request-list');
 
     //VISITAS
     Route::get('/visita-de-asesor', NewVisit::class)->name('advisor-visit');
+    Route::get('/editar-visita/{id}', EditVisit::class)->name('update-visit');
     Route::get('/listado-visitas', Visits::class)->name('visit-list');
 
     Route::get('/amortizacion-tabla', AmortizationTable::class);
@@ -116,7 +120,7 @@ Route::middleware('auth')->group(function() {
 
     //PAYMENTS
     Route::get('/nuevo-pago', Payments::class)->name('nuevo-pago');
-    
+
 });
 
 

@@ -77,15 +77,14 @@
         <!-- END: Users Layout -->
         <!-- BEGIN: Pagination -->
         <div class="intro-y col-span-12 flex flex-wrap sm:flex-row sm:flex-no-wrap items-center">
-            <ul class="pagination">
-                {{ $members->links() }}
-            </ul>
-            <select class="w-20 input box mt-3 sm:mt-0">
-                <option>10</option>
-                <option>25</option>
-                <option>35</option>
-                <option>50</option>
-            </select>
+                {{ $members->links('livewire.pagination')}}
+                <select class="w-20 input box mt-3 sm:mt-0" wire:model="perPage">
+                    <option value="6">6</option>
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="35">35</option>
+                    <option value="50">50</option>
+                </select>
         </div>
         <!-- END: Pagination -->
     </div>

@@ -1,5 +1,6 @@
-<div {{  $visibleFrame["7"]?'':'hidden' }} class="px-5 sm:px-20 mt-10 pt-10 border-t border-gray-200 dark:border-dark-5">
-{{--    <div class="font-medium text-base">Croquis Vivienda/Croquis Comercio</div>--}}
+<div
+    {{  $visibleFrame["7"]?'':'hidden' }} class="px-5 sm:px-20 mt-10 pt-10 border-t border-gray-200 dark:border-dark-5">
+    {{--    <div class="font-medium text-base">Croquis Vivienda/Croquis Comercio</div>--}}
 
     <div class="grid grid-cols-12 gap-6">
         <div class="intro-y col-span-12 lg:col-span-6">
@@ -13,12 +14,13 @@
                 </div>
                 <div class="intro-y box p-5 mt-12 sm:mt-5 visible" {{$check_living === true ? '' : 'hidden'}}>
                     <div class="intro-y col-span-12 sm:col-span-6">
-                        <input  wire:model="url_living" type="file" class="input w-full border flex-1">
-                        @error('url_living') <li class="text-theme-6">{{$message}}</li>  @enderror
+                        <input wire:model="url_living" type="file" class="input w-full border flex-1">
+                        @error('url_living')
+                        <li class="text-theme-6">{{$message}}</li> @enderror
                     </div>
                 </div>
                 <div class="intro-y box p-5 mt-12 sm:mt-5 visible" {{$check_living === false ? '' : 'hidden'}}>
-                   <div wire:ignore id="mapLiving" class="report-maps"></div>
+                    <div wire:ignore id="mapLiving" class="report-maps"></div>
                 </div>
 
             </div>
@@ -34,8 +36,9 @@
                 </div>
                 <div class="intro-y box p-5 mt-12 sm:mt-5 visible" {{$check_commerce === true ? '' : 'hidden'}}>
                     <div class="intro-y col-span-12 sm:col-span-6">
-                        <input  wire:model="url_commerce" type="file" class="input w-full border flex-1">
-                        @error('url_commerce') <li class="text-theme-6">{{$message}}</li>  @enderror
+                        <input wire:model="url_commerce" type="file" class="input w-full border flex-1">
+                        @error('url_commerce')
+                        <li class="text-theme-6">{{$message}}</li> @enderror
                     </div>
                 </div>
                 <div class="intro-y box p-5 mt-12 sm:mt-5" {{$check_commerce === false ? '' : 'hidden'}}>
@@ -45,9 +48,23 @@
         </div>
     </div>
 
+    @if($action === 'PUT')
+        <input type="hidden" id="txtLatLiving"
+               value="{{is_null($living_place_lat_edit) ? $living_place_lat : $living_place_lat_edit}}">
+        <input type="hidden" id="txtLngLiving"
+               value="{{is_null($living_place_lng_edit) ? $living_place_lng : $living_place_lng_edit}}">
+
+        <input type="hidden" id="txtLatCommerce"
+               value="{{is_null($commerce_lat_edit) ? $commerce_lat : $commerce_lat_edit}}">
+        <input type="hidden" id="txtLngCommerce"
+               value="{{is_null($commerce_lng_edit) ? $commerce_lng : $commerce_lng_edit}}">
+    @endif
+
 
     <div class="intro-y col-span-12 flex items-center justify-center sm:justify-end mt-5">
-        <button wire:click.prevent="storeStep7()" class="button w-24 justify-center block bg-theme-1 text-white ml-2">Guardar</button>
+        <button wire:click.prevent="storeStep7()" class="button w-24 justify-center block bg-theme-1 text-white ml-2">
+            Guardar
+        </button>
     </div>
 </div>
 

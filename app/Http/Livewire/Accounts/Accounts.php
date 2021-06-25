@@ -6,8 +6,19 @@ use Livewire\Component;
 use App\Models\AccountClient;
 use App\Models\ConfigTable;
 use App\Models\Member;
+use Livewire\WithPagination;
+
 class Accounts extends Component
 {
+    use WithPagination;
+
+    protected $queryString = [
+        'search' => ['except' => ''],
+        'perPage' => ['except' => '10'],
+    ];
+    public $perPage = '10';
+    public $search = '';
+
     public $member_type = "cliente",$search_number="";
     public $valSt = "";
     public $modal = false;
@@ -21,16 +32,16 @@ public $vass= "nill";
 
     public function render()
     {
-        $accounts =  AccountClient::orderBy('created_at','ASC')->get();
+        $accounts =  AccountClient::orderBy('created_at','ASC')->paginate($this->perPage);
         if($this->valSt==""){
             if($this->member_type!="Todos"){
-                $accounts =  AccountClient::where('type',$this->member_type)->orderBy('created_at','ASC')->get();
+                $accounts =  AccountClient::where('type',$this->member_type)->orderBy('created_at','ASC')->paginate($this->perPage);
             }
         }
         else{
             $accounts =  AccountClient::where('number',$this->valSt)
             ->orWhere('code',$this->valSt)
-            ->get();
+            ->paginate($this->perPage);
         }
         $this->getLastNumber();
         $this->getAccount();

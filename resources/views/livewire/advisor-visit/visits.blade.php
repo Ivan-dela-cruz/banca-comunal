@@ -8,7 +8,7 @@
                     <button wire:click.prevent="refresh()" class="ml-auto flex button text-white bg-theme-9 shadow-md ">
                         <i class="fas fa-redo-alt"></i>
                    </button>
-                    
+
                 </div>
                 <div class="grid grid-cols-12 gap-6 mt-5">
                     <div class="col-span-12 sm:col-span-6 xl:col-span-3 intro-y">
@@ -82,16 +82,16 @@
             <div class="col-span-12 mt-6">
                 <div class="intro-y block sm:flex items-center h-10">
                     <h2 class="text-lg font-medium truncate mr-5">Vistas realizadas </h2>
-                   
+
                     <div class="flex items-center sm:ml-auto mt-3 sm:mt-0">
-                       
+
                         <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
                             <div class=" w-56 relative text-gray-700 dark:text-gray-300">
                                 <input wire:keydown.enter="searchChange()" wire:model="search_number" type="text" class="input w-56  box pr-0 placeholder-theme-13" placeholder="Buscar ">
                                 <i class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0 fa fa-search" ></i>
                             </div>
                         </div>
-                        
+
                         <div class="intro-y col-span-12 sm:col-span-6 ml-2">
                             <select  wire:model="member_type" class="input w-full border flex-1">
                                 <option value="Todos">Todos</option>
@@ -102,7 +102,7 @@
                         <button class="ml-3 button box flex items-center text-gray-700 dark:text-gray-300">
                             <i class="hidden sm:block w-4 h-4 mr-2 fas fa-file"></i> Export to PDF
                         </button>
-                        
+
                     </div>
                 </div>
                 <div class="intro-y overflow-auto lg:overflow-visible mt-8 sm:mt-0">
@@ -125,7 +125,7 @@
                                 <td class="w-40">
                                     <span> {{ $lr->code }}</span>
                                  </td>
-                                
+
                                 <td>
                                     <a href="" class="font-medium whitespace-no-wrap">{{ $lr->member->last_name }} {{ $lr->member->name }}</a>
                                     <div class="text-gray-600 text-xs whitespace-no-wrap">{{ $lr->member->doc_number }}</div>
@@ -145,29 +145,27 @@
                                 </td>
                                 <td class="table-report__action w-56">
                                     <div class="flex justify-center items-center">
-                                        <a class="flex items-center mr-3" href="">
-                                            <i  class="fas fa-edit w-4 h-4 mr-1"></i> Edit
+                                        <a class="flex items-center mr-3" href="javascript:void(0)" wire:click="edit({{$lr->id}})">
+                                            <i  class="fas fa-edit w-4 h-4 mr-1"></i> Editar
                                         </a>
-                                        <a class="flex items-center text-theme-6" href="">
-                                            <i  class="fas fa-trash-alt w-4 h-4 mr-1"></i> Delete
+                                        <a class="flex items-center text-theme-6" href="javascript:void(0)" wire:click="delete({{$lr->id}})">
+                                            <i  class="fas fa-trash-alt w-4 h-4 mr-1"></i> Eliminar
                                         </a>
                                     </div>
                                 </td>
                             </tr>
                             @endforeach
-                           
+
                         </tbody>
                     </table>
                 </div>
                 <div class="intro-y flex flex-wrap sm:flex-row sm:flex-no-wrap items-center mt-3">
-                    <ul class="pagination">
-                       
-                    </ul>
-                    <select class="w-20 input box mt-3 sm:mt-0">
-                        <option>10</option>
-                        <option>25</option>
-                        <option>35</option>
-                        <option>50</option>
+                    {{ $list_requests->links('livewire.pagination')}}
+                    <select class="w-20 input box mt-3 sm:mt-0" wire:model="perPage">
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="35">35</option>
+                        <option value="50">50</option>
                     </select>
                 </div>
             </div>
