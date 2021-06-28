@@ -1,4 +1,4 @@
-@extends('adminlte::layouts.app')
+@extends('vendor.adminlte.layouts.app')
 
 @section('main-content')
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\contable;
 
 use Illuminate\Http\Request;
 use App\categories;
@@ -10,7 +10,7 @@ use App\bitacora;
 use Auth;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
-
+use App\Http\Controllers\Controller;
 class balanceController extends Controller
 {
 

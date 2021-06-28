@@ -52,7 +52,7 @@
             <li><a href="{{ url('bitacora/bitacora') }}"><i class='fa fa-history'></i> <span>Bitacora</span></a>
             </li>
             
-          <!--   <li> <a href="{{ url('attached/attached') }}"><i class='fa fa-paperclip'></i> <span>Adjuntos</span></a></li> -->
+            <li> <a href="{{ route('dashboard') }}"><i class='fa fa-sign-out'></i> <span>Regresar</span></a></li>
     
             
         </ul><!-- /.sidebar-menu -->

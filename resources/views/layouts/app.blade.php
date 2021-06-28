@@ -68,21 +68,21 @@
                         </a>
                         <ul class="">
                             <li>
-                                <a href="/members" class="side-menu">
+                                <a href="/balance/balance/add" class="side-menu">
                                     <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                                    <div class="side-menu__title"> Caja General </div>
+                                    <div class="side-menu__title"> Balance Ingresos </div>
                                 </a>
                             </li>
                             <li>
-                                <a href="/users" class="side-menu">
+                                <a href="/balance/balance/out" class="side-menu">
                                     <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                                    <div class="side-menu__title"> Caja Chica </div>
+                                    <div class="side-menu__title"> Balance Egresos</div>
                                 </a>
                             </li>
                             <li>
-                                <a href="/users" class="side-menu">
+                                <a href="/home" class="side-menu">
                                     <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                                    <div class="side-menu__title"> Historial </div>
+                                    <div class="side-menu__title"> Contabilidad </div>
                                 </a>
                             </li>
 

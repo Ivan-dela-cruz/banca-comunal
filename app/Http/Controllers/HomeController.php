@@ -5,7 +5,7 @@
  * https://github.com/laravel/framework/blob/5.3/src/Illuminate/Auth/Console/stubs/make/controllers/HomeController.stub
  */
 
-namespace App\Http\Controllers\contable;
+namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use Illuminate\Http\Request;
@@ -16,7 +16,7 @@ use App\settings;
 use App\permissions;
 use Datetime;
 use Auth;
-use App\Http\Controllers\Controller;
+
 /**
  * Class HomeController
  * @package App\Http\Controllers
@@ -44,16 +44,15 @@ class HomeController extends Controller
     {
 
     $log = Auth::id();
-    
     $user=array();
     $user = permissions::where('id_user',$log)->first();
-    if($user==null){
-      
-      $per = new permissions;
-      $per->id_user=$log;
-      $per->save();
+      if($user==null){
+        
+        $per = new permissions;
+        $per->id_user=$log;
+        $per->save();
 
-    }
+      }
     $r=(new summaryController)->pass($act='movimientos');
     if($r>0 ){  
 
@@ -129,12 +128,10 @@ class HomeController extends Controller
             $name_categories = categories::find($a->categories_id);
             $a->setAttribute('name_categories',$name_categories->name);
           }
-
-          $data = ['summary'=>$account,'account'=>$summary,'add'=>$add,'out'=>$out,'divisa'=>$divisa,'alerta'=>$alerta];
-          return view('home')->with($data);
+          return view('vendor.adminlte.home',['summary'=>$account,'account'=>$summary,'add'=>$add,'out'=>$out,'divisa'=>$divisa,'alerta'=>$alerta]);
 
       }else{
-         return view('permission')->with(['summary'=>null]);
+         return view('vendor.adminlte.permission',['summary'=>null]);
       }
         
     }

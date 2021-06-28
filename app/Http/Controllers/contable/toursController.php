@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\contable;
 
 use Illuminate\Http\Request;
 use App\categories;
@@ -15,7 +15,7 @@ use App\settings;
 use App\transfer;
 use Auth;
 use Datetime;
-
+use App\Http\Controllers\Controller;
 
 
 class toursController extends Controller

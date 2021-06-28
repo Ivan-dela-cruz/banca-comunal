@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\contable;
 
 use Illuminate\Http\Request;
 use App\attached;
@@ -8,7 +8,7 @@ use App\summary;
 use Datetime;
 use App\bitacora;
 use Auth;
-
+use App\Http\Controllers\Controller;
 
 class attachedController extends Controller
 {
