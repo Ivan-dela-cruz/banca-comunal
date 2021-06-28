@@ -1,5 +1,5 @@
-@extends('adminlte::layouts.app')
-@inject('provider', 'App\Http\Controllers\balanceController')
+@extends('vendor.adminlte.layouts.app')
+@inject('provider', 'App\Http\Controllers\contable\balanceController')
 @section('main-content')
     <div class="container-fluid spark-screen">
         <div class="row">

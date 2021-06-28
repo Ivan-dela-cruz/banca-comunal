@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\contable;
 
 use Illuminate\Http\Request;
 use App\summary;
@@ -15,7 +15,7 @@ use App\tours;
 use APP\attributestours;
 use Auth;
 use Datetime;
-
+use App\Http\Controllers\Controller;
 class futuroController extends Controller
 {
 

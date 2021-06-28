@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\contable;
 
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use App\permissions;
 use App\bitacora;
-
+use App\Http\Controllers\Controller;
 
 class usersController extends Controller
 {

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\contable;
 
 use Illuminate\Http\Request;
 use App\User;	
 use App\bitacora;
 use App\permissions;
 use Auth;
-
+use App\Http\Controllers\Controller;
 class permissionsController extends Controller
 {
     public function index(Request $request, $id)

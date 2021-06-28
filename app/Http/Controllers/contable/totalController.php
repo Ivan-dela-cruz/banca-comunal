@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\contable;
 
 use Illuminate\Http\Request;
 use App\summary;
@@ -9,7 +9,7 @@ use App\categories;
 use App\settings;
 use Datetime;
 use Auth;
-
+use App\Http\Controllers\Controller;
 
 
 class totalController extends Controller

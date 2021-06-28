@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\contable;
 
 use Illuminate\Http\Request;
 use App\summary;
@@ -10,7 +10,7 @@ use App\attached;
 use App\attributes;
 use App\User;
 use Illuminate\Support\Facades\Storage;
-
+use App\Http\Controllers\Controller;
 class detalleController extends Controller
 {
     
