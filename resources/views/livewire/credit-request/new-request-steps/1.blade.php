@@ -11,7 +11,7 @@
             <div class="mb-2">Crédito <span class="text-theme-6">*</span></div>
 {{--            <input  type="text" class="input w-full border flex-1" placeholder="Nuevo o Refinanciación">--}}
 
-            <div class="sm:mt-2"> 
+            <div class="sm:mt-2">
                 <select wire:model="credit_type" class="input w-full border flex-1">
                     <option value="">Seleccione</option>
                     <option value="Nuevo">Nuevo</option>
@@ -26,12 +26,12 @@
             @error('name_debtor') <li class="text-theme-6">{{$message}}</li>  @enderror
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
-            <div class="mb-2">N° C.I. <span class="text-theme-6">*</span></div>
+            <div class="mb-2">N° C.I. <span class="text-theme-6">*</span> <small class="text-muted">&nbsp;(Buscar Socio)</small></div>
             <input wire:keydown.enter="findMember()"  wire:model="dni_debtor" type="text" class="input w-full border flex-1" placeholder="Cédula de identidad">
             @error('dni_debtor') <li class="text-theme-6">{{$message}}</li>  @enderror
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
-            <div class="mb-2">Monto ($)</div>
+            <div class="mb-2">Monto ($) <span class="text-theme-6">*</span></div>
             <input  wire:model="amount" type="text" class="input w-full border flex-1" placeholder="">
             @error('amount') <li class="text-theme-6">{{$message}}</li>  @enderror
         </div>
@@ -52,13 +52,13 @@
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
             <div class="mb-2">Cuota Variable <span class="text-theme-6">*</span></div>
-            <div class="sm:mt-2"> 
+            <div class="sm:mt-2">
                 <select wire:model="variable_fee" class="input w-full border flex-1">
                     <option value="0">Fija</option>
                     <option value="1">Variable</option>
-                </select> 
+                </select>
             </div>
-           
+
             @error('variable_fee') <li class="text-theme-6">{{$message}}</li>  @enderror
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">

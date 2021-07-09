@@ -13,11 +13,12 @@ use App\Models\ConfigTable;
 class NewVisit extends Component
 {
     use WithFileUploads;
+
     //step1
-    public $request_id = null, $credit_type, $name_debtor, $dni_debtor, $amount, $reason_invest, $pay, $deadline, $variable_fee=0, $credit_segment;
+    public $request_id = null, $credit_type, $name_debtor, $dni_debtor, $amount, $reason_invest, $pay, $deadline, $variable_fee = 0, $credit_segment;
 
     //step2
-    public $member_id = null,$code,$status, $doc_type, $doc_number, $name, $last_name, $instruction, $birth_place, $country, $birth_date;
+    public $member_id = null, $code, $status, $doc_type, $doc_number, $name, $last_name, $instruction, $birth_place, $country, $birth_date;
     public $marital_status, $gender, $email, $phone1, $phone2, $residence_address;
     public $member_type, $account_number, $status_member, $url_image;
 
@@ -41,37 +42,40 @@ class NewVisit extends Component
     public $check_living = false, $check_commerce = false;
     //CONFIG TABLE
     public $secuence_tab = 0;
+
     public function render()
     {
         $this->getLastNumber();
-        $data_reference = MemberReference::where('member_id', $this->member_id)->where('status',1)->get();
+        $data_reference = MemberReference::where('member_id', $this->member_id)->where('status', 1)->get();
         return view('livewire.advisor-visit.new-visit', compact('data_reference'))
             ->extends('layouts.app')
             ->section('subcontent');
     }
+
     public function getLastNumber()
     {
         $re_last = ConfigTable::where('identifier', 'visitas')->first();
-        if($re_last){
-            $this->secuence_tab = $re_last->secuence+1;
-            $codeAux = strval($re_last->complemenet+$re_last->secuence+1);
-            $codeAux= ltrim($codeAux, '1');
-            $this->code=($re_last->serie)."".($codeAux);
+        if ($re_last) {
+            $this->secuence_tab = $re_last->secuence + 1;
+            $codeAux = strval($re_last->complemenet + $re_last->secuence + 1);
+            $codeAux = ltrim($codeAux, '1');
+            $this->code = ($re_last->serie) . "" . ($codeAux);
             return;
         }
         $this->code = 0;
 
     }
+
     public function findMember()
     {
         $member = Member::where('doc_number', $this->dni_debtor)->first();
-        if($member){
+        if ($member) {
             $this->member_id = $member->id;
             if (isset($member)) {
                 // $this->alert('success','Registro recuperado satisfactoriamente');
                 $detail = DetailMember::where('member_id', $member->id)->first();
                 $this->loadData($member, $detail);
-                $this->alert('success','¡Datos del cliente cargados con exíto!');
+                $this->alert('success', '¡Datos del cliente cargados con exíto!');
             } else {
                 $this->action = 'POST';
                 // $this->resetInputFields();
@@ -79,7 +83,7 @@ class NewVisit extends Component
             }
             return;
         }
-        $this->alert('warning','No se encontrarón registros asociados');
+        $this->alert('warning', 'No se encontrarón registros asociados');
     }
 
     public function loadData($member, $detail)
@@ -130,9 +134,32 @@ class NewVisit extends Component
 
     public function storeStep1()
     {
+        $this->validate([
+            'code' => 'required',
+            'credit_type' => 'required',
+            'name_debtor' => 'required',
+            'dni_debtor' => 'required',
+            'amount' => 'required',
+            'reason_invest' => 'required',
+            'pay' => 'required',
+            'deadline' => 'required',
+            'variable_fee' => 'required',
+            'credit_segment' => 'required',
+        ],[
+            'code.required' => 'Campo obligatorio.',
+            'credit_type.required' => 'Campo obligatorio.',
+            'name_debtor.required' => 'Campo obligatorio.',
+            'dni_debtor.required' => 'Campo obligatorio.',
+            'amount.required' => 'Campo obligatorio.',
+            'reason_invest.required' => 'Campo obligatorio.',
+            'pay.required' => 'Campo obligatorio.',
+            'deadline.required' => 'Campo obligatorio.',
+            'variable_fee.required' => 'Campo obligatorio.',
+            'credit_segment.required' => 'Campo obligatorio.',
+        ]);
         $data = [
             'member_id' => $this->member_id,
-            'code'=>$this->code,
+            'code' => $this->code,
             'credit_type' => $this->credit_type,
             'name_debtor' => $this->name_debtor,
             'dni_debtor' => $this->dni_debtor,
@@ -143,23 +170,56 @@ class NewVisit extends Component
             'variable_fee' => $this->variable_fee,
             'credit_segment' => $this->credit_segment,
         ];
-//        if ($this->request_id = !null) {
-        $credit = AdvisorVisit::find($this->request_id);
-        if (isset($credit)) {
-            $credit->update($data);
-            $this->request_id = $credit->id;
-            $this->alert('success', 'Información de crédito actualizada con exito');
+        if ($this->member_id != null) {
+            $credit = AdvisorVisit::find($this->request_id);
+            if (isset($credit)) {
+                $credit->update($data);
+                $this->request_id = $credit->id;
+                $this->alert('success', 'Información de crédito actualizada con exito');
+            } else {
+                $data_credit = AdvisorVisit::create($data);
+                $this->request_id = $data_credit->id;
+                $this->alert('success', 'Información de crédito registrada con exito.');
+            }
         } else {
-            $data_credit = AdvisorVisit::create($data);
-            $this->request_id = $data_credit->id;
-            $this->alert('success', 'Información de crédito registrada con exito.');
+            $this->alert('error', 'No se puede guardar la información. Seleccione un Socio');
         }
-//        }
 
     }
 
     public function storeStep2()
     {
+        $this->Validate([
+            'doc_type' => 'required',
+            'doc_number' => 'required',
+            'name' => 'required',
+            'last_name' => 'required',
+            'instruction' => 'required',
+            'birth_place' => 'required',
+            'country' => 'required',
+            'birth_date' => 'required',
+            'marital_status' => 'required',
+            'gender' => 'required',
+            'email' => 'required',
+            'phone1' => 'required',
+            'phone2' => 'required',
+            'residence_address' => 'required',
+        ],[
+            'doc_type.required' => ' Campo obligatorio',
+            'doc_number.required' => ' Campo obligatorio',
+            'name.required' => ' Campo obligatorio',
+            'last_name.required' => ' Campo obligatorio',
+            'instruction.required' => ' Campo obligatorio',
+            'birth_place.required' => ' Campo obligatorio',
+            'country.required' => ' Campo obligatorio',
+            'birth_date.required' => ' Campo obligatorio',
+            'marital_status.required' => ' Campo obligatorio',
+            'gender.required' => ' Campo obligatorio',
+            'email.required' => ' Campo obligatorio',
+            'phone1.required' => ' Campo obligatorio',
+            'phone2.required' => ' Campo obligatorio',
+            'residence_address.required' => ' Campo obligatorio',
+        ]);
         $data = [
             'doc_type' => $this->doc_type,
             'doc_number' => $this->doc_number,
@@ -192,6 +252,36 @@ class NewVisit extends Component
 
     public function storeStep3()
     {
+        $this->validate([
+            'name_spouse' => 'required',
+            'last_name_spouse' => 'required',
+            'dni_spouse' => 'required',
+            'phone1_spouse' => 'required',
+            'economic_activity' => 'required',
+            'contract_type' => 'required',
+            'company_name' => 'required',
+            'company_address' => 'required',
+            'company_phone' => 'required',
+            'service_time' => 'required',
+            'profession_spouse' => 'required',
+            'actual_charge_spouse' => 'required',
+            'income_spouse' => 'required',
+        ],[
+            'name_spouse.required' => 'Campo obligatorio.',
+            'last_name_spouse.required' => 'Campo obligatorio.',
+            'dni_spouse.required' => 'Campo obligatorio.',
+            'phone1_spouse.required' => 'Campo obligatorio.',
+            'economic_activity.required' => 'Campo obligatorio.',
+            'contract_type.required' => 'Campo obligatorio.',
+            'company_name.required' => 'Campo obligatorio.',
+            'company_address.required' => 'Campo obligatorio.',
+            'company_phone.required' => 'Campo obligatorio.',
+            'service_time.required' => 'Campo obligatorio.',
+            'profession_spouse.required' => 'Campo obligatorio.',
+            'actual_charge_spouse.required' => 'Campo obligatorio.',
+            'income_spouse.required' => 'Campo obligatorio.',
+        ]);
+
         $data = [
             'member_id' => $this->member_id,
             'name_spouse' => $this->name_spouse,
@@ -220,13 +310,37 @@ class NewVisit extends Component
                 $this->alert('success', 'Información del cónyugue registrada con exito');
             }
         } else {
-            $this->alert('error', 'No se puede guardar la información');
+            $this->alert('error', 'No se puede guardar la información.');
         }
 
     }
 
     public function storeStep4()
     {
+
+        $this->validate([
+            'business_name' => 'required',
+            'ruc' => 'required',
+            'business_age' => 'required',
+            'sales_place' => 'required',
+            'local_type' => 'required',
+            'business_time' => 'required',
+            'business_address' => 'required',
+            'streets' => 'required',
+            'number' => 'required',
+            'business_reference' => 'required',
+        ],[
+            'business_name.required' => 'Campo obligatorio',
+            'ruc.required' => 'Campo obligatorio',
+            'business_age.required' => 'Campo obligatorio',
+            'sales_place.required' => 'Campo obligatorio',
+            'local_type.required' => 'Campo obligatorio',
+            'business_time.required' => 'Campo obligatorio',
+            'business_address.required' => 'Campo obligatorio',
+            'streets.required' => 'Campo obligatorio',
+            'number.required' => 'Campo obligatorio',
+            'business_reference.required' => 'Campo obligatorio',
+        ]);
 
         $data = [
             'member_id' => $this->member_id,
@@ -241,7 +355,7 @@ class NewVisit extends Component
             'number' => $this->number,
             'business_reference' => $this->business_reference,
         ];
-//        if ($this->request_id = !null) {
+        if ($this->member_id != null) {
         $credit = AdvisorVisit::find($this->request_id);
         if (isset($credit)) {
             $credit->update($data);
@@ -252,13 +366,35 @@ class NewVisit extends Component
             $this->request_id = $c->id;
             $this->alert('success', 'Información de negocio registrada con exito');
         }
-//        }
+        }else {
+            $this->alert('error', 'No se puede guardar la información. Seleccione un Socio');
+        }
 
     }
 
     #region step5
     public function storeReference()
     {
+        $this->validate([
+            'name_ref' => 'required',
+            'last_name_ref' => 'required',
+            'dni_ref' => 'required',
+            'age_ref' => 'required',
+            'relationship_ref' => 'required',
+            'instruction_ref' => 'required',
+            'time_to_meet_ref' => 'required',
+            'phone_ref' => 'required',
+        ],[
+            'name_ref.required' => 'Campo obligatorio',
+            'last_name_ref.required' => 'Campo obligatorio',
+            'dni_ref.required' => 'Campo obligatorio',
+            'age_ref.required' => 'Campo obligatorio',
+            'relationship_ref.required' => 'Campo obligatorio',
+            'instruction_ref.required' => 'Campo obligatorio',
+            'time_to_meet_ref.required' => 'Campo obligatorio',
+            'phone_ref.required' => 'Campo obligatorio',
+        ]);
+
         $data = [
             'member_id' => $this->member_id,
             'name' => $this->name_ref,
@@ -298,6 +434,26 @@ class NewVisit extends Component
 
     public function updateReference()
     {
+        $this->validate([
+            'name_ref' => 'required',
+            'last_name_ref' => 'required',
+            'dni_ref' => 'required',
+            'age_ref' => 'required',
+            'relationship_ref' => 'required',
+            'instruction_ref' => 'required',
+            'time_to_meet_ref' => 'required',
+            'phone_ref' => 'required',
+        ],[
+            'name_ref.required' => 'Campo obligatorio',
+            'last_name_ref.required' => 'Campo obligatorio',
+            'dni_ref.required' => 'Campo obligatorio',
+            'age_ref.required' => 'Campo obligatorio',
+            'relationship_ref.required' => 'Campo obligatorio',
+            'instruction_ref.required' => 'Campo obligatorio',
+            'time_to_meet_ref.required' => 'Campo obligatorio',
+            'phone_ref.required' => 'Campo obligatorio',
+        ]);
+
         $reference = MemberReference::where('id', $this->reference_id);
         $data = [
             'name' => $this->name_ref,
@@ -333,7 +489,8 @@ class NewVisit extends Component
 
     #endregion
 
-    public function storeStep6(){
+    public function storeStep6()
+    {
 
         $pathLiving = '';
         if ($this->url_living != '') {
@@ -352,7 +509,7 @@ class NewVisit extends Component
 
         $data = [
             'member_id' => $this->member_id,
-            'living_place_lat' => $this->living_place_lat ,
+            'living_place_lat' => $this->living_place_lat,
             'living_place_lng' => $this->living_place_lng,
             'commerce_lat' => $this->commerce_lat,
             'commerce_lng' => $this->commerce_lng,
@@ -361,16 +518,21 @@ class NewVisit extends Component
 
         ];
 
-        $credit = AdvisorVisit::find($this->request_id);
-        if (isset($credit)) {
-            $credit->update($data);
-            $this->request_id = $credit->id;
-            $this->alert('success', 'Información de la vivienda y comercio actualizada con exito');
-        } else {
-            $c = AdvisorVisit::create($data);
-            $this->request_id = $c->id;
-            $this->alert('success', 'Información de la vivienda y comercio registrada con exito');
+        if ($this->member_id != null) {
+            $credit = AdvisorVisit::find($this->request_id);
+            if (isset($credit)) {
+                $credit->update($data);
+                $this->request_id = $credit->id;
+                $this->alert('success', 'Información de la vivienda y comercio actualizada con exito');
+            } else {
+                $c = AdvisorVisit::create($data);
+                $this->request_id = $c->id;
+                $this->alert('success', 'Información de la vivienda y comercio registrada con exito');
+            }
+        }else {
+            $this->alert('error', 'No se puede guardar la información');
         }
+
 
     }
 

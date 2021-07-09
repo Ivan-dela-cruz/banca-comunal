@@ -33,7 +33,7 @@
             @error('instruction') <li class="text-theme-6">{{$message}}</li>  @enderror
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
-            <div class="mb-2">Lugar de Nacimiento)</div>
+            <div class="mb-2">Lugar de Nacimiento) <span class="text-theme-6">*</span></div>
             <input  wire:model="birth_place" type="text" class="input w-full border flex-1" placeholder="">
             @error('birth_place') <li class="text-theme-6">{{$message}}</li>  @enderror
         </div>
