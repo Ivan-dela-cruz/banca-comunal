@@ -6,22 +6,22 @@
     <div class="grid grid-cols-12 gap-4 row-gap-5 mt-5">
         <!--   Referencias personales :  -->
         <div class="intro-y col-span-12 sm:col-span-6">
-            <div class="mb-2">Nombre del Negocio o Razón Social</div>
+            <div class="mb-2">Nombre del Negocio o Razón Social <span class="text-theme-6">*</span></div>
             <input wire:model="business_name" type="text" class="input w-full border flex-1" placeholder="">
             @error('business_name') <li class="text-theme-6">{{$message}}</li>  @enderror
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
-            <div class="mb-2">R.U.C.</div>
+            <div class="mb-2">R.U.C. <span class="text-theme-6">*</span></div>
             <input wire:model="ruc" type="text" class="input w-full border flex-1" placeholder="">
             @error('ruc') <li class="text-theme-6">{{$message}}</li>  @enderror
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
-            <div class="mb-2">Antgüedad del Negocio</div>
+            <div class="mb-2">Antgüedad del Negocio <span class="text-theme-6">*</span></div>
             <input wire:model="business_age" type="text" class="input w-full border flex-1" placeholder="">
             @error('business_age') <li class="text-theme-6">{{$message}}</li>  @enderror
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
-            <div class="mb-2">Lugar de Ventas</div>
+            <div class="mb-2">Lugar de Ventas <span class="text-theme-6">*</span></div>
             {{--            <input wire:model="sales_place" type="text" class="input w-full border flex-1" placeholder="">--}}
             <div class="sm:mt-2"> <select wire:model="sales_place" class="input w-full border flex-1">
                     <option value="">Seleccione</option>
@@ -31,7 +31,7 @@
             @error('sales_place') <li class="text-theme-6">{{$message}}</li>  @enderror
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
-            <div class="mb-2">Local es</div>
+            <div class="mb-2">Local es <span class="text-theme-6">*</span></div>
             {{--            <input wire:model="local_type" type="text" class="input w-full border flex-1" placeholder="">--}}
             <div class="sm:mt-2"> <select wire:model="local_type" class="input w-full border flex-1">
                     <option value="">Seleccione</option>
@@ -43,27 +43,27 @@
             @error('local_type') <li class="text-theme-6">{{$message}}</li>  @enderror
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
-            <div class="mb-2">Tiempo de Negocio</div>
+            <div class="mb-2">Tiempo de Negocio <span class="text-theme-6">*</span></div>
             <input wire:model="business_time" type="text" class="input w-full border flex-1" placeholder=" ">
             @error('business_time') <li class="text-theme-6">{{$message}}</li>  @enderror
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
-            <div class="mb-2">Dirección del Negocio</div>
+            <div class="mb-2">Dirección del Negocio <span class="text-theme-6">*</span></div>
             <input wire:model="business_address" type="text" class="input w-full border flex-1" placeholder=" ">
             @error('business_address') <li class="text-theme-6">{{$message}}</li>  @enderror
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
-            <div class="mb-2">Calles</div>
+            <div class="mb-2">Calles <span class="text-theme-6">*</span></div>
             <input wire:model="streets" type="text" class="input w-full border flex-1" placeholder=" ">
             @error('streets') <li class="text-theme-6">{{$message}}</li>  @enderror
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
-            <div class="mb-2">Número</div>
+            <div class="mb-2">Número <span class="text-theme-6">*</span></div>
             <input wire:model="number" type="text" class="input w-full border flex-1" placeholder=" ">
             @error('number') <li class="text-theme-6">{{$message}}</li>  @enderror
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
-            <div class="mb-2">Referencia del sitio del negocio</div>
+            <div class="mb-2">Referencia del sitio del negocio <span class="text-theme-6">*</span></div>
             <input wire:model="business_reference" type="text" class="input w-full border flex-1" placeholder=" ">
             @error('business_reference') <li class="text-theme-6">{{$message}}</li>  @enderror
         </div>

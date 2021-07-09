@@ -51,6 +51,7 @@ class NewRequest extends Component
     //step 7
     public $living_place_lat, $living_place_lng, $commerce_lat, $commerce_lng, $url_living, $url_commerce;
 
+    public $living_place_lat_edit ,$commerce_lat_edit;
 //    public $action = 'POST';
 
 public $check_living = false, $check_commerce = false;
@@ -86,8 +87,28 @@ public $secuence_tab = 0;
 
         $this->validate([
            'credit_type' => 'required',
+           'name_debtor' => 'required',
+           'dni_debtor' => 'required',
+           'amount' => 'required|numeric',
+           'reason_invest' => 'required',
+           'pay' => 'required',
+           'deadline' => 'required',
+           'variable_fee' => 'required',
+           'credit_segment' => 'required',
+        ],[
+            'credit_type.required' => 'Campo obligatorio.',
+            'name_debtor.required' => 'Campo obligatorio.',
+            'dni_debtor.required' => 'Campo obligatorio.',
+            'amount.required' => 'Campo obligatorio.',
+            'amount.numeric' => 'Campo incorrecto.',
+            'reason_invest.required' => 'Campo obligatorio.',
+            'pay.required' => 'Campo obligatorio.',
+            'deadline.required' => 'Campo obligatorio.',
+            'variable_fee.required' => 'Campo obligatorio.',
+            'credit_segment.required' => 'Campo obligatorio.',
         ]);
 
+        if ($this->member_id != null) {
         $data = [
             'member_id' => $this->member_id,
             'code'=>$this->code,
@@ -101,7 +122,6 @@ public $secuence_tab = 0;
             'variable_fee' => $this->variable_fee,
             'credit_segment' => $this->credit_segment,
         ];
-//        if ($this->request_id = !null) {
         $credit = CreditRequest::find($this->request_id);
         if (isset($credit)) {
             $credit->update($data);
@@ -115,7 +135,9 @@ public $secuence_tab = 0;
             $config_table->save();
             $this->alert('success', 'Información de crédito registrada con exito.');
         }
-//        }
+        }else{
+            $this->alert('error','Seleccione un Socio');
+        }
 
     }
 
@@ -123,8 +145,28 @@ public $secuence_tab = 0;
     {
         $this->validate([
            'doc_type' => 'required',
+           'doc_number' => 'required',
+           'name' => 'required',
+           'last_name' => 'required',
+           'instruction' => 'required',
+           'birth_place' => 'required',
+           'country' => 'required',
+           'birth_date' => 'required',
+           'marital_status' => 'required',
+           'gender' => 'required',
+           'residence_address' => 'required',
         ],[
-            'doc_type.required' => 'Campo obligatorio.'
+            'doc_type.required' => 'Campo obligatorio.',
+            'doc_number.required' => 'Campo obligatorio.',
+            'name.required' => 'Campo obligatorio.',
+            'last_name.required' => 'Campo obligatorio.',
+            'instruction.required' => 'Campo obligatorio.',
+            'birth_place.required' => 'Campo obligatorio.',
+            'country.required' => 'Campo obligatorio.',
+            'birth_date.required' => 'Campo obligatorio.',
+            'gender.required' => 'Campo obligatorio.',
+            'residence_address.required' => 'Campo obligatorio.',
+            'marital_status.required' => 'Campo obligatorio.',
         ]);
         $data = [
             'doc_type' => $this->doc_type,
@@ -159,10 +201,35 @@ public $secuence_tab = 0;
     public function storeStep3()
     {
         $this->validate([
-            'economic_activity' => 'required'
+            'economic_activity' => 'required',
+            'name_spouse' => 'required',
+            'last_name_spouse' => 'required',
+            'dni_spouse' => 'required',
+            'phone1_spouse' => 'required',
+            'contract_type' => 'required',
+            'company_name' => 'required',
+            'company_address' => 'required',
+            'company_phone' => 'required',
+            'service_time' => 'required',
+            'profession_spouse' => 'required',
+            'actual_charge_spouse' => 'required',
+            'income_spouse' => 'required',
         ],[
-            'economic_activity.required' => 'Campo obligatorio.'
+            'economic_activity.required' => 'Campo obligatorio.',
+            'name_spouse.required' => 'Campo obligatorio.',
+            'last_name_spouse.required' => 'Campo obligatorio.',
+            'dni_spouse.required' => 'Campo obligatorio.',
+            'phone1_spouse.required' => 'Campo obligatorio.',
+            'contract_type.required' => 'Campo obligatorio.',
+            'company_name.required' => 'Campo obligatorio.',
+            'company_address.required' => 'Campo obligatorio.',
+            'company_phone.required' => 'Campo obligatorio.',
+            'service_time.required' => 'Campo obligatorio.',
+            'profession_spouse.required' => 'Campo obligatorio.',
+            'actual_charge_spouse.required' => 'Campo obligatorio.',
+            'income_spouse.required' => 'Campo obligatorio.',
         ]);
+
         $data = [
             'member_id' => $this->member_id,
             'name_spouse' => $this->name_spouse,
@@ -191,14 +258,37 @@ public $secuence_tab = 0;
                 $this->alert('success', 'Información del cónyugue registrada con exito');
             }
         } else {
-            $this->alert('error', 'No se puede guardar la información');
+            $this->alert('error', 'No se puede guardar la información. Seleccione un Socio');
         }
 
     }
 
     public function storeStep4()
     {
-//        dd($this->member_id);
+
+        $this->validate([
+            'business_name' => 'required',
+            'ruc' => 'required',
+            'business_age' => 'required',
+            'sales_place' => 'required',
+            'local_type' => 'required',
+            'business_time' => 'required',
+            'business_address' => 'required',
+            'streets' => 'required',
+            'number' => 'required',
+            'business_reference' => 'required',
+        ],[
+            'business_name.required' => 'Campo obligatorio.',
+            'ruc.required' => 'Campo obligatorio.',
+            'business_age.required' => 'Campo obligatorio.',
+            'sales_place.required' => 'Campo obligatorio.',
+            'local_type.required' => 'Campo obligatorio.',
+            'business_time.required' => 'Campo obligatorio.',
+            'business_address.required' => 'Campo obligatorio.',
+            'streets.required' => 'Campo obligatorio.',
+            'number.required' => 'Campo obligatorio.',
+            'business_reference.required' => 'Campo obligatorio.',
+        ]);
 
         $data = [
             'member_id' => $this->member_id,
@@ -213,24 +303,45 @@ public $secuence_tab = 0;
             'number' => $this->number,
             'business_reference' => $this->business_reference,
         ];
-//        if ($this->request_id = !null) {
-        $credit = CreditRequest::find($this->request_id);
-        if (isset($credit)) {
-            $credit->update($data);
-            $this->request_id = $credit->id;
-            $this->alert('success', 'Información de negocio actualizada con exito');
-        } else {
-            $c = CreditRequest::create($data);
-            $this->request_id = $c->id;
-            $this->alert('success', 'Información de negocio registrada con exito');
+        if ($this->member_id != null) {
+            $credit = CreditRequest::find($this->request_id);
+            if (isset($credit)) {
+                $credit->update($data);
+                $this->request_id = $credit->id;
+                $this->alert('success', 'Información de negocio actualizada con exito');
+            } else {
+                $c = CreditRequest::create($data);
+                $this->request_id = $c->id;
+                $this->alert('success', 'Información de negocio registrada con exito');
+            }
+        }else {
+            $this->alert('error', 'No se puede guardar la información. Seleccione un Socio');
         }
-//        }
 
     }
 
     #region step5
     public function storeReference()
     {
+        $this->validate([
+            'name_ref' => 'required',
+            'last_name_ref' => 'required',
+            'dni_ref' => 'required',
+            'age_ref' => 'required',
+            'relationship_ref' => 'required',
+            'instruction_ref' => 'required',
+            'time_to_meet_ref' => 'required',
+            'phone_ref' => 'required',
+        ],[
+            'name_ref.required' => 'Campo obligatorio',
+            'last_name_ref.required' => 'Campo obligatorio',
+            'dni_ref.required' => 'Campo obligatorio',
+            'age_ref.required' => 'Campo obligatorio',
+            'relationship_ref.required' => 'Campo obligatorio',
+            'instruction_ref.required' => 'Campo obligatorio',
+            'time_to_meet_ref.required' => 'Campo obligatorio',
+            'phone_ref.required' => 'Campo obligatorio',
+        ]);
         $data = [
             'member_id' => $this->member_id,
             'name' => $this->name_ref,
@@ -270,6 +381,26 @@ public $secuence_tab = 0;
 
     public function updateReference()
     {
+        $this->validate([
+            'name_ref' => 'required',
+            'last_name_ref' => 'required',
+            'dni_ref' => 'required',
+            'age_ref' => 'required',
+            'relationship_ref' => 'required',
+            'instruction_ref' => 'required',
+            'time_to_meet_ref' => 'required',
+            'phone_ref' => 'required',
+        ],[
+            'name_ref.required' => 'Campo obligatorio',
+            'last_name_ref.required' => 'Campo obligatorio',
+            'dni_ref.required' => 'Campo obligatorio',
+            'age_ref.required' => 'Campo obligatorio',
+            'relationship_ref.required' => 'Campo obligatorio',
+            'instruction_ref.required' => 'Campo obligatorio',
+            'time_to_meet_ref.required' => 'Campo obligatorio',
+            'phone_ref.required' => 'Campo obligatorio',
+        ]);
+
         $reference = MemberReference::where('id', $this->reference_id);
         $data = [
             'name' => $this->name_ref,
@@ -350,16 +481,21 @@ public $secuence_tab = 0;
             'total_ex' => $this->total_ex,
         ];
 
-        $credit = CreditRequest::find($this->request_id);
-        if (isset($credit)) {
-            $credit->update($data);
-            $this->request_id = $credit->id;
-            $this->alert('success', 'Información de la situación economica actualizada con exito');
-        } else {
-            $c = CreditRequest::create($data);
-            $this->request_id = $c->id;
-            $this->alert('success', 'Información de la situación economica registrada con exito');
+        if ($this->member_id != null) {
+            $credit = CreditRequest::find($this->request_id);
+            if (isset($credit)) {
+                $credit->update($data);
+                $this->request_id = $credit->id;
+                $this->alert('success', 'Información de la situación economica actualizada con exito');
+            } else {
+                $c = CreditRequest::create($data);
+                $this->request_id = $c->id;
+                $this->alert('success', 'Información de la situación economica registrada con exito');
+            }
+        }else {
+            $this->alert('error', 'No se puede guardar la información. Seleccione un Socio');
         }
+
 
     }
 
@@ -391,15 +527,19 @@ public $secuence_tab = 0;
 
         ];
 
-        $credit = CreditRequest::find($this->request_id);
-        if (isset($credit)) {
-            $credit->update($data);
-            $this->request_id = $credit->id;
-            $this->alert('success', 'Información de la vivienda y comercio actualizada con exito');
-        } else {
-            $c = CreditRequest::create($data);
-            $this->request_id = $c->id;
-            $this->alert('success', 'Información de la vivienda y comercio registrada con exito');
+        if ($this->member_id != null) {
+            $credit = CreditRequest::find($this->request_id);
+            if (isset($credit)) {
+                $credit->update($data);
+                $this->request_id = $credit->id;
+                $this->alert('success', 'Información de la vivienda y comercio actualizada con exito');
+            } else {
+                $c = CreditRequest::create($data);
+                $this->request_id = $c->id;
+                $this->alert('success', 'Información de la vivienda y comercio registrada con exito');
+            }
+        }else {
+            $this->alert('error', 'No se puede guardar la información. Seleccione un Socio');
         }
 
     }
