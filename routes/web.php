@@ -11,6 +11,7 @@ use App\Http\Livewire\ShowEvents;
 use App\Http\Livewire\Members\{
     Member,
     NewMember,
+    Profile,
 //    References,
 };
 use App\Http\Livewire\Roles\{
@@ -98,6 +99,7 @@ Route::middleware('auth')->group(function() {
     Route::get('/eventos', ShowEvents::class)->name('events');
     Route::get('/miembros', Member::class)->name('members');
     Route::get('/nuevo-miembro', NewMember::class)->name('new-member');
+    Route::get('/perfil', Profile::class)->name('perfil');
     Route::get('/usuarios', Users::class)->name('users');
 
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');

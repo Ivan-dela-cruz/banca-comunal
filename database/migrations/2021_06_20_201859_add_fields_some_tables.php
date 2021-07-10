@@ -17,16 +17,13 @@ class AddFieldsSomeTables extends Migration
         Schema::table('account_clients', function (Blueprint $table) {
             $table->softDeletes()->after('updated_at');
         });
-        Schema::table('account', function (Blueprint $table) {
-            $table->softDeletes()->after('updated_at');
-        });
+        //Schema::table('account', function (Blueprint $table) {
+        //    $table->softDeletes()->after('updated_at');
+        //});
         Schema::table('advisor_visits', function (Blueprint $table) {
             $table->softDeletes()->after('updated_at');
         });
-        Schema::table('credit_request', function (Blueprint $table) {
-            $table->softDeletes()->after('updated_at');
-        });
-        Schema::table('detail_members', function (Blueprint $table) {
+        Schema::table('credit_requests', function (Blueprint $table) {
             $table->softDeletes()->after('updated_at');
         });
 
@@ -44,16 +41,13 @@ class AddFieldsSomeTables extends Migration
         Schema::table('account_clients', function($table) {
             $table->dropColumn('delete_at');
         });
-        Schema::table('account', function($table) {
-            $table->dropColumn('delete_at');
-        });
+        //Schema::table('account', function($table) {
+        //    $table->dropColumn('delete_at');
+        //});
         Schema::table('advisor_visits', function($table) {
             $table->dropColumn('delete_at');
         });
-        Schema::table('credit_request', function($table) {
-            $table->dropColumn('delete_at');
-        });
-        Schema::table('detail_members', function($table) {
+        Schema::table('credit_requests', function($table) {
             $table->dropColumn('delete_at');
         });
     }
