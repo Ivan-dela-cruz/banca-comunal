@@ -5,7 +5,7 @@ namespace App\Http\Controllers\contable;
 
 use Illuminate\Http\Request;
 use App\bitacora;
-use App\User;
+use App\Models\User;
 use Auth;
 use Datetime;
 use App\Http\Controllers\Controller;

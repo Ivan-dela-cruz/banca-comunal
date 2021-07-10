@@ -8,7 +8,7 @@ use App\account;
 use App\categories;
 use App\attached;
 use App\attributes;
-use App\User;
+use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 class detalleController extends Controller
