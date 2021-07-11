@@ -9,9 +9,11 @@ use App\Models\DetailMember;
 use App\Models\Member;
 use App\Models\ConfigTable;
 use App\Models\AccountClient;
+use Livewire\WithFileUploads;
 
 class NewMember extends Component
 {
+    use WithFileUploads;
 
     public $listButtonFrame = [
         "1" => "button text-white bg-theme-1",
@@ -36,7 +38,7 @@ class NewMember extends Component
     ];
     public $pageFrame = 1;
 
-    public $data_id, $status = true, $url_image, $member_type="cliente", $acount_number;
+    public $data_id, $status = true, $member_type="cliente", $acount_number;
     public $member_id = null, $city;
     public $canton, $parish, $principal_street, $secundary_street, $reference_place;
     public $members;
@@ -54,6 +56,9 @@ class NewMember extends Component
     public $search_member = "",$block_account=false;
     //DATA ACCOUNT
     public $serie_ac,$secuence_ac, $number_ac;
+    public $temporaryUrl = false;
+    public $url_image;
+
     public function selectFrame($id)
     {
         for ($i = 1; $i <= count($this->listButtonFrame); $i++) {
@@ -74,7 +79,8 @@ class NewMember extends Component
         $data_reference = MemberReference::where('member_id', $this->member_id)->get();
         $this->getLastNumber();
         $this->getAccount();
-       
+
+        // dd($this->url_image  );
         return view('livewire.members.new-member', compact('data_reference'))
             ->extends('layouts.app')
             ->section('subcontent');
@@ -172,6 +178,7 @@ class NewMember extends Component
 
     public function resetInputFields()
     {
+        $this->temporaryUrl = false;
         $this->data_id = '';
         $this->name = '';
         $this->last_name = '';
@@ -220,8 +227,15 @@ class NewMember extends Component
 
     }
 
+    public function tempUrl()
+    {
+        $this->url_image = null;
+        $this->temporaryUrl = true;
+    }
+
     public function store()
     {
+        // dd($this->url_image);
         /*
         $validation = $this->validate([
     		'name'	=>	'required',
@@ -246,7 +260,6 @@ class NewMember extends Component
             'member_type' => $this->member_type,
             'account_number' => $this->acount_number,
             'status' => $this->status,
-            'url_image' => $this->url_image
         ];
         $member_create = Member::create($data_member);
         $this->member_id = $member_create->id;
@@ -280,6 +293,7 @@ class NewMember extends Component
     public function storePersonal()
     {
 
+        // dd($this->url_image);
         $this->validate([
             'name' => 'required|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u|max:255',
             'last_name' => 'required|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u|max:255',
@@ -288,7 +302,7 @@ class NewMember extends Component
             'instruction' => 'required',
             'marital_status' => 'required',
             'birth_date' => 'required',
-            'email' => ['required', 'email', 'unique:users,email'],
+            'email' => ['required', 'email', 'unique:users,email','unique:members,email'],
             'phone1' => 'required',
             'phone2' => 'numeric',
         ], [
@@ -311,6 +325,14 @@ class NewMember extends Component
             'phone2.numeric' => 'El campo debe contener solo números.',
         ]);
 
+        $path = 'images/user.jpg';
+        if ($this->url_image != '') {
+            $this->validate(['url_image' => 'image'], ['url_image.image' => 'La portada debe ser de formato: .jpg,.jpeg ó .png']);
+            //save image
+            $name = "file-" . time() . '.' . $this->url_image->getClientOriginalExtension();
+            $path = 'images/users/' . $this->url_image->storeAs('/', $name, 'users');
+        }
+
         $data_member = [
             'name' => $this->name,
             'last_name' => $this->last_name,
@@ -321,7 +343,8 @@ class NewMember extends Component
             'birth_date' => $this->birth_date,
             'email' => $this->email,
             'phone1' => $this->phone1,
-            'phone2' => $this->phone2
+            'phone2' => $this->phone2,
+            'url_image' => $path,
         ];
         $member_t = Member::where('doc_number', $this->dni)->first();
         if (is_null($member_t)) {
@@ -400,7 +423,7 @@ class NewMember extends Component
             'member_type' => $this->member_type,
             'account_number' => $this->acount_number,
             'status' => $this->status,
-            'url_image' => $this->url_image
+            // 'url_image' => $this->url_image
         ];
         $member_t->update($data_deatil);
 
@@ -448,6 +471,17 @@ class NewMember extends Component
         */
         $member = Member::find($this->data_id);
         $detail = DetailMember::where('member_id', $member->id);
+
+        
+        if ($this->url_image != $member->url_image) {
+            $this->validate(['url_image' => 'image'], ['url_image.image' => 'La portada debe ser de formato: .jpg,.jpeg ó .png']);
+            //save image
+            $name = "file-" . time() . '.' . $this->url_image->getClientOriginalExtension();
+            $path = 'images/users/'  . $this->url_image->storeAs('/', $name, 'users');
+        } else {
+            $path = $member->url_image;
+        }
+
         $data_member = [
             'name' => $this->name,
             'last_name' => $this->last_name,
@@ -462,7 +496,7 @@ class NewMember extends Component
             'member_type' => $this->member_type,
             'acount_number' => $this->acount_number,
             'status' => $this->status,
-            'url_image' => $this->url_image
+            'url_image' => $path
         ];
         $data_deatil = [
             'member_id' => $this->member_id,
