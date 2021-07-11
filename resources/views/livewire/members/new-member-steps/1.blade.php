@@ -52,6 +52,35 @@
             <input  wire:model="phone2" type="text" class="input w-full border flex-1" placeholder="Secundario">
               @error('phone2') <li class="text-theme-6">{{$message}}</li>  @enderror
         </div>
+
+        <div class="intro-y col-span-12 sm:col-span-6">
+            <div class="mb-2">Fotografía </div>
+            <div class="flex items-stretch">
+            {{-- @if($url_image == null)
+                <img src="{{asset('images/user.jpg')}}" alt="image"
+                    class="py-1 mr-2"
+                    style="width:45px; height:45px;">
+            @else
+                @if($temporaryUrl)
+                    <img src="{{$url_image->temporaryUrl()}}" alt="image"
+                    class="py-1 mr-2"
+                    style="width:45px; height:45px;">
+                @else
+                    <img src="{{asset($url_image)}}" alt="image"
+                    class="py-1 mr-2"
+                    style="width:45px; height:45px;">
+                @endif
+
+            @endif --}}
+                <input wire:model="url_image" type="file" class="input w-full border flex-1"
+                accept="image/png,image/jpg,image/jpeg" wire:click="tempUrl()">
+                @error('url_image')
+                <li class="text-theme-6">{{$message}}</li> @enderror
+            </div>
+           
+        </div>
+       
+
         <div class="intro-y col-span-12 flex items-center justify-center sm:justify-end mt-5">
             <button wire:click.prevent="storePersonal()" class="button w-24 justify-center block bg-theme-1 text-white ml-2">Guardar</button>
         </div>

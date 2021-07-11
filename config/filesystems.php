@@ -84,6 +84,13 @@ return [
             'visibility' => 'public',
         ],
 
+        'users' => [
+            'driver' => 'local',
+            'root' => public_path('images/users'),
+            'url' => env('APP_URL') . 'public/images/users',
+            'visibility' => 'public',
+        ],
+
     ],
 
     /*

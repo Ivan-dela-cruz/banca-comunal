@@ -28,7 +28,8 @@ class Member extends Model
         'residence_address',
         'member_type',
         'account_number',
-        'status'
+        'status', 
+        'url_image',
     ];
 
     public function detail()
