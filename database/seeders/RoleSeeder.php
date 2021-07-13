@@ -47,6 +47,51 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'update_member', 'modulo' => 'Miembros', 'alias' => 'Modificar']);
         Permission::create(['name' => 'destroy_member', 'modulo' => 'Miembros', 'alias' => 'Eliminar']);
 
+        Permission::create(['name' => 'create_accountancy', 'modulo' => 'Contaduría', 'alias' => 'Crear']);
+        Permission::create(['name' => 'read_accountancy', 'modulo' => 'Contaduría', 'alias' => 'Leer']);
+        Permission::create(['name' => 'update_accountancy', 'modulo' => 'Contaduría', 'alias' => 'Modificar']);
+        Permission::create(['name' => 'destroy_accountancy', 'modulo' => 'Contaduría', 'alias' => 'Eliminar']);
+
+        Permission::create(['name' => 'create_request', 'modulo' => 'Solicitudes de Crédito', 'alias' => 'Crear']);
+        Permission::create(['name' => 'read_request', 'modulo' => 'Solicitudes de Crédito', 'alias' => 'Leer']);
+        Permission::create(['name' => 'update_request', 'modulo' => 'Solicitudes de Crédito', 'alias' => 'Modificar']);
+        Permission::create(['name' => 'destroy_request', 'modulo' => 'Solicitudes de Crédito', 'alias' => 'Eliminar']);
+
+        Permission::create(['name' => 'create_visit', 'modulo' => 'Visita de Asesor', 'alias' => 'Crear']);
+        Permission::create(['name' => 'read_visit', 'modulo' => 'Visita de Asesor', 'alias' => 'Leer']);
+        Permission::create(['name' => 'update_visit', 'modulo' => 'Visita de Asesor', 'alias' => 'Modificar']);
+        Permission::create(['name' => 'destroy_visit', 'modulo' => 'Visita de Asesor', 'alias' => 'Eliminar']);
+
+        Permission::create(['name' => 'create_contribution', 'modulo' => 'Aportes', 'alias' => 'Crear']);
+        Permission::create(['name' => 'read_contribution', 'modulo' => 'Aportes', 'alias' => 'Leer']);
+        Permission::create(['name' => 'update_contribution', 'modulo' => 'Aportes', 'alias' => 'Modificar']);
+        Permission::create(['name' => 'destroy_contribution', 'modulo' => 'Aportes', 'alias' => 'Eliminar']);
+
+        Permission::create(['name' => 'create_credit', 'modulo' => 'Créditos', 'alias' => 'Crear']);
+        Permission::create(['name' => 'read_credit', 'modulo' => 'Créditos', 'alias' => 'Leer']);
+        Permission::create(['name' => 'update_credit', 'modulo' => 'Créditos', 'alias' => 'Modificar']);
+        Permission::create(['name' => 'destroy_credit', 'modulo' => 'Créditos', 'alias' => 'Eliminar']);
+
+        Permission::create(['name' => 'create_transactions', 'modulo' => 'Transacciones', 'alias' => 'Crear']);
+        Permission::create(['name' => 'read_transactions', 'modulo' => 'Transacciones', 'alias' => 'Leer']);
+        Permission::create(['name' => 'update_transactions', 'modulo' => 'Transacciones', 'alias' => 'Modificar']);
+        Permission::create(['name' => 'destroy_transactions', 'modulo' => 'Transacciones', 'alias' => 'Eliminar']);
+
+        Permission::create(['name' => 'create_notebook', 'modulo' => 'Libretas', 'alias' => 'Crear']);
+        Permission::create(['name' => 'read_notebook', 'modulo' => 'Libretas', 'alias' => 'Leer']);
+        Permission::create(['name' => 'update_notebook', 'modulo' => 'Libretas', 'alias' => 'Modificar']);
+        Permission::create(['name' => 'destroy_notebook', 'modulo' => 'Libretas', 'alias' => 'Eliminar']);
+
+        Permission::create(['name' => 'create_simulator', 'modulo' => 'Simulador', 'alias' => 'Crear']);
+        Permission::create(['name' => 'read_simulator', 'modulo' => 'Simulador', 'alias' => 'Leer']);
+        Permission::create(['name' => 'update_simulator', 'modulo' => 'Simulador', 'alias' => 'Modificar']);
+        Permission::create(['name' => 'destroy_simulator', 'modulo' => 'Simulador', 'alias' => 'Eliminar']);
+
+        Permission::create(['name' => 'create_payment', 'modulo' => 'Pagos', 'alias' => 'Crear']);
+        Permission::create(['name' => 'read_payment', 'modulo' => 'Pagos', 'alias' => 'Leer']);
+        Permission::create(['name' => 'update_payment', 'modulo' => 'Pagos', 'alias' => 'Modificar']);
+        Permission::create(['name' => 'destroy_payment', 'modulo' => 'Pagos', 'alias' => 'Eliminar']);
+
 
         /// role super admin
         $role = Role::create(['name' => 'SuperAdmin', 'description' => 'Rol de superadmin', 'status' => true]);
