@@ -42,10 +42,20 @@ class RoleSeeder extends Seeder
 
         /// crea los permisos para el crud del techier
 
+        Permission::create(['name' => 'create_client', 'modulo' => 'Clientes', 'alias' => 'Crear']);
+        Permission::create(['name' => 'read_client', 'modulo' => 'Clientes', 'alias' => 'Leer']);
+        Permission::create(['name' => 'update_client', 'modulo' => 'Clientes', 'alias' => 'Modificar']);
+        Permission::create(['name' => 'destroy_client', 'modulo' => 'Clientes', 'alias' => 'Eliminar']);
+
         Permission::create(['name' => 'create_member', 'modulo' => 'Miembros', 'alias' => 'Crear']);
         Permission::create(['name' => 'read_member', 'modulo' => 'Miembros', 'alias' => 'Leer']);
         Permission::create(['name' => 'update_member', 'modulo' => 'Miembros', 'alias' => 'Modificar']);
         Permission::create(['name' => 'destroy_member', 'modulo' => 'Miembros', 'alias' => 'Eliminar']);
+
+        Permission::create(['name' => 'create_account', 'modulo' => 'Cuentas', 'alias' => 'Crear']);
+        Permission::create(['name' => 'read_account', 'modulo' => 'Cuentas', 'alias' => 'Leer']);
+        Permission::create(['name' => 'update_account', 'modulo' => 'Cuentas', 'alias' => 'Modificar']);
+        Permission::create(['name' => 'destroy_account', 'modulo' => 'Cuentas', 'alias' => 'Eliminar']);
 
         Permission::create(['name' => 'create_accountancy', 'modulo' => 'Contaduría', 'alias' => 'Crear']);
         Permission::create(['name' => 'read_accountancy', 'modulo' => 'Contaduría', 'alias' => 'Leer']);

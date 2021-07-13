@@ -132,13 +132,16 @@
                         <td class="table-report__action">
                             <div class="flex justify-center items-center">
 
-                                @if($cont == 2 && $data->retreats == 0)
-                                    <a wire:click="edit({{ $data->id}})" class="flex items-center mr-3" href="javascript:;">
-                                        <i class="w-4 h-4 fas fa-edit"></i> Editar
-                                    </a>
-                                @else
-                                    <button disabled class="flex items-center mr-3 text-theme-6"><i class="w-4 h-4 fas fa-ban"></i> Editar</button>
-                                @endif
+                                @can('update_transactions')
+                                    @if($cont == 2 && $data->retreats == 0)
+                                        <a wire:click="edit({{ $data->id}})" class="flex items-center mr-3" href="javascript:;">
+                                            <i class="w-4 h-4 fas fa-edit"></i> Editar
+                                        </a>
+                                    @else
+                                        <button disabled class="flex items-center mr-3 text-theme-6"><i class="w-4 h-4 fas fa-ban"></i> Editar</button>
+                                    @endif
+                                @endcan
+
                             </div>
                         </td>
                     </tr>
