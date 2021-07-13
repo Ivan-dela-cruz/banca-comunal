@@ -15,7 +15,7 @@ class Roles extends Component
     public function render()
     {
         $this->roles = HasRoles::all();
-        $this->permissions = Permission::all();
+        $this->permissions = Permission::where('type',true)->get();
        //->groupBy('modulo')
         return view('livewire.roles.roles')
         ->extends('layouts.app')
@@ -30,7 +30,7 @@ class Roles extends Component
         $this->select_permissions  = [];
         $this->action = 'POST';
         $this->role = [];
-    
+
     }
 
     public function store()
@@ -60,7 +60,7 @@ class Roles extends Component
         $this->data_id = $id;
         $this->role=$data;
         $permissions = $data->permissions->pluck('id');
-        
+
         $data_list = [];
         $list = [];
         $cont=1;
@@ -70,7 +70,7 @@ class Roles extends Component
                 $var_temp = false;
                 foreach ($permissions as $k => $v){
                     if($per->id == $v){
-                      
+
                        $var_temp = $v;
                         unset($permissions[$k]);
                         break;
@@ -79,7 +79,7 @@ class Roles extends Component
                     }
                 }
                 $data_list[$cont] =  $var_temp;
-               
+
                 $cont ++;
             }else{
                 $data_list[$cont] = false;
@@ -109,7 +109,7 @@ class Roles extends Component
         $role->revokePermissionTo(Permission::all());
         // sincronizar los nuevos permisos
         $role->syncPermissions($this->select_permissions);
-        
+
         $this->resetInputFields();
         $this->action = 'POST';
         $this->alert('success', 'Rol actualizado exitosamente!',[ 'showCancelButton' =>  false, ]);
@@ -126,6 +126,6 @@ class Roles extends Component
     {
         $this->confirming = $id;
         $this->color = "red";
-       
+
     }
 }
