@@ -15,7 +15,7 @@ class Roles extends Component
     public function render()
     {
         $this->roles = HasRoles::all();
-        $this->permissions = Permission::where('type',true)->get();
+        $this->permissions = Permission::where('type',1)->groupBy('modulo')->get();
        //->groupBy('modulo')
         return view('livewire.roles.roles')
         ->extends('layouts.app')

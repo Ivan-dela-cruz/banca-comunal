@@ -152,7 +152,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($permissions->groupBy('modulo') as $k => $v)
+                            @foreach($permissions as $k => $v)
                                 <tr>
                                     <td>
                                         <a href="" class="font-medium whitespace-no-wrap">{{$k}}</a>
