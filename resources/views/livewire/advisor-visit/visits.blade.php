@@ -145,12 +145,16 @@
                                 </td>
                                 <td class="table-report__action w-56">
                                     <div class="flex justify-center items-center">
+                                        @can('update_visit')
                                         <a class="flex items-center mr-3" href="javascript:void(0)" wire:click="edit({{$lr->id}})">
                                             <i  class="fas fa-edit w-4 h-4 mr-1"></i> Editar
                                         </a>
+                                        @endcan
+                                        @can('destroy_visit')
                                         <a class="flex items-center text-theme-6" href="javascript:void(0)" wire:click="delete({{$lr->id}})">
                                             <i  class="fas fa-trash-alt w-4 h-4 mr-1"></i> Eliminar
                                         </a>
+                                        @endcan
                                     </div>
                                 </td>
                             </tr>

@@ -2,10 +2,12 @@
         <div class="intro-y flex items-center mt-8">
                 <h2 class="text-lg font-medium mr-auto">Gestión de usuarios</h2>
                 <div class="hidden md:block mx-auto text-gray-600"></div>
+            @can('create_user')
                 <button wire:click.prevent="open()" class="btn_plus button text-white bg-theme-9 shadow-md mr-2">
                         <i class="fas fa-plus mr-1"></i>
                         Nuevo
                 </button>
+            @endcan
                 <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
                         <div class="w-56 relative text-gray-700 dark:text-gray-300">
                                 <input type="text" class="input w-56 box pr-10 placeholder-theme-13"
@@ -56,7 +58,7 @@
                                                         </div>
                                                 </div>
                                         @endif
-                                       
+
                                         <div class="mt-3">
                                                 <label>Imagen</label>
                                                 <div class="relative mt-2">
@@ -117,11 +119,15 @@
                                                 <button wire:click.prevent="resetFields()" type="button"
                                                         class="btn_cancel button w-24 border bg-theme-6 text-white dark:border-dark-5 text-white dark:text-white mr-1">Cancelar</button>
                                                 @if ($action=="PUT")
-                                                <button wire:click.prevent="update()" type="button"
-                                                        class="button w-24 bg-theme-1 text-white">Actualizar</button>
+                                                    @can('update_user')
+                                                        <button wire:click.prevent="update()" type="button"
+                                                                class="button w-24 bg-theme-1 text-white">Actualizar</button>
+                                                    @endcan
                                                 @else
-                                                <button wire:click.prevent="store()" type="button"
-                                                        class="button w-24 bg-theme-1 text-white">Guardar</button>
+                                                    @can('create_user')
+                                                    <button wire:click.prevent="store()" type="button"
+                                                            class="button w-24 bg-theme-1 text-white">Guardar</button>
+                                                    @endcan
                                                 @endif
                                         </div>
                                 </div>
@@ -163,21 +169,24 @@
                                                 </td>
                                                 <td class="text-center">{{ $us->address}}</td>
                                                 <td class="w-40"> {{ $us->phone }} </td>
-                                                <td class="text-center w-40"> 
+                                                <td class="text-center w-40">
                                                         <span class="text-xs px-1 rounded-full {{ $us->status?'bg-theme-9':'bg-theme-6' }} text-white mr-1">
                                                                 {{ $us->status?"Activo":"Inactivo" }}
                                                         </span>
                                                 </td>
                                                 <td class="table-report__action w-56">
                                                         <div class="flex justify-center items-center">
+                                                            @can('update_user')
                                                                 <a wire:click.prevent="edit({{ $us->id }})" class="flex items-center mr-3" href="javascript:;">
                                                                         <i class="fas fa-edit w-4 h-4 mr-1"></i>
                                                                 </a>
-                                                                
-                                                                <a wire:click.prevent="delete({{ $us->id }})" href="javascript:;" 
+                                                            @endcan
+                                                            @can('destroy_user')
+                                                                <a wire:click.prevent="delete({{ $us->id }})" href="javascript:;"
                                                                         class="flex items-center {{ $us->status?'text-theme-6':'text-theme-9' }}">
                                                                         <i class="fas {{ $us->status?'fas fa-exchange-alt':'fas fa-redo-alt' }} w-4 h-4 mr-1"></i>
                                                                 </a>
+                                                            @endcan
                                                         </div>
                                                 </td>
                                         </tr>

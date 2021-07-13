@@ -2,12 +2,15 @@
     <h2 class="intro-y text-lg font-medium mt-10">Listado de miembros</h2>
     <div class="grid grid-cols-12 gap-6 mt-5">
         <div class="intro-y col-span-12 flex flex-wrap sm:flex-no-wrap items-center mt-2">
+
+            @can('create_client')
             <a class="button text-white bg-theme-1 shadow-md mr-2">Agregar nuevo</a>
-           
+            @endcan
+
             <div class="hidden md:block mx-auto text-gray-600"></div>
             <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
                 <div class="w-56 relative text-gray-700 dark:text-gray-300">
-                    <input type="text" class="input w-56 box pr-10 placeholder-theme-13" placeholder="Search...">
+                    <input type="text" class="input w-56 box pr-10 placeholder-theme-13" placeholder="Buscar...">
                     <i class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0 fas fa-search"></i>
                 </div>
             </div>
@@ -32,12 +35,16 @@
                             </a>
                             <div class="dropdown-box w-40">
                                 <div class="dropdown-box__content box dark:bg-dark-1 p-2">
-                                    <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
-                                        <i data-feather="edit-2" class="w-4 h-4 mr-2"></i> Editar
-                                    </a>
-                                    <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
-                                        <i data-feather="trash" class="w-4 h-4 mr-2"></i> Deshabilitar
-                                    </a>
+                                    @can('update_client')
+                                        <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
+                                            <i data-feather="edit-2" class="w-4 h-4 mr-2"></i> Editar
+                                        </a>
+                                    @endcan
+                                    @can('destroy_client')
+                                        <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
+                                            <i data-feather="trash" class="w-4 h-4 mr-2"></i> Deshabilitar
+                                        </a>
+                                    @endcan
                                 </div>
                             </div>
                         </div>

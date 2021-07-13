@@ -60,6 +60,7 @@
                             <div class="side-menu__title"> Dashboard </div>
                         </a>
                     </li>
+                    @can('create_accountancy')
                     <li>
                         <a href="javascript:;" class="side-menu">
                             <div class="side-menu__icon"> <i class="md:text-red-600" data-feather="box"></i> </div>
@@ -85,18 +86,20 @@
                                     <div class="side-menu__title"> Contabilidad </div>
                                 </a>
                             </li>
-
                         </ul>
                     </li>
-                    <li>
+                    @endcan
+
+                    @canany(['create_client','read_client','update_client','destroy_client'])
+                        <li>
                         <a href="javascript:;"
                             class="side-menu @if(request()->is('miembros') || request()->is('nuevo-miembro'))side-menu--active side-menu--open @endif">
                             <div class="side-menu__icon"> <i class="md:text-green-600" data-feather="users"></i> </div>
                             <div class="side-menu__title"> Clientes <i data-feather="chevron-down"
                                     class="side-menu__sub-icon"></i> </div>
                         </a>
-                        <ul
-                            class="@if(request()->is('miembros') || request()->is('nuevo-miembro'))side-menu__sub-open @endif">
+                        <ul class="@if(request()->is('miembros') || request()->is('nuevo-miembro'))side-menu__sub-open @endif">
+                            @can('create_client')
                             <li>
                                 <a href="/nuevo-miembro" class="side-menu">
                                     <div class="side-menu__icon md:text-green-400"> <i data-feather="user-plus"></i>
@@ -104,146 +107,183 @@
                                     <div class="side-menu__title"> Nuevo </div>
                                 </a>
                             </li>
-                            <li>
-                                <a href="/miembros" class="side-menu">
-                                    <div class="side-menu__icon md:text-green-400"> <i data-feather="list"></i> </div>
-                                    <div class="side-menu__title"> Listado </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/listado-cuentas" class="side-menu">
-                                    <div class="side-menu__icon md:text-green-400"> <i data-feather="layers"></i> </div>
-                                    <div class="side-menu__title"> Cuentas </div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:;"
-                            class="side-menu @if(request()->is('nueva-solicitud') || request()->is('listado-solicitudes'))side-menu--active side-menu--open @endif">
-                            <div class="side-menu__icon"> <i data-feather="box"></i> </div>
-                            <div class="side-menu__title"> Solicitudes <i data-feather="chevron-down"
-                                    class="side-menu__sub-icon"></i> </div>
-                        </a>
-                        <ul
-                            class="@if(request()->is('nueva-solicitud') || request()->is('listado-solicitudes'))side-menu__sub-open @endif">
-                            {{--                        <ul>--}}
-                            <li>
-                                <a href="/nueva-solicitud" class="side-menu">
-                                    <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                                    <div class="side-menu__title"> Nueva </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/listado-solicitudes" class="side-menu">
-                                    <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                                    <div class="side-menu__title"> Solicitudes Créditos </div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:;"
-                            class="side-menu  @if(request()->is('visita-de-asesor') || request()->is('listado-visitas'))side-menu--active side-menu--open @endif">
-                            <div class="side-menu__icon"> <i data-feather="box"></i> </div>
-                            <div class="side-menu__title"> Visitas Asesor <i data-feather="chevron-down"
-                                    class="side-menu__sub-icon"></i> </div>
-                        </a>
-                        <ul
-                            class="@if(request()->is('visita-de-asesor') || request()->is('listado-visitas'))side-menu__sub-open @endif">
-                            {{--                        <ul>--}}
-                            <li>
-                                <a href="/visita-de-asesor" class="side-menu">
-                                    <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                                    <div class="side-menu__title"> Nueva </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/listado-visitas" class="side-menu">
-                                    <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                                    <div class="side-menu__title"> Listado de Visitas </div>
-                                </a>
-                            </li>
+                            @endcan
+                            @can('read_client')
+                                <li>
+                                    <a href="/miembros" class="side-menu">
+                                        <div class="side-menu__icon md:text-green-400"> <i data-feather="list"></i> </div>
+                                        <div class="side-menu__title"> Listado </div>
+                                    </a>
+                                </li>
+                            @endcan
+                            @canany(['create_account','read_account','update_account','destroy_account'])
+                                <li>
+                                    <a href="/listado-cuentas" class="side-menu">
+                                        <div class="side-menu__icon md:text-green-400"> <i data-feather="layers"></i> </div>
+                                        <div class="side-menu__title"> Cuentas </div>
+                                    </a>
+                                </li>
+                            @endcanany
 
                         </ul>
                     </li>
+                    @endcanany
+
+                    @canany(['create_request','read_request','update_request','destroy_request'])
+                        <li>
+                            <a href="javascript:;"
+                                class="side-menu @if(request()->is('nueva-solicitud') || request()->is('listado-solicitudes'))side-menu--active side-menu--open @endif">
+                                <div class="side-menu__icon"> <i data-feather="box"></i> </div>
+                                <div class="side-menu__title"> Solicitudes <i data-feather="chevron-down"
+                                        class="side-menu__sub-icon"></i> </div>
+                            </a>
+                            <ul
+                                class="@if(request()->is('nueva-solicitud') || request()->is('listado-solicitudes'))side-menu__sub-open @endif">
+                                {{--                        <ul>--}}
+                                @can('create_request')
+                                <li>
+                                    <a href="/nueva-solicitud" class="side-menu">
+                                        <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
+                                        <div class="side-menu__title"> Nueva </div>
+                                    </a>
+                                </li>
+                                @endcan
+                                @canany('read_request')
+                                    <li>
+                                        <a href="/listado-solicitudes" class="side-menu">
+                                            <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
+                                            <div class="side-menu__title"> Solicitudes Créditos </div>
+                                        </a>
+                                    </li>
+                                @endcanany
+                            </ul>
+                        </li>
+                    @endcanany
+
+                    @canany(['create_visit','read_visit','update_visit','destroy_visit'])
+                        <li>
+                            <a href="javascript:;"
+                                class="side-menu  @if(request()->is('visita-de-asesor') || request()->is('listado-visitas'))side-menu--active side-menu--open @endif">
+                                <div class="side-menu__icon"> <i data-feather="box"></i> </div>
+                                <div class="side-menu__title"> Visitas Asesor <i data-feather="chevron-down"
+                                        class="side-menu__sub-icon"></i> </div>
+                            </a>
+                            <ul
+                                class="@if(request()->is('visita-de-asesor') || request()->is('listado-visitas'))side-menu__sub-open @endif">
+                                {{--                        <ul>--}}
+                                @can('create_visit')
+                                <li>
+                                    <a href="/visita-de-asesor" class="side-menu">
+                                        <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
+                                        <div class="side-menu__title"> Nueva </div>
+                                    </a>
+                                </li>
+                                @endcan
+
+                                @can('read_visit')
+                                    <li>
+                                        <a href="/listado-visitas" class="side-menu">
+                                            <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
+                                            <div class="side-menu__title"> Listado de Visitas </div>
+                                        </a>
+                                    </li>
+                                @endcanany
+                            </ul>
+                        </li>
+                    @endcanany
+
+                    @can('read_contribution')
                     <li>
-                        <a href="javascript:;" class="side-menu">
+                        <a href="javascript:;" class="side-menu @if(request()->is('aportes-socios'))side-menu--active side-menu--open @endif">
                             <div class="side-menu__icon"> <i data-feather="box"></i> </div>
                             <div class="side-menu__title"> Aportes <i data-feather="chevron-down"
                                     class="side-menu__sub-icon"></i> </div>
                         </a>
-                        <ul class="">
+                        <ul class="@if(request()->is('aportes-socios'))side-menu__sub-open @endif">
                             <li>
                                 <a href="/aportes-socios" class="side-menu">
                                     <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
                                     <div class="side-menu__title"> Aportes socios</div>
                                 </a>
                             </li>
-
                         </ul>
                     </li>
-                    <li>
-                        <a href="javascript:;" class="side-menu">
-                            <div class="side-menu__icon"> <i data-feather="box"></i> </div>
-                            <div class="side-menu__title"> Creditos <i data-feather="chevron-down"
-                                    class="side-menu__sub-icon"></i> </div>
-                        </a>
-                        <ul class="">
-                            <li>
-                                <a href="/nuevo-credito" class="side-menu">
-                                    <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                                    <div class="side-menu__title"> Nuevo </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/creditos" class="side-menu">
-                                    <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                                    <div class="side-menu__title"> Listado </div>
-                                </a>
-                            </li>
+                    @endcan
 
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:;"
-                            class="side-menu @if(request()->is('deposito') || request()->is('retiro'))side-menu--active side-menu--open @endif">
-                            <div class="side-menu__icon"> <i data-feather="box"></i> </div>
-                            <div class="side-menu__title"> Transacciones <i data-feather="chevron-down"
-                                    class="side-menu__sub-icon"></i> </div>
-                        </a>
-                        <ul class="@if(request()->is('deposito') || request()->is('retiro'))side-menu__sub-open @endif">
-                            <li>
-                                <a href="{{route('deposit')}}" class="side-menu">
-                                    <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                                    <div class="side-menu__title"> Deposito </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{route('retreats')}}" class="side-menu">
-                                    <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                                    <div class="side-menu__title"> Retiro </div>
-                                </a>
-                            </li>
+                    @canany(['create_credit','read_credit','update_credit','destroy_credit'])
+                        <li>
+                            <a href="javascript:;" class="side-menu @if(request()->is('nuevo-credito') || request()->is('creditos'))side-menu--active side-menu--open @endif">
+                                <div class="side-menu__icon"> <i data-feather="box"></i> </div>
+                                <div class="side-menu__title"> Créditos <i data-feather="chevron-down"
+                                        class="side-menu__sub-icon"></i> </div>
+                            </a>
+                            <ul class="@if(request()->is('nuevo-credito') || request()->is('creditos'))side-menu__sub-open @endif">
+                                @can('create_credit')
+                                    <li>
+                                        <a href="/nuevo-credito" class="side-menu">
+                                            <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
+                                            <div class="side-menu__title"> Nuevo </div>
+                                        </a>
+                                    </li>
+                                @endcan
+                                @can('read_credit')
+                                    <li>
+                                        <a href="/creditos" class="side-menu">
+                                            <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
+                                            <div class="side-menu__title"> Listado </div>
+                                        </a>
+                                    </li>
+                                @endcan
 
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:;" class="side-menu">
-                            <div class="side-menu__icon"> <i data-feather="box"></i> </div>
-                            <div class="side-menu__title"> Libretas <i data-feather="chevron-down"
-                                    class="side-menu__sub-icon"></i> </div>
-                        </a>
-                        <ul class="">
-                            <li>
-                                <a href="/nueva-libreta" class="side-menu">
-                                    <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                                    <div class="side-menu__title"> Nueva </div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+                            </ul>
+                        </li>
+                    @endcanany
 
+                    @canany(['create_transactions','read_transactions','update_transactions','destroy_transactions'])
+                        <li>
+                            <a href="javascript:;"
+                                class="side-menu @if(request()->is('deposito') || request()->is('retiro'))side-menu--active side-menu--open @endif">
+                                <div class="side-menu__icon"> <i data-feather="box"></i> </div>
+                                <div class="side-menu__title"> Transacciones <i data-feather="chevron-down"
+                                        class="side-menu__sub-icon"></i> </div>
+                            </a>
+                            <ul class="@if(request()->is('deposito') || request()->is('retiro'))side-menu__sub-open @endif">
+                                <li>
+                                    <a href="{{route('deposit')}}" class="side-menu">
+                                        <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
+                                        <div class="side-menu__title"> Deposito </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{route('retreats')}}" class="side-menu">
+                                        <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
+                                        <div class="side-menu__title"> Retiro </div>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+                    @endcanany
+
+                    @canany(['create_notebook','read_notebook','update_notebook','destroy_notebook'])
+                        <li>
+                            <a href="javascript:;" class="side-menu @if(request()->is('nueva-libreta') )side-menu--active side-menu--open @endif">
+                                <div class="side-menu__icon"> <i data-feather="box"></i> </div>
+                                <div class="side-menu__title"> Libretas <i data-feather="chevron-down"
+                                        class="side-menu__sub-icon"></i> </div>
+                            </a>
+                            <ul class="@if(request()->is('nueva-libreta'))side-menu__sub-open @endif">
+                                <li>
+                                    <a href="/nueva-libreta" class="side-menu">
+                                        <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
+                                        <div class="side-menu__title"> Nueva </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    @endcanany
+
+                    @canany(['create_simulator','read_simulator','update_simulator','destroy_simulator'])
                     <li>
                         <a href="javascript:;" class="side-menu">
                             <div class="side-menu__icon"> <i data-feather="box"></i> </div>
@@ -260,48 +300,64 @@
 
                         </ul>
                     </li>
+                    @endcanany
+
+                    @canany(['create_payment','read_payment','update_payment','destroy_payment'])
                     <li>
-                        <a href="javascript:;" class="side-menu">
+                        <a href="javascript:;" class="side-menu @if(request()->is('nuevo-pago') || request()->is('users'))side-menu--active side-menu--open @endif">
                             <div class="side-menu__icon"> <i data-feather="box"></i> </div>
                             <div class="side-menu__title"> Pagos <i data-feather="chevron-down"
                                     class="side-menu__sub-icon"></i> </div>
                         </a>
-                        <ul class="">
-                            <li>
-                                <a href="/nuevo-pago" class="side-menu">
-                                    <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                                    <div class="side-menu__title"> Nuevo </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/users" class="side-menu">
-                                    <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                                    <div class="side-menu__title"> Listado </div>
-                                </a>
-                            </li>
+                        <ul class="@if(request()->is('nuevo-pago') || request()->is('users'))side-menu__sub-open @endif">
+                            @can('create_payment')
+                                <li>
+                                    <a href="/nuevo-pago" class="side-menu">
+                                        <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
+                                        <div class="side-menu__title"> Nuevo </div>
+                                    </a>
+                                </li>
+                            @endcan
+{{--                            @can('read_payment')--}}
+{{--                                <li>--}}
+{{--                                    <a href="/users" class="side-menu">--}}
+{{--                                        <div class="side-menu__icon"> <i data-feather="activity"></i> </div>--}}
+{{--                                        <div class="side-menu__title"> Listado </div>--}}
+{{--                                    </a>--}}
+{{--                                </li>--}}
+{{--                            @endcan--}}
                         </ul>
                     </li>
-                    <li>
-                        <a href="javascript:;" class="side-menu">
-                            <div class="side-menu__icon"> <i data-feather="box"></i> </div>
-                            <div class="side-menu__title"> Configuración <i data-feather="chevron-down"
-                                    class="side-menu__sub-icon"></i> </div>
-                        </a>
-                        <ul class="">
-                            <li>
-                                <a href="/roles" class="side-menu">
-                                    <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                                    <div class="side-menu__title"> Roles & Permisos </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/usuarios" class="side-menu">
-                                    <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                                    <div class="side-menu__title"> Usuarios </div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+                    @endcanany
+
+                    @canany(['create_role','read_role','update_role','destroy_role','create_user','read_user','update_user','destroy_user'])
+                        <li>
+                            <a href="javascript:;" class="side-menu @if(request()->is('roles') || request()->is('usuarios'))side-menu--active side-menu--open @endif">
+                                <div class="side-menu__icon"> <i data-feather="box"></i> </div>
+                                <div class="side-menu__title"> Configuración <i data-feather="chevron-down"
+                                        class="side-menu__sub-icon"></i> </div>
+                            </a>
+                            <ul class="@if(request()->is('roles') || request()->is('usuarios'))side-menu__sub-open @endif">
+                                @canany(['create_role','read_role','update_role','destroy_role'])
+                                    <li>
+                                        <a href="/roles" class="side-menu">
+                                            <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
+                                            <div class="side-menu__title"> Roles & Permisos </div>
+                                        </a>
+                                    </li>
+                                @endcanany
+                                @canany(['create_user','read_user','update_user','destroy_user'])
+                                    <li>
+                                        <a href="/usuarios" class="side-menu">
+                                            <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
+                                            <div class="side-menu__title"> Usuarios </div>
+                                        </a>
+                                    </li>
+                                @endcanany
+                            </ul>
+                        </li>
+                    @endcanany
+
                 </ul>
             </nav>
         </nav>

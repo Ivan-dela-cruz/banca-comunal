@@ -93,14 +93,18 @@
                                     </td>
                                     <td class="table-report__action w-56">
                                         <div class="flex justify-center items-center">
+                                            @can('update_Account')
                                             <a href="javascript:void(0);" wire:click="edit({{ $a->id }})" class="flex items-center mr-3"
                                             data-toggle="modal"
                                             data-target="#accountModal">
-                                                <i data-feather="check-square" class="w-4 h-4 mr-1"></i> Edit
+                                                <i data-feather="check-square" class="w-4 h-4 mr-1"></i> Editar
                                             </a>
-                                            <a class="flex items-center text-theme-6" href="">
-                                                <i data-feather="trash-2" class="w-4 h-4 mr-1"></i> Delete
-                                            </a>
+                                            @endcan
+                                            @can('destroy_account')
+                                                <a class="flex items-center text-theme-6" href="">
+                                                    <i data-feather="trash-2" class="w-4 h-4 mr-1"></i> Eliminar
+                                                </a>
+                                            @endcan
                                         </div>
                                     </td>
                                 </tr>
