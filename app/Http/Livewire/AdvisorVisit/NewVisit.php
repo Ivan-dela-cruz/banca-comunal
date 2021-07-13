@@ -36,7 +36,7 @@ class NewVisit extends Component
     public $instruction_ref, $time_to_meet_ref, $phone_ref;
 
     //step 6
-    public $living_place_lng_edit ,$commerce_lng_edit,$living_place_lat_edit, $living_place_lat, $living_place_lng, $commerce_lat, $commerce_lng, $url_living, $url_commerce;
+    public $commerce_lat_edit,$living_place_lng_edit ,$commerce_lng_edit,$living_place_lat_edit, $living_place_lat, $living_place_lng, $commerce_lat, $commerce_lng, $url_living, $url_commerce;
 
     public $action = 'POST';
     public $check_living = false, $check_commerce = false;
