@@ -47,7 +47,7 @@
             <a href="" class="intro-x flex items-center pl-5 pt-4">
                 <img alt="User" class="w-6" src="{{ asset('dist/images/logo.svg') }}">
                 <span class="hidden xl:block text-white text-lg ml-3">
-                    Mid<span class="font-medium">one</span>
+                    Banca<span class="font-medium">Comunal</span>
                 </span>
             </a>
             <div class="side-nav__devider my-6"></div>

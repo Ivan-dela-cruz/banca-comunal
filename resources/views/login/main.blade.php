@@ -17,8 +17,8 @@
                 </a>
                 <div class="my-auto">
                     <img alt="Midone Tailwind HTML Admin Template" class="-intro-x w-1/2 -mt-16" src="{{ asset('dist/images/illustration.svg') }}">
-                    <div class="-intro-x text-white font-medium text-4xl leading-tight mt-10">Sistema de administración de activos.</div>
-                    <div class="-intro-x mt-5 text-lg text-white dark:text-gray-500">Gestiona tus recursos desde cualquir lugar</div>
+                    <div class="-intro-x text-white font-medium text-4xl leading-tight mt-10">Procesos de Crédito y Control Financiero</div>
+                    <div class="-intro-x mt-5 text-lg text-white dark:text-gray-500">Gestiona tus recursos desde cualquier lugar</div>
                 </div>
             </div>
             <!-- END: Login Info -->
