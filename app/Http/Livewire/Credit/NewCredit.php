@@ -418,6 +418,14 @@ class NewCredit extends Component
         }
     }
 
+    public function storeFinal()
+    {
+        $this->alert('success', 'Ejecutado  con éxito.');
+    }
+    public function print()
+    {
+        $this->alert('success', 'Acción configurada.');
+    }
     //ATTACHMENTS
     public function storeDoc()
     {
