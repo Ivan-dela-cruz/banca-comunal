@@ -195,14 +195,14 @@ class NewCredit extends Component
     {
         $this->validate([
             'member_id' => 'required',
-            'amount' => 'required',
-            'interest_rate' => 'required',
-            'term' => 'required',
+            'amount' => 'required|numeric',
+            'interest_rate' => 'required|numeric',
+            'term' => 'required|numeric',
             'fixed_free' => 'required',
             'period' => 'required',
             'credit_type' => 'required',
             'settlement_date' => 'required',
-            'due_date' => 'required',
+            'due_date' => 'required|date',
         ]);
 
         $data = [

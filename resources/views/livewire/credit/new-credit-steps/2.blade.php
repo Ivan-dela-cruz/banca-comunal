@@ -59,8 +59,9 @@
         </div>
 
         <div class="intro-y col-span-12 flex items-center justify-center sm:justify-end mt-5">
-            <a href="/nueva-solicitud" class="button w-50 justify-center block bg-theme-11 text-white ml-2">Ver solicitud</a>
+           {{--  <a href="/nueva-solicitud" class="button w-50 justify-center block bg-theme-11 text-white ml-2">Ver solicitud</a> 
             <a href="/nueva-solicitud" class="button w-50 justify-center block bg-theme-7 text-white ml-2">Crear solicitud</a>
+            --}}
             <button wire:click.prevent="storeFinal()" class="button w-24 justify-center block bg-theme-9 text-white ml-2">Guardar</button>
         </div>
     </div>
