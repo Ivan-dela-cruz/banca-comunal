@@ -64,7 +64,7 @@ class Roles extends Component
         $data_list = [];
         $list = [];
         $cont=1;
-        $p_list = Permission::all('id');
+        $p_list = Permission::where('type',1)->get('id');
         foreach($p_list as $per){
             if(count($permissions)>0){
                 $var_temp = false;

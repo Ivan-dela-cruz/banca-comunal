@@ -116,14 +116,13 @@
                                     </a>
                                 </li>
                             @endcan
-                            @canany(['create_account','read_account','update_account','destroy_account'])
+                            
                                 <li>
                                     <a href="/listado-cuentas" class="side-menu">
                                         <div class="side-menu__icon md:text-green-400"> <i data-feather="layers"></i> </div>
                                         <div class="side-menu__title"> Cuentas </div>
                                     </a>
                                 </li>
-                            @endcanany
 
                         </ul>
                     </li>
