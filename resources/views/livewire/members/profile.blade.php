@@ -96,7 +96,7 @@
     <div class="intro-y box col-span-12 mt-5 pt-5">
         <div class="flex items-center px-5 py-5 sm:py-3 border-b border-gray-200 dark:border-dark-5">
             <h2 class="font-medium text-base mr-auto">Pagos de para este mes</h2>
-            {{$listPayments  }}
+           {{--  {{$listPayments  }} --}}
             <button class="button border relative flex items-center text-gray-700 dark:border-dark-5 dark:text-gray-300 hidden sm:flex">
                 <i data-feather="file" class="w-4 h-4 mr-2"></i> Descargar PDF
             </button>
