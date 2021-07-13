@@ -25,7 +25,6 @@ class RoleSeeder extends Seeder
         // resetea el cache el los roles y permisos
         app()['cache']->forget('spatie.permission.cache');
 
-
         /// crea los permisos para el crud del roles
         ///
         Permission::create(['name' => 'create_role', 'modulo' => 'Roles', 'alias' => 'Crear']);

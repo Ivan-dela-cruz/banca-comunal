@@ -145,13 +145,6 @@ class NewMember extends Component
         $this->principal_street = $detail->principal_street;
         $this->secundary_street = $detail->secundary_street;
         $this->reference_place = $detail->reference_place;
-//        $this->name_reference = $detail->name_reference;
-//        $this->last_name_reference = $detail->last_name_reference;
-//        $this->dni_reference = $detail->dni_reference;
-//        $this->relationship = $detail->relationship;
-//        $this->time_to_meet = $detail->time_to_meet;
-//        $this->instruction_reference = $detail->instruction_reference;
-
         //CHANGE VALUE ACTION
         $this->action = 'PUT';
         
@@ -161,7 +154,6 @@ class NewMember extends Component
     {
         $member = Member::where('doc_number', $this->search_member)->first();
         if (isset($member)) {
-            // $this->alert('success','Registro recuperado satisfactoriamente');
             $detail = DetailMember::where('member_id', $member->id)->first();
             $this->loadData($member, $detail);
             $this->getAccount();
@@ -172,7 +164,7 @@ class NewMember extends Component
             $this->resetInputFields();
             $this->alert('warning', 'No se encontrarón registros!');
             // $this->resetInputFields();
-            // $this->alert('warning','No se encontrarón registros asociados');
+            $this->alert('warning','No se encontrarón registros asociados');
         }
     }
 
@@ -211,13 +203,6 @@ class NewMember extends Component
         $this->principal_street = '';
         $this->secundary_street = '';
         $this->reference_place = '';
-//        $this->name_reference = '';
-//        $this->last_name_reference = '';
-//        $this->dni_reference = '';
-//        $this->relationship = '';
-//        $this->time_to_meet = '';
-//        $this->instruction_reference = '';
-        //chang value action
         $this->action = 'POST';
     }
 
@@ -235,22 +220,10 @@ class NewMember extends Component
 
     public function store()
     {
-        // dd($this->url_image);
-        /*
-        $validation = $this->validate([
-    		'name'	=>	'required',
-    		'last_name' => 'required',
-            'email' => 'required|email|unique:users',
-            'dni' => 'required|unique:students',
-            'status' => 'required'
-        ]);
-        */
-
         $data_member = [
             'name' => $this->name,
             'last_name' => $this->last_name,
             'doc_number' => $this->dni,
-//            'passport' => $this->passport,
             'instruction' => $this->instruction,
             'marital_status' => $this->marital_status,
             'birth_date' => $this->birth_date,
@@ -279,12 +252,6 @@ class NewMember extends Component
             'principal_street' => $this->principal_street,
             'secundary_street' => $this->secundary_street,
             'reference_place' => $this->reference_place,
-//            'name_reference'=>$this->name_reference,
-//            'last_name_reference'=>$this->last_name_reference,
-//            'dni_reference'=>$this->dni_reference,
-//            'relationship'=>$this->relationship,
-//            'time_to_meet'=>$this->time_to_meet,
-//            'instruction_reference'=>$this->instruction_reference
         ];
         $detail_member_create = DetailMember::create($data_deatil);
         $this->alert('success', '¡Registro ingresado exitosamente!');
@@ -292,19 +259,17 @@ class NewMember extends Component
 
     public function storePersonal()
     {
-
-        // dd($this->url_image);
         $this->validate([
             'name' => 'required|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u|max:255',
             'last_name' => 'required|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u|max:255',
             'dni' => ['required', 'unique:members,doc_number', 'numeric', 'digits:10'],
             'passport' => 'numeric',
-            'instruction' => 'required',
-            'marital_status' => 'required',
-            'birth_date' => 'required',
+            'instruction' => 'required|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u|max:255',
+            'marital_status' => 'required|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u|max:255',
+            'birth_date' => 'date|required',
             'email' => ['required', 'email', 'unique:users,email','unique:members,email'],
-            'phone1' => 'required',
-            'phone2' => 'numeric',
+            'phone1' => 'numeric|required|digits:10',
+            'phone2' => 'numeric|digits:10',
         ], [
             'name.required' => 'Campo obligatorio.',
             'last_name.required' => 'Campo obligatorio.',
@@ -316,13 +281,19 @@ class NewMember extends Component
             'dni.digits' => 'Debe contener 10 digítos.',
             'passport.numeric' => 'El campo debe contener solo números.',
             'instruction.required' => 'Campo obligatorio.',
+            'instruction.regex' => 'Campo solo acepta letras.',
             'marital_status.required' => 'Campo obligatorio.',
+            'marital_status.regex' => 'Campo solo acepta letras.',
             'birth_date.required' => 'Campo obligatorio.',
+            'birth_date.date' => 'Campo solo acepta fechas.',
             'email.required' => 'Campo obligatorio.',
             'email.email'=>'Ingrese un correo válido.',
             'email.unique'=>'El correo ya existe.',
             'phone1.required' => 'Campo obligatorio.',
-            'phone2.numeric' => 'El campo debe contener solo números.',
+            'phone1.numeric' => 'El campo debe contener solo números.',
+            'phone1.digits' => 'El campo debe contener 10 cáracteres.',
+            'phone2.numeric' => 'El campo debe contener digits.',
+            'phone2.digits' => 'El campo debe contener 10 cáracteres.',
         ]);
 
         $path = 'images/user.jpg';
@@ -367,7 +338,6 @@ class NewMember extends Component
             'last_name_spouse' => 'regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u|max:255',
             'dni_spouse' => 'numeric|digits:10',
             'passport_spouse' => 'numeric',
-            //'birth_date_spouse',
             'email_spouse' => ['email', 'unique:detail_members,email_spouse'],
             'phone1_spouse' => 'numeric|digits:10',
             'phone2_spouse' => 'numeric|digits:10',
@@ -377,11 +347,12 @@ class NewMember extends Component
             'dni_spouse.numeric' => 'El campo acepta solo números.',
             'dni_spouse.digits' => 'Ingrese  10 digítos.',
             'passport_spouse.numeric' =>'El campo acepta solo números.',
-//            'birth_date_spouse',
             'email_spouse.email'=>'Ingrese un correo válido.',
             'email_spouse.unique'=>'El correo ya existe.',
             'phone1_spouse.numeric'=>'El campo acepta solo números.',
+            'phone1_spouse.digits'=>'El campo acepta 10 números.',
             'phone2_spouse.numeric'=>'El campo acepta solo números.',
+            'phone2_spouse.digits'=>'El campo acepta 10 números.',
         ]);
 
         $detail = DetailMember::where('member_id', $this->member_id);
@@ -545,19 +516,21 @@ class NewMember extends Component
             'name_ref'=>'required|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u|max:255',
             'last_name_ref'=>'required|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u|max:255',
             'dni_ref'=>'required|numeric|digits:10',
-            'relationship_ref'=>'required',
-            'instruction_ref'=>'required',
+            'relationship_ref'=>'required|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u',
+            'instruction_ref'=>'required|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u',
             'time_to_meet_ref'=>'required',
         ],[
-            'name_ref.required'=>'Campo obligatoio.',
+            'name_ref.required'=>'Campo obligatorio.',
             'name_ref.regex'=>'Ingrese solo letras.',
-            'last_name_ref.required'=>'Campo obligatoio.',
-            'dni_ref.required'=>'Campo obligatoio.',
+            'last_name_ref.required'=>'Campo obligatorio.',
+            'dni_ref.required'=>'Campo obligatorio.',
             'dni_ref.numeric'=>'El campo acepta solo números.',
             'dni_ref.digits'=>'Ingrese 10 digítos.',
-            'relationship_ref.required'=>'Campo obligatoio.',
-            'instruction_ref.required'=>'Campo obligatoio.',
-            'time_to_meet_ref.required'=>'Campo obligatoio.',
+            'relationship_ref.required'=>'Campo obligatorio.',
+            'relationship_ref.regex'=>'Campo acepta solo letras.',
+            'instruction_ref.required'=>'Campo obligatorio.',
+            'instruction_ref.regex'=>'Campo acepta solo letras.',
+            'time_to_meet_ref.required'=>'Campo obligatorio.',
         ]);
         if($this->member_id != null){
             $data = [

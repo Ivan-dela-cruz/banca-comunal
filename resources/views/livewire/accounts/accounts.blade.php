@@ -44,7 +44,7 @@
                                 <th class="whitespace-no-wrap">Creación</th>
                                 <th class="whitespace-no-wrap">Modificado</th>
                                 <th class="text-center whitespace-no-wrap">Estado</th>
-                                <th class="text-center whitespace-no-wrap">Acciones</th>
+                               {{--  <th class="text-center whitespace-no-wrap">Acciones</th> --}}
                             </tr>
                         </thead>
                         <tbody>
@@ -91,7 +91,8 @@
                                         @endif
 
                                     </td>
-                                    <td class="table-report__action w-56">
+                                   {{-- 
+                                     <td class="table-report__action w-56">
                                         <div class="flex justify-center items-center">
                                             @can('update_Account')
                                             <a href="javascript:void(0);" wire:click="edit({{ $a->id }})" class="flex items-center mr-3"
@@ -107,6 +108,7 @@
                                             @endcan
                                         </div>
                                     </td>
+                                    --}}
                                 </tr>
                            @endforeach
 

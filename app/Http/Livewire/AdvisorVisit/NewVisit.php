@@ -137,9 +137,9 @@ class NewVisit extends Component
         $this->validate([
             'code' => 'required',
             'credit_type' => 'required',
-            'name_debtor' => 'required',
-            'dni_debtor' => 'required',
-            'amount' => 'required',
+            'name_debtor' => 'required|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u',
+            'dni_debtor' => 'required|digits:10',
+            'amount' => 'required|numeric',
             'reason_invest' => 'required',
             'pay' => 'required',
             'deadline' => 'required',
@@ -149,8 +149,11 @@ class NewVisit extends Component
             'code.required' => 'Campo obligatorio.',
             'credit_type.required' => 'Campo obligatorio.',
             'name_debtor.required' => 'Campo obligatorio.',
+            'name_debtor.regex' => 'Campo acpeta solo letras.',
             'dni_debtor.required' => 'Campo obligatorio.',
+            'dni_debtor.digits' => 'Campo acepta 10 carácteres.',
             'amount.required' => 'Campo obligatorio.',
+            'amount.numeric' => 'Campo acepta solo números.',
             'reason_invest.required' => 'Campo obligatorio.',
             'pay.required' => 'Campo obligatorio.',
             'deadline.required' => 'Campo obligatorio.',
@@ -191,33 +194,44 @@ class NewVisit extends Component
     {
         $this->Validate([
             'doc_type' => 'required',
-            'doc_number' => 'required',
-            'name' => 'required',
-            'last_name' => 'required',
-            'instruction' => 'required',
+            'doc_number' => 'required|numeric',
+            'name' => 'required|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u',
+            'last_name' => 'required|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u',
+            'instruction' => 'required|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u',
             'birth_place' => 'required',
-            'country' => 'required',
-            'birth_date' => 'required',
-            'marital_status' => 'required',
-            'gender' => 'required',
-            'email' => 'required',
-            'phone1' => 'required',
-            'phone2' => 'required',
+            'country' => 'required|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u',
+            'birth_date' => 'required|date',
+            'marital_status' => 'required|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u',
+            'gender' => 'required|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u',
+            'email' => 'required|email',
+            'phone1' => 'required|numeric|digits:10',
+            'phone2' => 'required|numeric|digits:10',
             'residence_address' => 'required',
         ],[
             'doc_type.required' => ' Campo obligatorio',
             'doc_number.required' => ' Campo obligatorio',
             'name.required' => ' Campo obligatorio',
+            'name.regex' => ' Ingrese solo letras',
             'last_name.required' => ' Campo obligatorio',
+            'last_name.regex' => ' Ingrese solo letras',
             'instruction.required' => ' Campo obligatorio',
+            'instruction.regex' => ' Ingrese solo letras',
             'birth_place.required' => ' Campo obligatorio',
             'country.required' => ' Campo obligatorio',
+            'country.regex' => ' Ingrese solo letras',
             'birth_date.required' => ' Campo obligatorio',
+            'birth_date.date' => 'Ingrese una fecha válida',
             'marital_status.required' => ' Campo obligatorio',
             'gender.required' => ' Campo obligatorio',
+            'gender.regex' => ' Ingrese solo letras',
             'email.required' => ' Campo obligatorio',
+            'email.email' => ' Ingrese solo un email',
             'phone1.required' => ' Campo obligatorio',
+            'phone1.numeric' => ' Ingrese solo números',
+            'phone1.digits' => ' Ingrese 10 digítos.',
             'phone2.required' => ' Campo obligatorio',
+            'phone2.numeric' => ' Ingrese solo números',
+            'phone2.digits' => ' Ingrese 10 digítos.',
             'residence_address.required' => ' Campo obligatorio',
         ]);
         $data = [
@@ -515,7 +529,6 @@ class NewVisit extends Component
             'commerce_lng' => $this->commerce_lng,
             'url_living' => $pathLiving,
             'url_commerce' => $pathCommerce,
-
         ];
 
         if ($this->member_id != null) {
@@ -532,8 +545,6 @@ class NewVisit extends Component
         }else {
             $this->alert('error', 'No se puede guardar la información');
         }
-
-
     }
 
     #region CONFIG TEMPLATE
