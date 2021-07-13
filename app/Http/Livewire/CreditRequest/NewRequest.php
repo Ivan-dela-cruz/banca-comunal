@@ -49,7 +49,7 @@ class NewRequest extends Component
     public $feeding_ex, $health_ex, $basic_services_ex, $education_ex, $transport_ex, $leases_ex, $other_expenses_ex, $total_ex;
 
     //step 7
-    public $living_place_lng_edit,$living_place_lat, $living_place_lng, $commerce_lat, $commerce_lng, $url_living, $url_commerce;
+    public $commerce_lng_edit ,$living_place_lng_edit,$living_place_lat, $living_place_lng, $commerce_lat, $commerce_lng, $url_living, $url_commerce;
 
     public $living_place_lat_edit ,$commerce_lat_edit;
 //    public $action = 'POST';
