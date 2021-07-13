@@ -99,7 +99,7 @@ Route::middleware('auth')->group(function() {
     Route::get('/eventos', ShowEvents::class)->name('events');
     Route::get('/miembros', Member::class)->name('members');
     Route::get('/nuevo-miembro', NewMember::class)->name('new-member');
-    Route::get('/perfil/{}', Profile::class)->name('perfil');
+    Route::get('/perfil/{id}', Profile::class)->name('perfil');
     Route::get('/usuarios', Users::class)->name('users');
 
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');

@@ -52,7 +52,7 @@
                         </div>
                     </div>
                     <div class="text-center lg:text-right p-5 border-t border-gray-200 dark:border-dark-5">
-                        <a href="/perfil" class="button button--sm text-white bg-theme-1 mr-2">Ver perfil</a>
+                        <a href="/perfil/{{$member->id}}" class="button button--sm text-white bg-theme-1 mr-2">Ver perfil</a>
                         <button class="button button--sm text-gray-700 border border-gray-300 dark:border-dark-5 dark:text-gray-300">Reporte</button>
                     </div>
                 </div>

@@ -1,4 +1,4 @@
-@extends('adminlte::layouts.errors')
+@extends('vendor.adminlte.layouts.errors')
 
 @section('htmlheader_title')
     {{ trans('adminlte_lang::message.pagenotfound') }}
@@ -26,7 +26,7 @@
             <center><label  class="form-control" >Ir al pantalla principal</label></center>
 
         <div class="input-group-btn">
-            <a href="/home"><button type="button" class="btn"><i class="fa fa-arrow-right text-muted"></i></button></a>
+            <a href="/"><button type="button" class="btn"><i class="fa fa-arrow-right text-muted"></i></button></a>
         </div>
     </div>
         </div>
