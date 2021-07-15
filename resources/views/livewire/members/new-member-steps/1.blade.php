@@ -24,12 +24,25 @@
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
             <div class="mb-2">Instruccción <span class="text-theme-6">*</span></div>
-            <input  wire:model="instruction" type="text" class="input w-full border flex-1" placeholder="Nivel educativo">
+{{--            <input  wire:model="instruction" type="text" class="input w-full border flex-1" placeholder="Nivel educativo">--}}
+            <select  wire:model="instruction" class="input w-full border flex-1">
+                <option value="">Seleccionar</option>
+                <option value="Básica">Básica</option>
+                <option value="Secundaria">Secundaria</option>
+                <option value="Superior">Superior</option>
+            </select>
             @error('instruction') <li class="text-theme-6">{{$message}}</li>  @enderror
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
             <div class="mb-2">Estado cívil <span class="text-theme-6">*</span></div>
-            <input  wire:model="marital_status" type="text" class="input w-full border flex-1" placeholder="">
+{{--            <input  wire:model="marital_status" type="text" class="input w-full border flex-1" placeholder="">--}}
+            <select  wire:model="marital_status" class="input w-full border flex-1">
+                <option value="">Seleccionar</option>
+                <option value="Casado">Casado</option>
+                <option value="Viudo">Viudo</option>
+                <option value="Soltero">Soltero</option>
+                <option value="Divorciado">Divorciado</option>
+            </select>
             @error('marital_status') <li class="text-theme-6">{{$message}}</li>  @enderror
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
@@ -77,9 +90,9 @@
                 @error('url_image')
                 <li class="text-theme-6">{{$message}}</li> @enderror
             </div>
-           
+
         </div>
-       
+
 
         <div class="intro-y col-span-12 flex items-center justify-center sm:justify-end mt-5">
             <button wire:click.prevent="storePersonal()" class="button w-24 justify-center block bg-theme-1 text-white ml-2">Guardar</button>

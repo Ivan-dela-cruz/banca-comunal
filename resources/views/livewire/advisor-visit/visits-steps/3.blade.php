@@ -34,7 +34,12 @@
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
             <div class="mb-2">Tipo de Contrato <span class="text-theme-6">*</span></div>
-            <input wire:model="contract_type" type="text" class="input w-full border flex-1" placeholder="">
+{{--            <input wire:model="contract_type" type="text" class="input w-full border flex-1" placeholder="">--}}
+            <select  wire:model="contract_type" class="input w-full border flex-1">
+                <option value="">Seleccionar</option>
+                <option value="Indefinido">Indefinido</option>
+                <option value="Temporal">Temporal</option>
+            </select>
             @error('contract_type') <li class="text-theme-6">{{$message}}</li>  @enderror
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
