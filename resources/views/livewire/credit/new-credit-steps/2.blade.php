@@ -1,7 +1,7 @@
 <div {{  $visibleFrame["2"]?'':'hidden' }} class="px-5 sm:px-20 mt-10 pt-10 border-t border-gray-200 dark:border-dark-5">
     <div class="flex items-center px-5 py-5 sm:py-3">
         <div class="font-medium text-base mr-auto">Visita de Asesor</div>
-        <a  href="javascript:void(0);" data-toggle="modal" data-target="#visit-modal" class="button border  items-center px-2 bg-theme-1 text-white inline-block hidden sm:flex"><span class="w-5 h-5 flex items-center justify-center"> <i class="fa fa-eye"></i> </span></a>
+        <a  href="javascript:void(0);" data-toggle="modal" data-target="#visit-modal" class="button border  items-center px-2 bg-theme-1 text-white inline-block hidden sm:flex"><span class="w-75 h-5 flex items-center justify-center"> <i class="fa fa-eye"></i>&nbsp;Ver Visitas de Asesor</span></a>
     </div>
     <div class="grid grid-cols-12 gap-4 row-gap-5 mt-5">
         <div class="intro-y col-span-12 sm:col-span-6">
@@ -59,7 +59,7 @@
         </div>
 
         <div class="intro-y col-span-12 flex items-center justify-center sm:justify-end mt-5">
-           {{--  <a href="/nueva-solicitud" class="button w-50 justify-center block bg-theme-11 text-white ml-2">Ver solicitud</a> 
+           {{--  <a href="/nueva-solicitud" class="button w-50 justify-center block bg-theme-11 text-white ml-2">Ver solicitud</a>
             <a href="/nueva-solicitud" class="button w-50 justify-center block bg-theme-7 text-white ml-2">Crear solicitud</a>
             --}}
             <button wire:click.prevent="storeFinal()" class="button w-24 justify-center block bg-theme-9 text-white ml-2">Guardar</button>

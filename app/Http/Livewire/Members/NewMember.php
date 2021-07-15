@@ -2,7 +2,10 @@
 
 namespace App\Http\Livewire\Members;
 
+use App\Models\Canton;
 use App\Models\MemberReference;
+use App\Models\Parish;
+use App\Models\Province;
 use Livewire\Component;
 use Illuminate\Support\Collection;
 use App\Models\DetailMember;
@@ -59,6 +62,10 @@ class NewMember extends Component
     public $temporaryUrl = false;
     public $url_image;
 
+    public $provinces = [], $cantons=[],$parishes = [];
+
+
+
     public function selectFrame($id)
     {
         for ($i = 1; $i <= count($this->listButtonFrame); $i++) {
@@ -81,9 +88,21 @@ class NewMember extends Component
         $this->getAccount();
 
         // dd($this->url_image  );
+        $this->provinces = Province::all();
+        $this->cantonsByProvince($this->city);
+        $this->parishesByCanton($this->canton);
         return view('livewire.members.new-member', compact('data_reference'))
             ->extends('layouts.app')
             ->section('subcontent');
+    }
+
+    public function cantonsByProvince($name){
+        $province = Province::where('name',$name)->first();
+        $this->cantons = $name != '' ? Canton::where('province_id',$province->id)->get() : [];
+    }
+    public function parishesByCanton($name){
+        $canton = Canton::where('name',$name)->first();
+        $this->parishes = $name != '' ? Parish::where('canton_id',$canton->id)->get() : [];
     }
 
     public function getAccount()
@@ -93,7 +112,7 @@ class NewMember extends Component
             $this->block_account = true;
             return;
         }
-        
+
         $this->block_account = false;
     }
     public function getLastNumber()
@@ -109,7 +128,7 @@ class NewMember extends Component
             return;
         }
         $this->acount_number = 0;
-       
+
     }
     public function loadData($member, $detail)
     {
@@ -147,7 +166,7 @@ class NewMember extends Component
         $this->reference_place = $detail->reference_place;
         //CHANGE VALUE ACTION
         $this->action = 'PUT';
-        
+
     }
 
     public function findMember()
@@ -398,7 +417,7 @@ class NewMember extends Component
         ];
         $member_t->update($data_deatil);
 
-        if($account){ 
+        if($account){
             AccountClient::create([
                 'member_id'=>$this->member_id,
                 'code'=>$this->serie_ac,
@@ -443,7 +462,7 @@ class NewMember extends Component
         $member = Member::find($this->data_id);
         $detail = DetailMember::where('member_id', $member->id);
 
-        
+
         if ($this->url_image != $member->url_image) {
             $this->validate(['url_image' => 'image'], ['url_image.image' => 'La portada debe ser de formato: .jpg,.jpeg ó .png']);
             //save image

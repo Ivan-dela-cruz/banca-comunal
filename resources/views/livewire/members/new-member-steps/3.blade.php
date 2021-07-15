@@ -3,16 +3,34 @@
     <div class="grid grid-cols-12 gap-4 row-gap-5 mt-5">
         <!--  Lugar de residencia :  -->
         <div class="intro-y col-span-12 sm:col-span-6">
-            <div  class="mb-2">Ciudad </div>
-            <input wire:model="city" type="text" class="input w-full border flex-1" placeholder="">
+            <div  class="mb-2">Provincia </div>
+{{--            <input wire:model="city" type="text" class="input w-full border flex-1" placeholder="">--}}
+            <select  wire:model="city" class="input w-full border flex-1">
+                <option value="">Seleccionar</option>
+                @foreach($provinces as $data)
+                    <option value="{{$data->name}}">{{$data->name}}</option>
+                @endforeach
+            </select>
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
             <div class="mb-2">Cantón </div>
-            <input  wire:model="canton" type="text" class="input w-full border flex-1" placeholder="">
+{{--            <input  wire:model="canton" type="text" class="input w-full border flex-1" placeholder="">--}}
+            <select  wire:model="canton" class="input w-full border flex-1">
+                <option value="">Seleccionar</option>
+                @foreach($cantons as $data)
+                    <option value="{{$data->name}}">{{$data->name}}</option>
+                @endforeach
+            </select>
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
             <div class="mb-2">Parroquia </div>
-            <input  wire:model="parish" type="text" class="input w-full border flex-1" placeholder="">
+{{--            <input  wire:model="parish" type="text" class="input w-full border flex-1" placeholder="">--}}
+            <select  wire:model="parish" class="input w-full border flex-1">
+                <option value="">Seleccionar</option>
+                @foreach($parishes as $data)
+                    <option value="{{$data->name}}">{{$data->name}}</option>
+                @endforeach
+            </select>
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
             <div class="mb-2">Calle principal </div>

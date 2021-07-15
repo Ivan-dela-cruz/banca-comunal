@@ -70,8 +70,8 @@
                     <input wire:model="tools_machines_as" type="text" wire:keyup="totalAssets()" placeholder="00.00"
                            class="input w-full border flex-1 @error('tools_machines_as')  border-red-400 @enderror">
                 </td>
-                <td class="text-center">TOTAL DE DEUDAS</td>
-                <td class="text-center">
+                <td class="text-center" style="background: #EDF2F7"><strong>TOTAL DE DEUDAS</strong></td>
+                <td class="text-center" style="background: #EDF2F7">
                     <input wire:model="total_debts_pa" type="text" wire:keyup="totalDebts()" placeholder="00.00"
                            class="input w-full border flex-1" readonly>
                 </td>
@@ -105,21 +105,21 @@
 
             </tr>
             <tr class="intro-x">
-                <td class="text-center">TOTALES:</td>
-                <td class="text-center">
+                <td class="text-center" style="background: #EDF2F7"><strong>TOTALES:</strong></td>
+                <td class="text-center" style="background: #EDF2F7">
                     <input wire:model="total_as" type="text" class="input w-full border flex-1" readonly placeholder="00.00">
                 </td>
-                <td class="text-center">TOTALES: </td>
-                <td class="text-center">
+                <td class="text-center" style="background: #EDF2F7"><strong>TOTALES:</strong> </td>
+                <td class="text-center" style="background: #EDF2F7">
                     <input wire:model="total_pa" type="text" class="input w-full border flex-1" readonly  placeholder="00.00">
                 </td>
             </tr>
 
             <tr class="bg-gray-200 text-gray-700">
-                <td class="text-center whitespace-no-wrap">INGRESOS</td>
-                <td class="text-center whitespace-no-wrap"></td>
-                <td class="text-center whitespace-nowrap">EGRESOS</td>
-                <td class="text-center whitespace-nowrap"></td>
+                <td class="text-center whitespace-no-wrap" style="background: #EDF2F7"><strong>INGRESOS</strong></td>
+                <td class="text-center whitespace-no-wrap" style="background: #EDF2F7"></td>
+                <td class="text-center whitespace-no-wrap" style="background: #EDF2F7"><strong>EGRESOS</strong></td>
+                <td class="text-center whitespace-no-wrap" style="background: #EDF2F7"></td>
             </tr>
 
             <tr class="intro-x">
@@ -207,12 +207,12 @@
                 </td>
             </tr>
             <tr class="intro-x">
-                <td class="text-center">TOTALES:</td>
-                <td class="text-center">
+                <td class="text-center"  style="background: #EDF2F7"><strong>TOTALES:</strong></td>
+                <td class="text-center"  style="background: #EDF2F7">
                     <input wire:model="total_in" type="text" class="input w-full border flex-1" readonly placeholder="00.00">
                 </td>
-                <td class="text-center">TOTALES:</td>
-                <td class="text-center">
+                <td class="text-center"  style="background: #EDF2F7"><strong>TOTALES:</strong></td>
+                <td class="text-center"  style="background: #EDF2F7">
                     <input wire:model="total_ex" type="text" class="input w-full border flex-1" readonly placeholder="00.00">
                 </td>
             </tr>

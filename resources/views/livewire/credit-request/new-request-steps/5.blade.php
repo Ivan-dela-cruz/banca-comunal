@@ -1,7 +1,7 @@
 <div {{  $visibleFrame["5"]?'':'hidden' }} class="px-5 sm:px-20 mt-10 pt-10 border-t border-gray-200 dark:border-dark-5">
     <div class="flex items-center px-5 py-5 sm:py-3">
         <div class="font-medium text-base mr-auto"> Referencias Personales</div>
-        <a  href="javascript:void(0);" data-toggle="modal" data-target="#references-modal" class="button border  items-center px-2 bg-theme-1 text-white inline-block hidden sm:flex"><span class="w-5 h-5 flex items-center justify-center"> <i class="fa fa-eye"></i> </span></a>
+        <a  href="javascript:void(0);" data-toggle="modal" data-target="#references-modal" class="button border  items-center px-2 bg-theme-1 text-white inline-block hidden sm:flex"><span class="w-75 h-5 flex items-center justify-center"> <i class="fa fa-eye"></i>&nbsp;Ver Referencias</span></a>
     </div>
     <div class="grid grid-cols-12 gap-4 row-gap-5 mt-5">
         <!--   Referencias personales :  -->
@@ -27,12 +27,27 @@
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
             <div class="mb-2">Parentesco <span class="text-theme-6">*</span></div>
-            <input wire:model="relationship_ref" type="text" class="input w-full border flex-1" placeholder="Nivel de parentesco">
+{{--            <input wire:model="relationship_ref" type="text" class="input w-full border flex-1" placeholder="Nivel de parentesco">--}}
+            <select  wire:model="relationship_ref" class="input w-full border flex-1">
+                <option value="">Seleccionar</option>
+                <option value="Primo">Primo</option>
+                <option value="Hermano">Hermano</option>
+                <option value="Padre">Padre</option>
+                <option value="Madre">Madre</option>
+                <option value="Tío">Tío</option>
+                <option value="Otro">Otro</option>
+            </select>
             @error('relationship_ref') <li class="text-theme-6">{{$message}}</li>  @enderror
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
             <div class="mb-2">Instrucción <span class="text-theme-6">*</span></div>
-            <input wire:model="instruction_ref" type="text" class="input w-full border flex-1" placeholder="Nivel de educación">
+{{--            <input wire:model="instruction_ref" type="text" class="input w-full border flex-1" placeholder="Nivel de educación">--}}
+            <select  wire:model="instruction_ref" class="input w-full border flex-1">
+                <option value="">Seleccionar</option>
+                <option value="Básica">Básica</option>
+                <option value="Secundaria">Secundaria</option>
+                <option value="Superior">Superior</option>
+            </select>
             @error('instruction_ref') <li class="text-theme-6">{{$message}}</li>  @enderror
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
