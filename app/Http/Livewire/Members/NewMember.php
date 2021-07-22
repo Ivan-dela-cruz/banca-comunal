@@ -282,7 +282,6 @@ class NewMember extends Component
             'name' => 'required|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u|max:255',
             'last_name' => 'required|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u|max:255',
             'dni' => ['required', 'unique:members,doc_number', 'numeric', 'digits:10'],
-            'passport' => 'numeric',
             'instruction' => 'required|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u|max:255',
             'marital_status' => 'required|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u|max:255',
             'birth_date' => 'date|required',
@@ -298,7 +297,6 @@ class NewMember extends Component
             'dni.unique' => 'La identificación ya existe.',
             'dni.numeric' => 'El campo debe contener solo números.',
             'dni.digits' => 'Debe contener 10 digítos.',
-            'passport.numeric' => 'El campo debe contener solo números.',
             'instruction.required' => 'Campo obligatorio.',
             'instruction.regex' => 'Campo solo acepta letras.',
             'marital_status.required' => 'Campo obligatorio.',
@@ -314,7 +312,9 @@ class NewMember extends Component
             'phone2.numeric' => 'El campo debe contener digits.',
             'phone2.digits' => 'El campo debe contener 10 cáracteres.',
         ]);
-
+        if ($this->passport != ""){
+            $this->validate([ 'passport' => 'regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u']);
+        }
         $path = 'images/user.jpg';
         if ($this->url_image != '') {
             $this->validate(['url_image' => 'image'], ['url_image.image' => 'La portada debe ser de formato: .jpg,.jpeg ó .png']);

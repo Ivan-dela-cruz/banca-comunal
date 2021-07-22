@@ -13,22 +13,22 @@
             @error('doc_type') <li class="text-theme-6">{{$message}}</li>  @enderror
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
-            <div class="mb-2">No. del Documento de Identidad<span class="text-theme-6">*</span></div>
-            <input  wire:model="doc_number" type="text" class="input w-full border flex-1" placeholder="">
+            <div class="mb-2 {{ $last_name!=""?'text-theme-10':'' }}">No. del Documento de Identidad<span class="{{ $doc_number!=""?'text-theme-10':'text-theme-6' }}">*</span></div>
+            <input  wire:model="doc_number" type="text" class="input w-full border flex-1 " placeholder="">
             @error('doc_number') <li class="text-theme-6">{{$message}}</li>  @enderror
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
-            <div class="mb-2">Nombres <span class="text-theme-6">*</span></div>
+            <div class="mb-2 {{ $last_name!=""?'text-theme-10':'' }}">Nombres <span class="{{ $name!=""?'text-theme-10':'text-theme-6' }}">*</span></div>
             <input wire:model="name" type="text" class="input w-full border flex-1" placeholder="Primero y segundo nombre">
             @error('name') <li class="text-theme-6">{{$message}}</li>  @enderror
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
-            <div class="mb-2">Apellidos <span class="text-theme-6">*</span></div>
+            <div class="mb-2 {{ $last_name!=""?'text-theme-10':'' }}">Apellidos <span class="{{ $last_name!=""?'text-theme-10':'text-theme-6' }}">*</span></div>
             <input  wire:model="last_name" type="text" class="input w-full border flex-1" placeholder="Apellido paterno y materno">
             @error('last_name') <li class="text-theme-6">{{$message}}</li>  @enderror
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
-            <div class="mb-2">Instrucción <span class="text-theme-6">*</span></div>
+            <div class="mb-2 {{ $instruction!=""?'text-theme-10':'' }}">Instrucción <span class="{{ $instruction!=""?'text-theme-10':'text-theme-6' }}">*</span></div>
 {{--            <input  wire:model="instruction" type="text" class="input w-full border flex-1" placeholder="Instrucción">--}}
             <select  wire:model="instruction" class="input w-full border flex-1">
                 <option value="">Seleccionar</option>
@@ -39,24 +39,24 @@
             @error('instruction') <li class="text-theme-6">{{$message}}</li>  @enderror
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
-            <div class="mb-2">Lugar de Nacimiento) <span class="text-theme-6">*</span></div>
+            <div class="mb-2 {{ $birth_place!=""?'text-theme-10':'' }}">Lugar de Nacimiento <span class="{{ $birth_place!=""?'text-theme-10':'text-theme-6' }}">*</span></div>
             <input  wire:model="birth_place" type="text" class="input w-full border flex-1" placeholder="">
             @error('birth_place') <li class="text-theme-6">{{$message}}</li>  @enderror
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
-            <div class="mb-2">País <span class="text-theme-6">*</span></div>
+            <div class="mb-2">País <span class="{{ $country!=""?'text-theme-10':'text-theme-6' }}">*</span></div>
             <input  wire:model="country" type="text" class="input w-full border flex-1" placeholder="">
             @error('country') <li class="text-theme-6">{{$message}}</li>  @enderror
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
-            <div class="mb-2">Fecha de Nacimiento <span class="text-theme-6">*</span></div>
+            <div class="mb-2 {{ $birth_date!=""?'text-theme-10':'' }}">Fecha de Nacimiento <span class="{{ $birth_date!=""?'text-theme-10':'text-theme-6' }}">*</span></div>
             <input  wire:model="birth_date" type="date" class="input w-full border flex-1" placeholder="">
             @error('birth_date') <li class="text-theme-6">{{$message}}</li>  @enderror
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
-            <div class="mb-2">Estado Civil <span class="text-theme-6">*</span></div>
+            <div class="mb-2">Estado Civil <span class="{{ $marital_status!=""?'text-theme-10':'text-theme-6' }}">*</span></div>
 {{--            <input wire:model="marital_status" type="text" class="input w-full border flex-1" placeholder="">--}}
-            <select  wire:model="marital_status" class="input w-full border flex-1">
+            <select  wire:model="marital_status" class="input w-full border flex-1 {{ $marital_status!=""?'text-theme-10':'' }}">
                 <option value="">Seleccionar</option>
                 <option value="Casado">Casado</option>
                 <option value="Viudo">Viudo</option>
@@ -66,9 +66,9 @@
             @error('marital_status') <li class="text-theme-6">{{$message}}</li>  @enderror
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
-            <div class="mb-2">Sexo <span class="text-theme-6">*</span></div>
+            <div class="mb-2">Sexo <span class="{{ $gender!=""?'text-theme-10':'text-theme-6' }}">*</span></div>
 {{--            <input  wire:model="gender" type="text" class="input w-full border flex-1" placeholder="">--}}
-            <div class="sm:mt-2"> <select wire:model="gender" class="input w-full border flex-1">
+            <div class="sm:mt-2 {{ $gender!=""?'text-theme-10':'' }}"> <select wire:model="gender" class="input w-full border flex-1">
                     <option value="">Seleccione</option>
                     <option value="Masculino">Masculino</option>
                     <option value="Femenino">Femenino</option>
@@ -76,7 +76,7 @@
             @error('gender') <li class="text-theme-6">{{$message}}</li>  @enderror
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
-            <div class="mb-2">Direccion de la Residencia <span class="text-theme-6">*</span></div>
+            <div class="mb-2 {{ $residence_address!=""?'text-theme-10':'' }}">Direccion de la Residencia <span class="{{ $residence_address!=""?'text-theme-10':'text-theme-6' }}">*</span></div>
             <input  wire:model="residence_address" type="text" class="input w-full border flex-1" placeholder="">
             @error('residence_address') <li class="text-theme-6">{{$message}}</li>  @enderror
         </div>

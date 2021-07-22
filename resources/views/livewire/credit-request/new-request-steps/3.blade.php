@@ -3,27 +3,27 @@
     <div class="grid grid-cols-12 gap-4 row-gap-5 mt-5">
         <!-- Datos Conyuge :  -->
         <div class="intro-y col-span-12 sm:col-span-6">
-            <div class="mb-2">Nombres<span class="text-theme-6">*</span></div>
+            <div class="mb-2 {{ $name_spouse!=""?'text-theme-10':'' }}">Nombres<span class="text-theme-6">*</span></div>
             <input  wire:model="name_spouse" type="text" class="input w-full border flex-1" placeholder="Primero y segundo nombre">
             @error('name_spouse') <li class="text-theme-6">{{$message}}</li>  @enderror
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
-            <div class="mb-2">Apellidos<span class="text-theme-6">*</span></div>
+            <div class="mb-2 {{ $last_name_spouse!=""?'text-theme-10':'' }}">Apellidos<span class="text-theme-6">*</span></div>
             <input wire:model="last_name_spouse" type="text" class="input w-full border flex-1" placeholder="Apellido paterno y materno">
             @error('last_name_spouse') <li class="text-theme-6">{{$message}}</li>  @enderror
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
-            <div class="mb-2">Identificación<span class="text-theme-6">*</span></div>
+            <div class="mb-2 {{ $dni_spouse!=""?'text-theme-10':'' }}">Identificación<span class="text-theme-6">*</span></div>
             <input  wire:model="dni_spouse" type="text" class="input w-full border flex-1" placeholder="Cédula de identidad">
             @error('dni_spouse') <li class="text-theme-6">{{$message}}</li>  @enderror
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
-            <div class="mb-2">Télefono/Celular<span class="text-theme-6">*</span></div>
+            <div class="mb-2 {{ $phone1_spouse!=""?'text-theme-10':'' }}">Télefono/Celular<span class="text-theme-6">*</span></div>
             <input wire:model="phone1_spouse" type="text" class="input w-full border flex-1" placeholder="">
             @error('phone1_spouse') <li class="text-theme-6">{{$message}}</li>  @enderror
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
-            <div class="mb-2">Actividad Económica<span class="text-theme-6">*</span></div>
+            <div class="mb-2 {{ $economic_activity!=""?'text-theme-10':'' }}">Actividad Económica<span class="text-theme-6">*</span></div>
 {{--            <input wire:model="economic_activity" type="text" class="input w-full border flex-1" placeholder="">--}}
             <div class="sm:mt-2"> <select wire:model="economic_activity" class="input w-full border flex-1">
                     <option value="">Seleccione</option>
@@ -33,7 +33,7 @@
             @error('economic_activity') <li class="text-theme-6">{{$message}}</li>  @enderror
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
-            <div class="mb-2">Tipo de Contrato<span class="text-theme-6">*</span></div>
+            <div class="mb-2 {{ $contract_type!=""?'text-theme-10':'' }}">Tipo de Contrato<span class="text-theme-6">*</span></div>
 {{--            <input wire:model="contract_type" type="text" class="input w-full border flex-1" placeholder="">--}}
             <select  wire:model="contract_type" class="input w-full border flex-1">
                 <option value="">Seleccionar</option>

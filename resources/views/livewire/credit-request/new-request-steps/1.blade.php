@@ -21,8 +21,8 @@
         </div>
 
         <div class="intro-y col-span-12 sm:col-span-6">
-            <div class="mb-2">Nombre del Deudor<span class="text-theme-6">*</span></div>
-            <input  wire:model="name_debtor" type="text" class="input w-full border flex-1" placeholder="Nombres y Apellidos">
+            <div class="mb-2 {{ $name_debtor !=""?'text-theme-10':'' }}">Nombre del Deudor<span class="text-theme-6">*</span></div>
+            <input  wire:model="name_debtor" type="text" class="input w-full border flex-1 " placeholder="Nombres y Apellidos">
             @error('name_debtor') <li class="text-theme-6">{{$message}}</li>  @enderror
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
@@ -31,7 +31,7 @@
             @error('dni_debtor') <li class="text-theme-6">{{$message}}</li>  @enderror
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
-            <div class="mb-2">Monto ($) <span class="text-theme-6">*</span></div>
+            <div class="mb-2">Monto Solicitado($) <span class="text-theme-6">*</span></div>
             <input  wire:model="amount" type="text" class="input w-full border flex-1" placeholder="">
             @error('amount') <li class="text-theme-6">{{$message}}</li>  @enderror
         </div>
@@ -41,17 +41,17 @@
             @error('reason_invest') <li class="text-theme-6">{{$message}}</li>  @enderror
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
-            <div class="mb-2">Pago <span class="text-theme-6">*</span></div>
+            <div class="mb-2">Pago (Estimado) <span class="text-theme-6">*</span></div>
             <input  wire:model="pay" type="text" class="input w-full border flex-1" placeholder="">
             @error('pay') <li class="text-theme-6">{{$message}}</li>  @enderror
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
-            <div class="mb-2">Plazo <span class="text-theme-6">*</span></div>
+            <div class="mb-2">Plazo (Meses) <span class="text-theme-6">*</span></div>
             <input wire:model="deadline" type="text" class="input w-full border flex-1" placeholder="">
             @error('deadline') <li class="text-theme-6">{{$message}}</li>  @enderror
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
-            <div class="mb-2">Cuota Variable <span class="text-theme-6">*</span></div>
+            <div class="mb-2">Tipos de  Coutas <span class="text-theme-6">*</span></div>
             <div class="sm:mt-2">
                 <select wire:model="variable_fee" class="input w-full border flex-1">
                     <option value="0">Fija</option>
