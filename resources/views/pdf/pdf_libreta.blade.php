@@ -292,7 +292,7 @@
 <body>
 <section style="margin-bottom: 0px; height: auto;">
     <div class="encabezado">
-        <img class="logo" src="{{asset('dist/images/dinero.jpg')}}" alt="">
+        <img class="logo" src="http://18.221.204.244/dist/images/dinero.jpg" alt="">
         <div class="box-company">
             <h1 class="name-company">Banca Comunal</h1>
             <small class="dates-company">Procesos de Crédito y Control Financiero <br></small>
