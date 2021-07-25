@@ -111,7 +111,7 @@
 
     #facarticuloS thead {
         padding: 20px;
-        background: #238288;
+        background: #2653d8;
         text-align: center;
         border-bottom: 1px solid #FFFFFF;
     }
@@ -167,7 +167,7 @@
     .name-company {
         margin-bottom: 0px;
         font-size: 20px;
-        color: #238288;
+        color: #214dd3;
         font-family: 'Montserrat', sans-serif;
     }
 
@@ -200,7 +200,7 @@
         margin-bottom: 5px;
         height: 10px;
         width: 50%;
-        background-color: #06a084;
+        background-color: #1C3FAA;
     }
 
     .box-1 {
@@ -220,8 +220,8 @@
         height: 120px;
         width: 100%;
         padding-left: 10px;
-        background-color: #5de2c9;
-        border: 2px solid #5de2c9;
+        background-color: #1C3FAA;
+        border: 2px solid #1C3FAA;
         border-radius: 25px;
     }
 
@@ -340,7 +340,7 @@
             <tr style="color: black; text-align: center; background-color: #FFFFFF; border: 1px solid #FFFFFF;">
                 <th style="text-align: right; font-size: 12px;" colspan="5">Detalle</th>
             </tr>
-            <tr style="text-align: left; background-color: #5de2c9; border: 2px solid #5de2c9;">
+            <tr style="text-align: left; background-color: #1C3FAA; border: 2px solid #1C3FAA;">
                 <th width="15px">N°</th>
                 <th style="text-align: center" width="100px">Fecha</th>
                 <th>Detalle</th>
