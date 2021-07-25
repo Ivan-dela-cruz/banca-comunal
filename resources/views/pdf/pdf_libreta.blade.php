@@ -220,7 +220,7 @@
         height: 120px;
         width: 100%;
         padding-left: 10px;
-        background-color: #307ee4e3;
+        background-color: #fff;
         border: 2px solid #307ee4e3;
         border-radius: 25px;
     }
