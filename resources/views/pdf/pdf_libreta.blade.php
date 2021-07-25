@@ -221,7 +221,7 @@
         width: 100%;
         padding-left: 10px;
         background-color: #fff;
-        border: 2px solid #307ee4e3;
+        border: 2px solid #1C3FAA;
         border-radius: 25px;
     }
 
