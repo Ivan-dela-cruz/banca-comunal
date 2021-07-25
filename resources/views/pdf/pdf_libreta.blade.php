@@ -220,8 +220,8 @@
         height: 120px;
         width: 100%;
         padding-left: 10px;
-        background-color: #1C3FAA;
-        border: 2px solid #1C3FAA;
+        background-color: #307ee4e3;
+        border: 2px solid #307ee4e3;
         border-radius: 25px;
     }
 
@@ -304,7 +304,7 @@
         <div class="lines-1"></div>
         <div class="lines-2"></div>
     </div>
-    <h5 style=" margin-bottom: 0px;font-size: 13px;color: #238288;font-family: 'Montserrat', sans-serif; ">Presupuesto del tartamiento</h5>
+    <h5 style=" margin-bottom: 0px;font-size: 13px;color: #1c47ca;font-family: 'Montserrat', sans-serif; ">Presupuesto del tartamiento</h5>
     <div class="box">
         <div class="box-1">
             <h1>Sr(a).</h1>
