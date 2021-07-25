@@ -342,8 +342,8 @@
             </tr>
             <tr style="text-align: left; background-color: #5de2c9; border: 2px solid #5de2c9;">
                 <th width="15px">N°</th>
-                <th>Fecha</th>
-                <th style="text-align: center" width="120px">Detalle</th>
+                <th style="text-align: center" width="100px">Fecha</th>
+                <th>Detalle</th>
                 <th style="text-align: center" width="65px">Deposito</th>
                 <th style="text-align: center" width="65px">Retiro</th>
                 <th style="text-align: center" width="70px">Saldo</th>
