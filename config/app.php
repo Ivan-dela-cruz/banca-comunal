@@ -177,6 +177,7 @@ return [
         App\Providers\ViewServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
         Laraveles\Spanish\SpanishServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 
     ],
 
@@ -230,6 +231,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Hp' => App\Helper::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
 
     ],
 

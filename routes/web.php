@@ -6,6 +6,9 @@ use App\Http\Controllers\{
     AuthController,
     PageController
 };
+use App\Http\Controllers\Report\{
+    Libreta
+};
 
 use App\Http\Livewire\ShowEvents;
 use App\Http\Livewire\Members\{
@@ -269,6 +272,9 @@ Route::middleware('auth')->group(function() {
     Route::get('balance/balance/out',[balanceController::class,'indexinit']);
     Route::get('balance/balance/add',[balanceController::class,'indexadd']);
 });
+
+
+Route::get('libreta-pdf/{id}',[Libreta::class,'libreta']);
 
 
 
