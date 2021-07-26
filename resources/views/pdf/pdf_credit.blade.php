@@ -378,7 +378,7 @@
             </tr>
 
             <tr style="color: black; text-align: center; background-color: #FFFFFF; border: 1px solid #FFFFFF;">
-                <th style="text-align: left; font-size: 15px;" colspan="7">Dettalle de las Coutas</th>
+                <th style="text-align: left; font-size: 15px;" colspan="7">Detalle de las Coutas</th>
             </tr>
 
             <tr style="text-align: left; background-color: #1C3FAA; border: 2px solid #1C3FAA;">
