@@ -344,7 +344,7 @@
         <table>
             <thead>
             <tr style="color: black; text-align: center; background-color: #FFFFFF; border: 1px solid #FFFFFF;">
-                <th style="text-align: left; font-size: 15px;" colspan="7">Datos de la Operación</th>
+                <th style="text-align: left; font-size: 15px;" colspan="7">Datos del Pago</th>
             </tr>
             <tr style="color: black; text-align: center; background-color: #FFFFFF; border: 1px solid #FFFFFF;">
                 <th>
