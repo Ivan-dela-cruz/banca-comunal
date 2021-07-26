@@ -24,7 +24,7 @@
             </div>
             <div class="intro-x lg:text-center flex items-center mt-5 lg:mt-0 lg:block flex-1 z-10">
                 <button  wire:click="selectFrame({{6}})" class="w-10 h-10 rounded-full {{ $listButtonFrame["6"]}}">6</button>
-                <div class="lg:w-32  ">Situación Ecónomica</div>
+                <div class="lg:w-32  ">Croquis</div>
             </div>
 
             <div class="wizard__line hidden lg:block w-2/3 bg-gray-200 dark:bg-dark-1 absolute mt-5"></div>
