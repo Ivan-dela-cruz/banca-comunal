@@ -11,6 +11,7 @@ use App\Models\Payment;
 use App\Models\ConfigTable;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Barryvdh\DomPDF\Facade as PDF;
 class Payments extends Component
 {
     public $position = "credit";
