@@ -308,7 +308,7 @@
         <div class="lines-1"></div>
         <div class="lines-2"></div>
     </div>
-    <h5 style=" margin-bottom: 0px;font-size: 13px;color: #1c47ca;font-family: 'Montserrat', sans-serif; ">Tabla de Amortización Francés</h5>
+    <h5 style=" margin-bottom: 0px;font-size: 13px;color: #1c47ca;font-family: 'Montserrat', sans-serif; ">Pago de Cuotas</h5>
     <div class="box">
         <div class="box-1">
             <h1>Sr(a).</h1>
@@ -382,13 +382,14 @@
             </tr>
 
             <tr style="text-align: left; background-color: #1C3FAA; border: 2px solid #1C3FAA;">
-                <th style="text-align: center" width="100px">Periodo</th>
-                <th style="text-align: center" width="100px">Fecha de Pago</th>
+                <th style="text-align: center" width="30px">Periodo</th>
+                <th style="text-align: center" width="80px">Fecha de Pago</th>
                 <th style="text-align: center" width="65px">Capital</th>
                 <th style="text-align: center" width="65px">Interes</th>
                 <th style="text-align: center" width="70px">Dividiendo</th>
                 <th style="text-align: center" width="70px">Total A Pagar</th>
                 <th style="text-align: center" width="70px">Saldo</th>
+                <th style="text-align: center" width="90px">Estado</th>
 
             </tr>
             </thead>
@@ -417,6 +418,9 @@
                     </td>
                     <td style="text-align: center">
                         $&nbsp;{{$data['balance']}}
+                    </td>
+                    <td style="text-align: center">
+                        $&nbsp;{{$data['status']}}
                     </td>
                 </tr>
 
