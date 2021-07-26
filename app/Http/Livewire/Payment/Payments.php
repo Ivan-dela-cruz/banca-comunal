@@ -294,7 +294,7 @@ class Payments extends Component
 
         $dataTable =  $this->details_amort ;
 
-        $pdf = PDF::loadView('pdf.pdf_credito', compact('member', 'dataOperation','dataTable'));
+        $pdf = PDF::loadView('pdf.pdf_credit', compact('member', 'dataOperation','dataTable'));
         $nombrePdf = 'reporte-pago-credito-' . $this->account_number_pay . '-' . time() . '.pdf';
 
         return response()->streamDownload(function () use ($pdf) {
