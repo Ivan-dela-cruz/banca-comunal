@@ -2,6 +2,9 @@
     <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
         <h2 class="text-lg font-medium mr-auto">Pagos de créditos</h2>
         <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
+            @if(count($details_amort)>0)
+            <button wire:click.prevent="print()" class="button w-24 justify-center block bg-theme-9 text-white ml-2 mr-2">Imprimir</button>
+            @endif
             <a href="/nuevo-credito"  class="button text-white bg-theme-1 shadow-md mr-2">Nuevo crédito</a>
         </div>
     </div>

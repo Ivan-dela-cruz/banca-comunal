@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Auth;
 class Payments extends Component
 {
     public $position = "credit";
-    public $member_id,$name,$action="POST",$acount_number,$search_member="1750474048",$credit_id;
+    public $member_id,$name,$action="POST",$acount_number,$search_member="",$credit_id;
     public $selectStatus = "proceso";
     //AMORTIATION:
     public $details_amort = [],$amortization_id;
@@ -30,12 +30,14 @@ class Payments extends Component
     public $date_pay,$total_pay,$balance_pay,$interest_mora_pay,$num_pay = "",$customers_name_pay="",$account_number_pay="";
     public $amount_pay,$status_pay,$code_pay,$payment_id;
 
+    //PDF 
+    public $dni ='',$email = '',$phone1='';
     public function render()
     {
         $credit = Credits::join('members','members.id','=','credits.member_id')
         ->where('credits.id',$this->credit_id)
         ->where('credits.active',true)
-        ->select('members.name','members.last_name','members.doc_number',
+        ->select('members.email','members.phone1','members.name','members.last_name','members.doc_number',
                 'members.account_number','credits.created_at','credits.id','credits.amortization_id',
                 'credits.amount','credits.term')
         ->first();
@@ -44,6 +46,9 @@ class Payments extends Component
             $this->customers_name_pay = $credit->name." ".$credit->last_name;
             $this->account_number_pay = $credit->account_number;
             $this->num_pay = $credit->term;
+            $this->dni = $credit->doc_number;
+            $this->email = $credit->email;
+            $this->phone1 = $credit->phone1;
         }
         $filter =  $this->selectStatus =="todos"?['proceso','cancelado']:$this->selectStatus;
         $listCredits = Credits::where('member_id', $this->member_id)
@@ -257,4 +262,43 @@ class Payments extends Component
     {
         $this->position = $poss;
     }
+
+    public function print(){
+        $member = [
+            'account' => $this->account_number_pay,
+            'names' => $this->customers_name_pay,
+            'dni' => $this->dni,
+            'email' => $this->email,
+            'phone1' => $this->phone1,
+            'num_pay' => $this->num_pay
+        ];
+        $dataOperation = [
+            'code'=>$this->code_pay,
+            'amortization_id'=>$this->amortization_id_pay,
+            'detail_amortization_id'=>$this->detail_amortization_id,
+            'user_id'=>$this->user_id_pay,
+            'member_id'=>$this->member_id_pay,
+            'credit_id'=>$this->credit_id_pay,
+            'date_period'=>$this->date_period_pay,
+            'date_pay'=>$this->date_pay,
+            'total'=>$this->total_pay,
+            'balance'=>$this->balance_pay,
+            'interest_mora'=>$this->interest_mora_pay,
+            'num_pay'=>$this->num_pay,
+            'customers_name'=>$this->customers_name_pay,
+            'account_number'=>$this->account_number_pay,
+            'amount'=>$this->amount_pay,
+            'status_pay'=>$this->statusDetail
+        ];
+
+        $dataTable =  $this->details_amort ;
+
+        $pdf = PDF::loadView('pdf.pdf_credito', compact('member', 'dataOperation','dataTable'));
+        $nombrePdf = 'reporte-pago-credito-' . $this->account_number_pay . '-' . time() . '.pdf';
+
+        return response()->streamDownload(function () use ($pdf) {
+            echo $pdf->stream();
+        }, $nombrePdf);
+    }
+
 }
