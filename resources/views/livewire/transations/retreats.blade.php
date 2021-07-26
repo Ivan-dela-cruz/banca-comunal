@@ -83,9 +83,13 @@
         <div class="intro-y block sm:flex items-center h-10">
             <h2 class="text-lg font-medium truncate mr-5">Detalle de Retiros  </h2>
             <div class="flex items-center sm:ml-auto mt-3 sm:mt-0">
-                <button class="ml-3 button box flex items-center text-gray-700 dark:text-gray-300">
-                    <i  class="hidden sm:block w-4 h-4 mr-2 fas fa-file"></i> Export to PDF
-                </button>
+                <p hidden> {{$type = "retiro"  }}</p>
+                @if(!is_null($member_id))
+                    <a href="{{ route('transactions-pdf',$this->member_id) }}?type={{$type}}"
+                        class="ml-3 button box flex items-center text-gray-700 dark:text-gray-300">
+                        <i  class="hidden sm:block w-4 h-4 mr-2 fas fa-file"></i> Export to PDF
+                    </a>
+                @endif
             </div>
         </div>
         <div class="intro-y overflow-auto lg:overflow-visible mt-8 sm:mt-0">
@@ -153,13 +157,16 @@
         </div>
 
         <div class="intro-y flex flex-wrap sm:flex-row sm:flex-no-wrap items-center mt-3">
-            {{$transactions->links('livewire.pagination')}}
-            <select class="w-20 input box mt-3 sm:mt-0" wire:model="perPage">
-                <option value="10">10</option>
-                <option value="25">25</option>
-                <option value="35">35</option>
-                <option value="50">50</option>
-            </select>
+            @if(count($transactions)>0)
+                {{$transactions->links('livewire.pagination')}}
+                <select class="w-20 input box mt-3 sm:mt-0" wire:model="perPage">
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="35">35</option>
+                    <option value="50">50</option>
+                </select>
+            @endif
+            
         </div>
 
     </div>

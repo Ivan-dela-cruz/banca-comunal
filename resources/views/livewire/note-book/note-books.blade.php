@@ -49,9 +49,12 @@
                    
                 </div>
                 <div class="w-full sm:w-auto flex">
-                    <button class="button text-white bg-theme-1 shadow-md mr-2">
-                        <i class="w-4 h-4 fas fa-print"></i>
-                        Imprimir</button>
+                   @if(!is_null($member_id))
+                    <a target="_blank" href="{{ route('notebook-pdf',$member_id) }}?desde={{ $date }}&hasta={{ $dateFin }}" 
+                    class="button text-white bg-theme-1 shadow-md mr-2">
+                    <i class="w-4 h-4 fas fa-print"></i>
+                    Imprimir</a>
+                   @endif
                     
                 </div>
             </div>

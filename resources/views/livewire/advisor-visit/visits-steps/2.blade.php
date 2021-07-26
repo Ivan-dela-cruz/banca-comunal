@@ -14,23 +14,23 @@
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
             <div class="mb-2">No. del Documento de Identidad<span class="text-theme-6">*</span></div>
-            <input  wire:model="doc_number" type="text" class="input w-full border flex-1" placeholder="">
+            <input  wire:model="doc_number" type="text" class="input w-full border flex-1 {{ $doc_number!=''?'border-theme-10':'' }}" placeholder="">
             @error('doc_number') <li class="text-theme-6">{{$message}}</li>  @enderror
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
             <div class="mb-2">Nombres <span class="text-theme-6">*</span></div>
-            <input wire:model="name" type="text" class="input w-full border flex-1" placeholder="Primero y segundo nombre">
+            <input wire:model="name" type="text" class="input w-full border flex-1 {{ $name!=''?'border-theme-10':'' }}" placeholder="Primero y segundo nombre">
             @error('name') <li class="text-theme-6">{{$message}}</li>  @enderror
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
             <div class="mb-2">Apellidos <span class="text-theme-6">*</span></div>
-            <input  wire:model="last_name" type="text" class="input w-full border flex-1" placeholder="Apellido paterno y materno">
+            <input  wire:model="last_name" type="text" class="input w-full border flex-1 {{ $last_name!=''?'border-theme-10':'' }}" placeholder="Apellido paterno y materno">
             @error('last_name') <li class="text-theme-6">{{$message}}</li>  @enderror
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
             <div class="mb-2">Instrucción <span class="text-theme-6">*</span></div>
 {{--            <input  wire:model="instruction" type="text" class="input w-full border flex-1" placeholder="Instrucción">--}}
-            <select  wire:model="instruction" class="input w-full border flex-1">
+            <select  wire:model="instruction" class="input w-full border flex-1 {{ $instruction!=''?'border-theme-10':'' }}">
                 <option value="">Seleccionar</option>
                 <option value="Básica">Básica</option>
                 <option value="Secundaria">Secundaria</option>
@@ -40,7 +40,7 @@
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
             <div class="mb-2">Lugar de Nacimiento)</div>
-            <input  wire:model="birth_place" type="text" class="input w-full border flex-1" placeholder="">
+            <input  wire:model="birth_place" type="text" class="input w-full border flex-1 " placeholder="">
             @error('birth_place') <li class="text-theme-6">{{$message}}</li>  @enderror
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
@@ -49,14 +49,14 @@
             @error('country') <li class="text-theme-6">{{$message}}</li>  @enderror
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
-            <div class="mb-2">Fecha de Nacimiento <span class="text-theme-6">*</span></div>
-            <input  wire:model="birth_date" type="date" class="input w-full border flex-1" placeholder="">
+            <div class="mb-2">Fecha de Nacimiento <span class="text-theme-6 ">*</span></div>
+            <input  wire:model="birth_date" type="date" class="input w-full border flex-1 {{ $birth_date!=''?'border-theme-10':'' }}" placeholder="">
             @error('birth_date') <li class="text-theme-6">{{$message}}</li>  @enderror
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
             <div class="mb-2">Estado Civil <span class="text-theme-6">*</span></div>
 {{--            <input wire:model="marital_status" type="text" class="input w-full border flex-1" placeholder="">--}}
-            <select  wire:model="marital_status" class="input w-full border flex-1">
+            <select  wire:model="marital_status" class="input w-full border flex-1 {{ $marital_status!=''?'border-theme-10':'' }}">
                 <option value="">Seleccionar</option>
                 <option value="Casado">Casado</option>
                 <option value="Viudo">Viudo</option>

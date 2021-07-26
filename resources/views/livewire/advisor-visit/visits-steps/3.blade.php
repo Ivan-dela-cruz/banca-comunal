@@ -4,22 +4,22 @@
         <!-- Datos Conyuge :  -->
         <div class="intro-y col-span-12 sm:col-span-6">
             <div class="mb-2">Nombres <span class="text-theme-6">*</span></div>
-            <input  wire:model="name_spouse" type="text" class="input w-full border flex-1" placeholder="Primero y segundo nombre">
+            <input  wire:model="name_spouse" type="text" class="input w-full border flex-1 {{ $name_spouse!=''?'border-theme-10':'' }}" placeholder="Primero y segundo nombre">
             @error('name_spouse') <li class="text-theme-6">{{$message}}</li>  @enderror
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
             <div class="mb-2">Apellidos <span class="text-theme-6">*</span></div>
-            <input wire:model="last_name_spouse" type="text" class="input w-full border flex-1" placeholder="Apellido paterno y materno">
+            <input wire:model="last_name_spouse" type="text" class="input w-full border flex-1 {{ $last_name_spouse!=''?'border-theme-10':'' }}" placeholder="Apellido paterno y materno">
             @error('last_name_spouse') <li class="text-theme-6">{{$message}}</li>  @enderror
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
             <div class="mb-2">Identificación <span class="text-theme-6">*</span></div>
-            <input  wire:model="dni_spouse" type="text" class="input w-full border flex-1" placeholder="Cédula de identidad">
+            <input  wire:model="dni_spouse" type="text" class="input w-full border flex-1 {{ $dni_spouse!=''?'border-theme-10':'' }}" placeholder="Cédula de identidad">
             @error('dni_spouse') <li class="text-theme-6">{{$message}}</li>  @enderror
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
             <div class="mb-2">Télefono/Celular <span class="text-theme-6">*</span></div>
-            <input wire:model="phone1_spouse" type="text" class="input w-full border flex-1" placeholder="">
+            <input wire:model="phone1_spouse" type="text" class="input w-full border flex-1 {{ $phone1_spouse!=''?'border-theme-10':'' }}" placeholder="">
             @error('phone1_spouse') <li class="text-theme-6">{{$message}}</li>  @enderror
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">

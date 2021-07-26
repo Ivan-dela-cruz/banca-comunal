@@ -132,6 +132,7 @@ class NewMember extends Component
     }
     public function loadData($member, $detail)
     {
+      
         $this->data_id = $member->id;
         $this->name = $member->name;
         $this->last_name = $member->last_name;
@@ -147,7 +148,7 @@ class NewMember extends Component
         $this->acount_number = $member->acount_number;
         $this->status = $member->status;
         $this->url_image = $member->url_image;
-
+        
         //LOAD DETAIL
         $this->member_id = $member->id;
         $this->name_spouse = $detail->name_spouse;
@@ -172,7 +173,8 @@ class NewMember extends Component
     public function findMember()
     {
         $member = Member::where('doc_number', $this->search_member)->first();
-        if (isset($member)) {
+       
+        if (!is_null($member)) {
             $detail = DetailMember::where('member_id', $member->id)->first();
             $this->loadData($member, $detail);
             $this->getAccount();

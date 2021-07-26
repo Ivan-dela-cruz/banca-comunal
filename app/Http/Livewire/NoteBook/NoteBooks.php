@@ -33,6 +33,7 @@ class NoteBooks extends Component
                 });
             })->whereBetween('created_at', [$this->date,$dateAux->format('Y-m-d')])
             ->paginate($this->perPage);
+            $this->dateFin = $dateAux->format('Y-m-d');
         return view('livewire.note-book.note-books', compact('transactions'))
         ->extends('layouts.app')
         ->section('subcontent');

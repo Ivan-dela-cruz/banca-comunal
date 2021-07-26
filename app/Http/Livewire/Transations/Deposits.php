@@ -29,12 +29,16 @@ class Deposits extends Component
     {
         $now = Carbon::now();
         $this->date = $now->format('Y-m-d');
-        $transactions = Transaction::orderBy('created_at', 'desc')
+        if(!is_null($this->member_id)){
+            $transactions = Transaction::orderBy('created_at', 'desc')
             ->where(function ($query) {
                 $query->when($this->member_id != null, function ($q) {
                     $q->where('member_id', $this->member_id);
                 });
             })->whereMonth('created_at', $now->month) ->paginate($this->perPage);
+        }else{
+            $transactions = [];
+        }
         return view('livewire.transations.deposits', compact('transactions'))
             ->extends('layouts.app')
             ->section('subcontent');
@@ -53,17 +57,7 @@ class Deposits extends Component
             'type_partner' => 'required',
             'deposit' => 'required|numeric',
             'status' => 'required',
-        ], [
-            'doc_number.required' => 'Campo obligatorio.',
-            'account_number.required' => 'Campo obligatorio.',
-            'member_id.required' => 'Campo obligatorio.',
-            'account_id.required' => 'Campo obligatorio.',
-            'date.required' => 'Campo obligatorio.',
-            "place.required" => 'Campo obligatorio.',
-            'type_partner.required' => 'Campo obligatorio.',
-            'deposit.required' => 'Campo obligatorio.',
-            'deposit.numeric' => 'Campo incorrecto.',
-            'status.required' => 'Campo obligatorio.',
+            'data1' => 'deposito',
         ]);
 
         $last_balance = $this->lastBalance($this->member_id);
@@ -88,6 +82,7 @@ class Deposits extends Component
             'balance' => $this->balance,
             'type_currency' => $this->type_currency,
             'status' => $this->status,
+            'data1' => 'deposito',
         ];
 
         $this->total_balance = '$ '.$this->balance;
@@ -124,22 +119,12 @@ class Deposits extends Component
 
             'member_id' => 'required',
             'account_id' => 'required',
-            'date' => 'required',
+            'date' => 'required|date',
             "place" => 'required',
             'type_partner' => 'required',
             'deposit' => 'required|numeric',
             'status' => 'required',
-        ], [
-            'doc_number.required' => 'Campo obligatorio.',
-            'account_number.required' => 'Campo obligatorio.',
-            'member_id.required' => 'Campo obligatorio.',
-            'account_id.required' => 'Campo obligatorio.',
-            'date.required' => 'Campo obligatorio.',
-            "place.required" => 'Campo obligatorio.',
-            'type_partner.required' => 'Campo obligatorio.',
-            'deposit.required' => 'Campo obligatorio.',
-            'deposit.numeric' => 'Campo incorrecto.',
-            'status.required' => 'Campo obligatorio.',
+            'data1' => 'deposito',
         ]);
 
         $last_balance = $this->lastBalance($this->member_id);
