@@ -398,29 +398,29 @@
             @foreach($dataTable as $data)
                 <tr>
 
-                    <td style=" text-transform: uppercase;">
+                    <td style=" text-transform: uppercase;text-align: center;">
                         {{$data['period']}}
                     </td>
                     <td style=" text-transform: uppercase;">
                         {{$data['payment_date']}}
                     </td>
-                    <td style="text-align: center">
+                    <td style="text-align: left">
                         $&nbsp;{{$data['amount']}}
                     </td>
-                    <td style="text-align: center">
+                    <td style="text-align: left">
                         $&nbsp;{{$data['interest']}}
                     </td>
-                    <td style="text-align: center">
+                    <td style="text-align: left">
                         $&nbsp;{{$data['dividing']}}
                     </td>
-                    <td style="text-align: center">
+                    <td style="text-align: left">
                         $&nbsp;{{$data['total_payment']}}
                     </td>
-                    <td style="text-align: center">
+                    <td style="text-align: left">
                         $&nbsp;{{$data['balance']}}
                     </td>
-                    <td style="text-align: center">
-                        $&nbsp;{{$data['status']}}
+                    <td style="text-align: right">
+                        {{$data['status']}}
                     </td>
                 </tr>
 

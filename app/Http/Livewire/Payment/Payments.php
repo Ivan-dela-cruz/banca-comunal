@@ -32,7 +32,7 @@ class Payments extends Component
     public $amount_pay,$status_pay,$code_pay,$payment_id;
 
     //PDF 
-    public $dni ='',$email = '',$phone1='';
+    public $dni ='',$email = '',$phone1='',$btn_p=false;
     public function render()
     {
         $credit = Credits::join('members','members.id','=','credits.member_id')
@@ -81,6 +81,7 @@ class Payments extends Component
             // $this->resetInputFields();
             $this->member_id="";
             $this->alert('warning', 'No se encontrarón registros asociados');
+            $this->btn_p = false;
         }
     }
     public function loadData($member, $detail)
@@ -160,6 +161,7 @@ class Payments extends Component
             $this->action = "POST";
             $this->total_pay = "";
         }
+        $this->btn_p = true;
         $this->alert('success', 'Couta cargada  satisfactoriamente');
     }
 
