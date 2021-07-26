@@ -146,31 +146,19 @@ class NewVisit extends Component
     public function storeStep1()
     {
         $this->validate([
-            'code' => 'required',
-            'credit_type' => 'required',
-            'name_debtor' => 'required|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u',
-            'dni_debtor' => 'required|digits:10',
-            'amount' => 'required|numeric',
-            'reason_invest' => 'required',
-            'pay' => 'required',
-            'deadline' => 'required',
-            'variable_fee' => 'required',
-            'credit_segment' => 'required',
-        ],[
-            'code.required' => 'Campo obligatorio.',
-            'credit_type.required' => 'Campo obligatorio.',
-            'name_debtor.required' => 'Campo obligatorio.',
-            'name_debtor.regex' => 'Campo acpeta solo letras.',
-            'dni_debtor.required' => 'Campo obligatorio.',
-            'dni_debtor.digits' => 'Campo acepta 10 carácteres.',
-            'amount.required' => 'Campo obligatorio.',
-            'amount.numeric' => 'Campo acepta solo números.',
-            'reason_invest.required' => 'Campo obligatorio.',
-            'pay.required' => 'Campo obligatorio.',
-            'deadline.required' => 'Campo obligatorio.',
-            'variable_fee.required' => 'Campo obligatorio.',
-            'credit_segment.required' => 'Campo obligatorio.',
-        ]);
+                'code' => 'required',
+                'credit_type' => 'required',
+                'name_debtor' => 'required|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u',
+                'dni_debtor' => 'required|digits:10',
+                'amount' => 'required|numeric',
+                'reason_invest' => 'required',
+                'pay' => 'required',
+                'deadline' => 'required',
+                'variable_fee' => 'required',
+                'credit_segment' => 'required',
+            ],[
+                'name_debtor.regex' => 'Campo acpeta solo letras.',
+            ]);
         $data = [
             'member_id' => $this->member_id,
             'code' => $this->code,
@@ -215,36 +203,14 @@ class NewVisit extends Component
             'marital_status' => 'required|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u',
             'gender' => 'required|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u',
             'email' => 'required|email',
-            'phone1' => 'required|numeric|digits:10',
-            'phone2' => 'required|numeric|digits:10',
             'residence_address' => 'required',
-        ],[
-            'doc_type.required' => ' Campo obligatorio',
-            'doc_number.required' => ' Campo obligatorio',
-            'name.required' => ' Campo obligatorio',
-            'name.regex' => ' Ingrese solo letras',
-            'last_name.required' => ' Campo obligatorio',
-            'last_name.regex' => ' Ingrese solo letras',
-            'instruction.required' => ' Campo obligatorio',
-            'instruction.regex' => ' Ingrese solo letras',
-            'birth_place.required' => ' Campo obligatorio',
-            'country.required' => ' Campo obligatorio',
-            'country.regex' => ' Ingrese solo letras',
-            'birth_date.required' => ' Campo obligatorio',
-            'birth_date.date' => 'Ingrese una fecha válida',
-            'marital_status.required' => ' Campo obligatorio',
-            'gender.required' => ' Campo obligatorio',
-            'gender.regex' => ' Ingrese solo letras',
-            'email.required' => ' Campo obligatorio',
-            'email.email' => ' Ingrese solo un email',
-            'phone1.required' => ' Campo obligatorio',
-            'phone1.numeric' => ' Ingrese solo números',
-            'phone1.digits' => ' Ingrese 10 digítos.',
-            'phone2.required' => ' Campo obligatorio',
-            'phone2.numeric' => ' Ingrese solo números',
-            'phone2.digits' => ' Ingrese 10 digítos.',
-            'residence_address.required' => ' Campo obligatorio',
-        ]);
+            ],[
+                'name.regex' => ' Ingrese solo letras',
+                'last_name.regex' => ' Ingrese solo letras',
+                'instruction.regex' => ' Ingrese solo letras',
+                'country.regex' => ' Ingrese solo letras',
+                'gender.regex' => ' Ingrese solo letras',
+            ]);
         $data = [
             'doc_type' => $this->doc_type,
             'doc_number' => $this->doc_number,
@@ -277,35 +243,23 @@ class NewVisit extends Component
 
     public function storeStep3()
     {
-        $this->validate([
-            'name_spouse' => 'required',
-            'last_name_spouse' => 'required',
-            'dni_spouse' => 'required',
-            'phone1_spouse' => 'required',
-            'economic_activity' => 'required',
-            'contract_type' => 'required',
-            'company_name' => 'required',
-            'company_address' => 'required',
-            'company_phone' => 'required',
-            'service_time' => 'required',
-            'profession_spouse' => 'required',
-            'actual_charge_spouse' => 'required',
-            'income_spouse' => 'required',
-        ],[
-            'name_spouse.required' => 'Campo obligatorio.',
-            'last_name_spouse.required' => 'Campo obligatorio.',
-            'dni_spouse.required' => 'Campo obligatorio.',
-            'phone1_spouse.required' => 'Campo obligatorio.',
-            'economic_activity.required' => 'Campo obligatorio.',
-            'contract_type.required' => 'Campo obligatorio.',
-            'company_name.required' => 'Campo obligatorio.',
-            'company_address.required' => 'Campo obligatorio.',
-            'company_phone.required' => 'Campo obligatorio.',
-            'service_time.required' => 'Campo obligatorio.',
-            'profession_spouse.required' => 'Campo obligatorio.',
-            'actual_charge_spouse.required' => 'Campo obligatorio.',
-            'income_spouse.required' => 'Campo obligatorio.',
-        ]);
+        if($this->dni_spouse!="" || $this->name_spouse != ""){
+            $this->validate([
+                'name_spouse' => 'regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u',
+                'last_name_spouse' => 'regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u',
+                'dni_spouse' => 'digits:10',
+                'phone1_spouse' => 'required|digits:10',
+                'economic_activity' => 'required',
+                'contract_type' => 'required',
+                'company_name' => 'required',
+                'company_address' => 'required',
+                'company_phone' => 'required',
+                'service_time' => 'required',
+                'profession_spouse' => 'required',
+                'actual_charge_spouse' => 'required',
+                'income_spouse' => 'required',
+            ]);
+        }
 
         $data = [
             'member_id' => $this->member_id,
