@@ -156,7 +156,7 @@
                             </table>
 
                             <div class="intro-y col-span-12 flex items-center justify-center sm:justify-end p-5">
-                                @if($action === 'PRINT')
+                                @if(count($data_table) > 0  && $dni != '' )
                                     <button wire:click.prevent="print()" class="button w-24 justify-center block bg-theme-9 text-white ml-2">Imprimir</button>
                                 @endif
                                 @if($action === 'STORE')

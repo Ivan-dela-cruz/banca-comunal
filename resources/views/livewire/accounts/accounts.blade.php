@@ -25,8 +25,8 @@
                                 <option value="socio fundador">Socio Fundador</option>
                             </select>
                         </div>
-                        <button class="ml-3 button box flex items-center text-gray-700 dark:text-gray-300">
-                            <i class="hidden sm:block w-4 h-4 mr-2 fas fa-file"></i> Export to PDF
+                        <button class="ml-3 button box flex items-center text-gray-700 dark:text-gray-300" wire:click="print()">
+                            <i class="hidden sm:block w-4 h-4 mr-2 fas fa-file"></i> Generar PDF
                         </button>
 
                     </div>
@@ -91,7 +91,7 @@
                                         @endif
 
                                     </td>
-                                   {{-- 
+                                   {{--
                                      <td class="table-report__action w-56">
                                         <div class="flex justify-center items-center">
                                             @can('update_Account')

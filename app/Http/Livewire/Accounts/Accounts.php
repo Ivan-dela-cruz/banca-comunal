@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Accounts;
 
+use Barryvdh\DomPDF\Facade as PDF;
 use Livewire\Component;
 use App\Models\AccountClient;
 use App\Models\ConfigTable;
@@ -95,5 +96,26 @@ public $vass= "nill";
     public function storeFinal()
     {
 
+    }
+
+    public function print(){
+        $accounts =  AccountClient::orderBy('created_at','ASC')->paginate($this->perPage);
+        if($this->valSt==""){
+            if($this->member_type!="Todos"){
+                $accounts =  AccountClient::where('type',$this->member_type)->orderBy('created_at','ASC')->paginate($this->perPage);
+            }
+        }
+        else{
+            $accounts =  AccountClient::where('number',$this->valSt)
+                ->orWhere('code',$this->valSt)
+                ->paginate($this->perPage);
+        }
+
+        $pdf = PDF::loadView('pdf.pdf_accounts', compact('accounts'));
+        $nombrePdf = 'reporte-cuentas' . time() . '.pdf';
+
+        return response()->streamDownload(function () use ($pdf) {
+            echo $pdf->stream();
+        }, $nombrePdf);
     }
 }

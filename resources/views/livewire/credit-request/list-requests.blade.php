@@ -99,9 +99,9 @@
                                 <option value="Refinanciación">Refinanciamiento</option>
                             </select>
                         </div>
-                        <button class="ml-3 button box flex items-center text-gray-700 dark:text-gray-300">
-                            <i class="hidden sm:block w-4 h-4 mr-2 fas fa-file"></i> Export to PDF
-                        </button>
+{{--                        <button class="ml-3 button box flex items-center text-gray-700 dark:text-gray-300">--}}
+{{--                            <i class="hidden sm:block w-4 h-4 mr-2 fas fa-file"></i> Export to PDF--}}
+{{--                        </button>--}}
 
                     </div>
                 </div>

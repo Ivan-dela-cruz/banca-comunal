@@ -14,6 +14,9 @@
                     <i class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0 fas fa-search"></i>
                 </div>
             </div>
+                <button class="ml-3 button box flex items-center text-gray-700 dark:text-gray-300" wire:click="print()">
+                    <i class="hidden sm:block w-4 h-4 mr-2 fas fa-file"></i> Generar PDF
+                </button>
         </div>
         <!-- BEGIN: Users Layout -->
         @foreach ($members as $member)
@@ -60,7 +63,7 @@
                     </div>
                     <div class="text-center lg:text-right p-5 border-t border-gray-200 dark:border-dark-5">
                         <a href="/perfil/{{$member->id}}" class="button button--sm text-white bg-theme-1 mr-2">Ver perfil</a>
-                        <button class="button button--sm text-gray-700 border border-gray-300 dark:border-dark-5 dark:text-gray-300">Reporte</button>
+{{--                        <button class="button button--sm text-gray-700 border border-gray-300 dark:border-dark-5 dark:text-gray-300">Reporte</button>--}}
                     </div>
                 </div>
             </div>

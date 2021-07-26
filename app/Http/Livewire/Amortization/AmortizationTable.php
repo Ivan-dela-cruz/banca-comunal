@@ -6,6 +6,8 @@ use App\Models\Amortization;
 use App\Models\DetailAmortization;
 use App\Models\DetailMember;
 use App\Models\Member;
+use App\Models\User;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Collection;
 use Livewire\Component;
 
@@ -248,6 +250,51 @@ class AmortizationTable extends Component
             return $number;
         else
             return 1;
+    }
+
+    public function print(){
+
+        $this->validate([
+
+            'amount' => 'required|numeric',
+            'interest_rate' => 'required|numeric',
+            'term' => 'required|numeric',
+            'fixed_free' => 'required',
+            'period' => 'required',
+            'credit_type' => 'required',
+            'settlement_date' => 'required',
+            'due_date' => 'required|date',
+        ]);
+
+
+        $member = [
+            'dni' => $this->dni,
+            'name' => $this->name,
+            'address' => $this->address,
+            'phone' => $this->phone
+        ];
+
+        $dataOperation = [
+            'amount' => $this->amount,
+            'term' => $this->term,
+            'period' => $this->period,
+
+            'interest_rate' => $this->interest_rate,
+            'fixed_free' => $this->fixed_free,
+            'credit_type' => $this->credit_type,
+
+            'settlement_date' => $this->settlement_date,
+            'due_date' => $this->due_date,
+        ];
+
+        $dataTable =  $this->data_table ;
+
+        $pdf = PDF::loadView('pdf.pdf_amortization', compact('member', 'dataOperation','dataTable'));
+        $nombrePdf = 'reporte-amortizacion-' . $this->name . '-' . time() . '.pdf';
+
+        return response()->streamDownload(function () use ($pdf) {
+            echo $pdf->stream();
+        }, $nombrePdf);
     }
 
 }
