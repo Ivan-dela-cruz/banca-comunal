@@ -274,7 +274,8 @@ Route::middleware('auth')->group(function() {
 });
 
 
-Route::get('libreta-pdf/{id}',[Libreta::class,'libreta']);
+Route::get('notebook-pdf/{id}',[Libreta::class,'notebook'])->name('notebook-pdf');
+Route::get('transactions-pdf/{id}',[Libreta::class,'transactions'])->name('transactions-pdf');
 
 
 

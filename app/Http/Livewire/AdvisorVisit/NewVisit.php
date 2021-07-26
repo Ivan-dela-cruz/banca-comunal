@@ -18,7 +18,7 @@ class NewVisit extends Component
     public $request_id = null, $credit_type, $name_debtor, $dni_debtor, $amount, $reason_invest, $pay, $deadline, $variable_fee = 0, $credit_segment;
 
     //step2
-    public $member_id = null, $code, $status, $doc_type, $doc_number, $name, $last_name, $instruction, $birth_place, $country, $birth_date;
+    public $member_id = null, $code, $status, $doc_type='Cédula', $doc_number, $name, $last_name, $instruction, $birth_place, $country, $birth_date;
     public $marital_status, $gender, $email, $phone1, $phone2, $residence_address;
     public $member_type, $account_number, $status_member, $url_image;
 
@@ -47,6 +47,16 @@ class NewVisit extends Component
     {
         $this->getLastNumber();
         $data_reference = MemberReference::where('member_id', $this->member_id)->where('status', 1)->get();
+        try{
+            if ($this->deadline > 0 && $this->amount > 0){
+                $this->pay = round($this->amount / $this->deadline, 2);
+            }else{
+                $this->pay  = 0 ;
+            }
+        }catch(Exception $e){
+            $this->deadline = 0;
+            $this->pay = 0;
+        }
         return view('livewire.advisor-visit.new-visit', compact('data_reference'))
             ->extends('layouts.app')
             ->section('subcontent');
@@ -91,6 +101,7 @@ class NewVisit extends Component
 //        $this->member_id = $member->id;
         $this->name = $member->name;
         $this->last_name = $member->last_name;
+        $this->name_debtor = $member->last_name." ".$member->name;
         $this->doc_number = $member->doc_number;
 //        $this->passport = $member->passport;
         $this->instruction = $member->instruction;

@@ -10,7 +10,7 @@ use App\Models\MemberReference;
 use App\Models\ReferenceMember;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-
+use Exception;
 class NewRequest extends Component
 {
     use WithFileUploads;
@@ -63,10 +63,15 @@ public $secuence_tab = 0;
     {
         $this->getLastNumber();
         $data_reference = MemberReference::where('member_id', $this->member_id)->where('status',1)->get();
-        if ($this->deadline > 0 && $this->amount > 0){
-            $this->pay = round($this->amount / $this->deadline, 2);
-        }else{
-            $this->pay  = 0 ;
+        try{
+            if ($this->deadline > 0 && $this->amount > 0){
+                $this->pay = round($this->amount / $this->deadline, 2);
+            }else{
+                $this->pay  = 0 ;
+            }
+        }catch(Exception $e){
+            $this->deadline = 0;
+            $this->pay = 0;
         }
         return view('livewire.credit-request.new-request', compact('data_reference'))
             ->extends('layouts.app')
@@ -596,6 +601,7 @@ public $secuence_tab = 0;
 
     public function findMember()
     {
+        
         $member = Member::where('doc_number', $this->dni_debtor)->first();
         $this->member_id = $member->id;
 //        dd($this->member_id);

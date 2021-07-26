@@ -21,8 +21,8 @@
         </div>
 
         <div class="intro-y col-span-12 sm:col-span-6">
-            <div class="mb-2 {{ $name_debtor !=""?'text-theme-10':'' }}">Nombre del Deudor<span class="text-theme-6">*</span></div>
-            <input  wire:model="name_debtor" type="text" class="input w-full border flex-1 " placeholder="Nombres y Apellidos">
+            <div class="mb-2 ">Nombre del Deudor<span class="text-theme-6">*</span></div>
+            <input  wire:model="name_debtor" type="text" class="input w-full border flex-1 {{ $name_debtor !=""?'border-theme-10':'' }}" placeholder="Nombres y Apellidos">
             @error('name_debtor') <li class="text-theme-6">{{$message}}</li>  @enderror
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
@@ -55,7 +55,7 @@
             <div class="sm:mt-2">
                 <select wire:model="variable_fee" class="input w-full border flex-1">
                     <option value="0">Fija</option>
-                    <option value="1">Variable</option>
+                   {{--  <option value="1">Variable</option> --}}
                 </select>
             </div>
 

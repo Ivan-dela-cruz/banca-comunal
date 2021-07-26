@@ -28,12 +28,17 @@ class Retreats extends Component
     {
         $now = Carbon::now();
         $this->date = $now->format('Y-m-d');
-        $transactions = Transaction::orderBy('created_at', 'desc')
+        if(!is_null($this->member_id)){
+            $transactions = Transaction::orderBy('created_at', 'desc')
             ->where(function ($query) {
                 $query->when($this->member_id != null, function ($q) {
                     $q->where('member_id', $this->member_id);
                 });
             })->whereMonth('created_at', $now->month) ->paginate($this->perPage);
+        }else{
+            $transactions = [];
+        }
+        
         return view('livewire.transations.retreats', compact('transactions'))
             ->extends('layouts.app')
             ->section('subcontent');
@@ -47,34 +52,21 @@ class Retreats extends Component
 
             'member_id' => 'required',
             'account_id' => 'required',
-            'date' => 'required',
+            'date' => 'required|date',
             "place" => 'required',
             'type_partner' => 'required',
             'retreats' => 'required|numeric',
             'status' => 'required',
-        ], [
-            'doc_number.required' => 'Campo obligatorio.',
-            'account_number.required' => 'Campo obligatorio.',
-            'member_id.required' => 'Campo obligatorio.',
-            'account_id.required' => 'Campo obligatorio.',
-            'date.required' => 'Campo obligatorio.',
-            "place.required" => 'Campo obligatorio.',
-            'type_partner.required' => 'Campo obligatorio.',
-            'retreats.required' => 'Campo obligatorio.',
-            'deposit.numeric' => 'Campo incorrecto.',
-            'status.required' => 'Campo obligatorio.',
+            'data1' => 'retiro',
         ]);
 
         $last_balance = $this->lastBalance($this->member_id);
-//        dd($last_balance, $this->retreats);
         if($last_balance > $this->retreats){
             if ($this->status == 'Finalizado') {
                 $this->balance = $last_balance - $this->retreats;
             } else {
                 $this->balance = $last_balance;
             }
-
-
             $data = [
                 'member_id' => $this->member_id,
                 'account_id' => $this->account_id,
@@ -93,14 +85,10 @@ class Retreats extends Component
             $this->total_balance = '$ '.$this->balance;
 
             $deposit = Transaction::create($data);
-//
             $this->alert('success', 'Retiro registrado con exito');
         }else{
             $this->alert('warning','El miembro no tiene el saldo disponible');
         }
-
-
-//        $this->resetInputFields();
     }
 
     public function edit($id)
@@ -134,17 +122,7 @@ class Retreats extends Component
             'type_partner' => 'required',
             'retreats' => 'required|numeric',
             'status' => 'required',
-        ], [
-            'doc_number.required' => 'Campo obligatorio.',
-            'account_number.required' => 'Campo obligatorio.',
-            'member_id.required' => 'Campo obligatorio.',
-            'account_id.required' => 'Campo obligatorio.',
-            'date.required' => 'Campo obligatorio.',
-            "place.required" => 'Campo obligatorio.',
-            'type_partner.required' => 'Campo obligatorio.',
-            'retreats.required' => 'Campo obligatorio.',
-            'retreats.numeric' => 'Campo incorrecto.',
-            'status.required' => 'Campo obligatorio.',
+            'data1' => 'retiro',
         ]);
 
         $last_balance = $this->lastBalance($this->member_id);
@@ -155,16 +133,12 @@ class Retreats extends Component
         if ($this->status == 'Anulado') {
             if($last_balance < $retreat){
                 $this->balance = 0;
-//                dd('aqui');
             }else{
-//                dd($last_balance, $retreat);
                 $this->balance = $last_balance + $retreat;
             }
         }elseif ($this->status == 'Finalizado') {
             $this->balance = $balance - $this->retreats;
         }
-
-//        dd($this->balance);
 
         $data = [
             'member_id' => $this->member_id,
