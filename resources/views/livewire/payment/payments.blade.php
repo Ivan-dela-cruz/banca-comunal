@@ -58,7 +58,11 @@
                                                 <span class="text-base text-theme-11">$&nbsp;0 </span>
                                             </td>
                                             <td class="w-20 text-center">
-                                                <span class="text-base text-theme-9">{{ $cred->status }}</span>
+                                                @if($cred->status=="aprovado")
+                                                    <span class="text-base text-theme-9">Aprobado</span>
+                                                @else
+                                                    <span class="text-base text-theme-9">{{ $cred->status }}</span>
+                                                @endif
                                             </td>
                                             <td class="w-20 text-center">
                                                 <button wire:click="getDetailCredit({{$cred->id}})" class="button px-2 mr-1 mb-2 bg-theme-12 text-white">
