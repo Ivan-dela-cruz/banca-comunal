@@ -3,11 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class PageController extends Controller
 {
 
     public function init(){
+
+        if (Auth::check()) {
+            return redirect("dashboard")
+            ->withSuccess('Signed in');
+        }
+
         return view('login/main', [
             'theme' => 'light',
             'page_name' => 'auth-login',
