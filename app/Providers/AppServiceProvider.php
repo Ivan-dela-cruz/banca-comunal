@@ -32,5 +32,8 @@ class AppServiceProvider extends ServiceProvider
                 $query->time
             );
         });
+        if (config('app.env') === 'production') {
+            URL::forceScheme('https');
+        }
     }
 }
