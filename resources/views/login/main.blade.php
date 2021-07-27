@@ -46,7 +46,7 @@
                         <button id="btn-login" class="button button--lg w-full xl:w-32 text-white bg-theme-1 xl:mr-3 align-top">Iniciar</button>
                         <button hidden class="button button--lg w-full xl:w-32 text-gray-700 border border-gray-300 dark:border-dark-5 dark:text-gray-300 mt-3 xl:mt-0 align-top">Sign up</button>
                     </div>
-                    <div class="intro-x mt-10 xl:mt-24 text-gray-700 dark:text-gray-600 text-center xl:text-left">
+                    <div hidden class="intro-x mt-10 xl:mt-24 text-gray-700 dark:text-gray-600 text-center xl:text-left">
                         Desarrollado por  <br> <a class="text-theme-1 dark:text-theme-10" href="">Desofsi</a> & <a class="text-theme-1 dark:text-theme-10" href=""> S.A</a>
                     </div>
                 </div>
