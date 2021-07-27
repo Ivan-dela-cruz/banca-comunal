@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Request\LoginRequest;
 use App\Http\Controllers\Controller;
+use App\Providers\RouteServiceProvider;
 
 class AuthController extends Controller
 {
+    protected $redirectTo = RouteServiceProvider::HOME;
     /**
      * Show specified view.
      *

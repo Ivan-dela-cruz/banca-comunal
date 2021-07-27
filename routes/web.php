@@ -6,9 +6,6 @@ use App\Http\Controllers\{
     AuthController,
     PageController
 };
-use App\Http\Controllers\Admin\{
-    DashboardController
-};
 use App\Http\Controllers\Report\{
     Libreta
 };
@@ -100,8 +97,9 @@ Route::middleware('loggedin')->group(function() {
 });
 
 Route::middleware('auth')->group(function() {
-    Route::get('/', [PageController::class, 'init'])->name('dashboard');
-   // Route::get('/', DashboardController::class,'init')->name('dashboard');
+   // Route::get('/', [PageController::class, 'loadPage'])->name('dashboard');
+   Route::get('/', [PageController::class, 'init'])->name('dashboard');
+   Route::get('/dashboard', Index::class)->name('dashboard');
     Route::get('/eventos', ShowEvents::class)->name('events');
     Route::get('/miembros', Member::class)->name('members');
     Route::get('/nuevo-miembro', NewMember::class)->name('new-member');
