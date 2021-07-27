@@ -32,12 +32,22 @@ class AuthController extends Controller
      */
     public function login(LoginRequest $request)
     {
-        if (!\Auth::attempt([
-            'email' => $request->email, 
-            'password' => $request->password
-        ])) {
-            throw new \Exception('Wrong email or password.');
+        $request->validate([
+            'email' => 'required',
+            'password' => 'required',
+        ]);
+        $credentials = $request->only('email', 'password');
+        if (Auth::attempt($credentials)) {
+            return redirect()->intended('dashboard')
+                        ->withSuccess('Signed in');
         }
+        throw new \Exception('El email o la contraseña no son válidos.');
+        //if (!\Auth::attempt([
+        //    'email' => $request->email, 
+        //    'password' => $request->password
+        //])) {
+        //    throw new \Exception('Wrong email or password.');
+        //}
     }
 
     /**
