@@ -6,6 +6,11 @@ use App\Http\Controllers\Controller;
 
 class PageController extends Controller
 {
+
+    public function init(){
+        return view('login.main');
+    }
+    
     /**
      * Show specified view.
      *
