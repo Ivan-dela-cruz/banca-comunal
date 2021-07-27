@@ -95,10 +95,10 @@ Route::middleware('loggedin')->group(function() {
     Route::get('register', [AuthController::class, 'registerView'])->name('register-view');
     Route::post('register', [AuthController::class, 'register'])->name('register');
 });
-
+Route::get('/', [PageController::class, 'init'])->name('dashboard');
 Route::middleware('auth')->group(function() {
    // Route::get('/', [PageController::class, 'loadPage'])->name('dashboard');
-   Route::get('/', [PageController::class, 'init'])->name('dashboard');
+  
    Route::get('/dashboard', Index::class)->name('dashboard');
     Route::get('/eventos', ShowEvents::class)->name('events');
     Route::get('/miembros', Member::class)->name('members');
