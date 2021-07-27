@@ -8,9 +8,13 @@ class PageController extends Controller
 {
 
     public function init(){
-        return view('login.main');
+        return view('login/main', [
+            'theme' => 'light',
+            'page_name' => 'auth-login',
+            'layout' => 'login'
+        ]);
     }
-    
+
     /**
      * Show specified view.
      *
