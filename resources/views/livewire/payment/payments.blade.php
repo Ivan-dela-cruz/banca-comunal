@@ -3,7 +3,7 @@
         <h2 class="text-lg font-medium mr-auto">Pagos de créditos</h2>
         <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
             @if($btn_p)
-            <button wire:click.prevent="print()" class="button w-24 justify-center block bg-theme-9 text-white ml-2 mr-2">Imprimir</button>
+                <button wire:click.prevent="print()" class="button w-24 justify-center block bg-theme-9 text-white ml-2 mr-2">Imprimir</button>
             @endif
             <a href="/nuevo-credito"  class="button text-white bg-theme-1 shadow-md mr-2">Nuevo crédito</a>
         </div>
@@ -40,11 +40,10 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                
                                         @foreach ($listCredits as $cred)
                                         <tr class="intro-x">
                                             <td class="w-auto text-center">
-                                                <span> CR00000001</span>
+                                                <span> {{ $cred->code}}</span>
                                             </td>
                                             <td class="w-20">
                                                 <span>{{ $cred->term}}</span>
@@ -68,11 +67,8 @@
                                                     </span>
                                                 </button>
                                             </td>
-                                            
                                         </tr>
                                         @endforeach
-                                
-                                
                                     </tbody>
                                 </table>
                             </div>
