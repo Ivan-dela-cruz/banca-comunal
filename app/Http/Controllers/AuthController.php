@@ -8,7 +8,7 @@ use App\Providers\RouteServiceProvider;
 
 class AuthController extends Controller
 {
-    protected $redirectTo = RouteServiceProvider::HOME;
+    //protected $redirectTo = RouteServiceProvider::HOME;
     /**
      * Show specified view.
      *
@@ -38,7 +38,7 @@ class AuthController extends Controller
         ]);
         $credentials = $request->only('email', 'password');
         if (\Auth::attempt($credentials)) {
-            return redirect()->intended('dashboard')
+            return redirect("dashboard")
                         ->withSuccess('Signed in');
         }
         throw new \Exception('El email o la contraseña no son válidos.');
