@@ -7,7 +7,7 @@ use App\Http\Controllers\{
     PageController
 };
 use App\Http\Controllers\Admin\{
-    DashboarController
+    DashboardController
 };
 use App\Http\Controllers\Report\{
     Libreta
@@ -101,7 +101,7 @@ Route::middleware('loggedin')->group(function() {
 
 Route::middleware('auth')->group(function() {
    // Route::get('/', [PageController::class, 'loadPage'])->name('dashboard');
-   Route::get('/', DashboarController::class,'init')->name('dashboard');
+   Route::get('/', DashboardController::class,'init')->name('dashboard');
     Route::get('/eventos', ShowEvents::class)->name('events');
     Route::get('/miembros', Member::class)->name('members');
     Route::get('/nuevo-miembro', NewMember::class)->name('new-member');
