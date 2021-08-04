@@ -49,7 +49,6 @@ class Retreats extends Component
         $this->validate([
             'doc_number' => 'required',
             'account_number' => 'required',
-
             'member_id' => 'required',
             'account_id' => 'required',
             'date' => 'required|date',
@@ -57,7 +56,6 @@ class Retreats extends Component
             'type_partner' => 'required',
             'retreats' => 'required|numeric',
             'status' => 'required',
-            'data1' => 'retiro',
         ]);
 
         $last_balance = $this->lastBalance($this->member_id);
@@ -80,6 +78,7 @@ class Retreats extends Component
                 'balance' => $this->balance,
                 'type_currency' => $this->type_currency,
                 'status' => $this->status,
+                'data1' => 'retiro',
             ];
 
             $this->total_balance = '$ '.$this->balance;
@@ -114,7 +113,6 @@ class Retreats extends Component
         $this->validate([
             'doc_number' => 'required',
             'account_number' => 'required',
-
             'member_id' => 'required',
             'account_id' => 'required',
             'date' => 'required',
@@ -122,7 +120,6 @@ class Retreats extends Component
             'type_partner' => 'required',
             'retreats' => 'required|numeric',
             'status' => 'required',
-            'data1' => 'retiro',
         ]);
 
         $last_balance = $this->lastBalance($this->member_id);

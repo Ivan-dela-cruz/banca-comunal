@@ -32,19 +32,19 @@
                                 <div class="text-gray-600 text-xs">{{ $member->doc_number }}</div>
                             </div>
                         </div>
-                        <div class="absolute right-0 top-0 dropdown">
+                        <div hidden class="absolute right-0 top-0 dropdown">
                             <a class="dropdown-toggle w-5 h-5 block" href="javascript:;">
                                 <i data-feather="more-horizontal" class="w-5 h-5 text-gray-700 dark:text-gray-300"></i>
                             </a>
                             <div class="dropdown-box w-40">
                                 <div class="dropdown-box__content box dark:bg-dark-1 p-2">
                                     @can('update_client')
-                                        <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
+                                        <a hidden href="#" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
                                             <i data-feather="edit-2" class="w-4 h-4 mr-2"></i> Editar
                                         </a>
                                     @endcan
                                     @can('destroy_client')
-                                        <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
+                                        <a hidden href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
                                             <i data-feather="trash" class="w-4 h-4 mr-2"></i> Deshabilitar
                                         </a>
                                     @endcan

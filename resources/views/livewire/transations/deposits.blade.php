@@ -48,7 +48,6 @@
                 <select class="input w-full border mt-2" wire:model="type_partner">
                     <option value="">Seleccionar</option>
                     <option value="cliente">Cliente</option>
-                    <option value="socio">Socio</option>
                     <option value="socio fundador">Socio Fundador</option>
                 </select>
                 @error('type_partner') <span class="text-theme-6">{{$message}}</span> @enderror
@@ -65,7 +64,7 @@
         <div class="grid grid-cols-1 gap-4">
             <div>
                 <label>Descripción</label>
-                <textarea  wire:model="description" type="text" class="input w-full border mt-2" placeholder="Ingrese cédula de identidad"></textarea>
+                <textarea  wire:model="description" type="text" class="input w-full border mt-2" placeholder="Ingrese un texto"></textarea>
             </div>
 
         </div>

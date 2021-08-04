@@ -46,7 +46,32 @@
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">
             <div class="mb-2">Plazo (meses)<span class="text-theme-6">*</span></div>
-            <input wire:model="deadline" type="text" class="input w-full border flex-1" placeholder="">
+            <select wire:model="deadline" name="deadline" class="input w-full border flex-1">
+                <option value="1">1   Mes</option>
+                <option value="2">2   Meses</option>
+                <option value="3">3   Meses</option>
+                <option value="4">4   Meses</option>
+                <option value="5">5   Meses</option>
+                <option value="6">6   Meses</option>
+                <option value="7">7   Meses</option>
+                <option value="8">8   Meses</option>
+                <option value="9">9   Meses</option>
+                <option value="10">10  Meses</option>
+                <option value="11">11  Meses</option>
+                <option value="12">12  Meses</option>
+                <option value="13">13  Meses</option>
+                <option value="14">14  Meses</option>
+                <option value="15">15  Meses</option>
+                <option value="16">16  Meses</option>
+                <option value="17">17  Meses</option>
+                <option value="18">18  Meses</option>
+                <option value="19">19  Meses</option>
+                <option value="20">20  Meses</option>
+                <option value="21">21  Meses</option>
+                <option value="22">22  Meses</option>
+                <option value="23">23  Meses</option>
+                <option value="24">24  Meses</option>
+            </select>
             @error('deadline') <li class="text-theme-6">{{$message}}</li>  @enderror
         </div>
         <div class="intro-y col-span-12 sm:col-span-6">

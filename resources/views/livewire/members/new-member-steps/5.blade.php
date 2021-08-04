@@ -8,7 +8,6 @@
                     <div class="mb-2">Tipo de socio</div>
                     <select  wire:model="member_type" class="input w-full border flex-1">
                         <option value="cliente">Cliente</option>
-                        <option value="socio">Socio</option>
                         <option value="socio fundador">Socio Fundador</option>
                     </select>
                 </div>

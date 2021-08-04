@@ -49,15 +49,13 @@ class Deposits extends Component
         $this->validate([
             'doc_number' => 'required',
             'account_number' => 'required',
-
             'member_id' => 'required',
             'account_id' => 'required',
             'date' => 'required',
-            "place" => 'required',
+            'place' => 'required',
             'type_partner' => 'required',
             'deposit' => 'required|numeric',
-            'status' => 'required',
-            'data1' => 'deposito',
+            'status' => 'required'
         ]);
 
         $last_balance = $this->lastBalance($this->member_id);
@@ -116,15 +114,13 @@ class Deposits extends Component
         $this->validate([
             'doc_number' => 'required',
             'account_number' => 'required',
-
             'member_id' => 'required',
             'account_id' => 'required',
             'date' => 'required|date',
-            "place" => 'required',
+            'place' => 'required',
             'type_partner' => 'required',
             'deposit' => 'required|numeric',
             'status' => 'required',
-            'data1' => 'deposito',
         ]);
 
         $last_balance = $this->lastBalance($this->member_id);
@@ -148,8 +144,8 @@ class Deposits extends Component
             'account_id' => $this->account_id,
             'date' => $this->date,
             'description' => $this->description,
-            "amount_letters" => $this->amount_letters,
-            "place" => $this->place,
+            'amount_letters' => $this->amount_letters,
+            'place' => $this->place,
             'type_partner' => $this->type_partner,
             'deposit' => $this->deposit,
             'retreats' => 0,
