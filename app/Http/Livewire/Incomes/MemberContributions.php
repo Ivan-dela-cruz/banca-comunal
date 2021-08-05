@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Incomes;
 
 use Livewire\Component;
 use App\Models\Member;
+use App\summary;
 use App\Models\MemberIncomeContribution;
 use Livewire\WithPagination;
 
@@ -38,6 +39,18 @@ class MemberContributions extends Component
             'status' => $this->status
         ];
         $income = MemberIncomeContribution::create($data);
+        $sumary = new summary();
+        $sumary->created_at = $this->date;
+        $sumary->concept=$this->description;
+        $sumary->type='add';
+        $sumary->amount=$this->amount;
+        $sumary->tax=0;
+        $sumary->account_id=24;
+        $sumary->categories_id=78;
+        $sumary->id_autor=auth()->user()->id;
+        $sumary->future =1;
+        $sumary->save();
+
         $this->data_id = $income->id;
         $this->action = 'PUT';
         $this->alert('success', '¡Datos registrados con exíto!');

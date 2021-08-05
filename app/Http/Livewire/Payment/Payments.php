@@ -8,6 +8,7 @@ use App\Models\Member;
 use App\Models\DetailAmortization;
 use App\Models\Credits;
 use App\Models\Payment;
+use App\summary;
 use App\Models\ConfigTable;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -201,6 +202,17 @@ class Payments extends Component
             $detail->balance_pay = 0;
         }
         $detail->save();
+        $sumary = new summary();
+        $sumary->created_at = $this->date_pay;
+        $sumary->concept="Pago Crédito "."Doc. Pago ".$this->code_pay.", Letra N° ".$this->num_pay." Cta. ".$this->account_number_pay;
+        $sumary->type='add';
+        $sumary->amount=$this->total_pay;
+        $sumary->tax=0;
+        $sumary->account_id=32;
+        $sumary->categories_id=75;
+        $sumary->id_autor=auth()->user()->id;
+        $sumary->future =1;
+        $sumary->save();
         $this->action="PUT";
         $this->getDetailCredit($this->credit_id_pay);
         $this->alert('success', 'Couta cancelada  satisfactoriamente');

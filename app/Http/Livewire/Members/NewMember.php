@@ -329,7 +329,7 @@ class NewMember extends Component
             'name' => $this->name,
             'last_name' => $this->last_name,
             'doc_number' => $this->dni,
-//            'passport' => $this->passport,
+            'passport' => $this->passport,
             'instruction' => $this->instruction,
             'marital_status' => $this->marital_status,
             'birth_date' => $this->birth_date,
@@ -358,7 +358,6 @@ class NewMember extends Component
             'name_spouse' => 'regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u|max:255',
             'last_name_spouse' => 'regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u|max:255',
             'dni_spouse' => 'numeric|digits:10',
-            'passport_spouse' => 'numeric',
             'email_spouse' => ['email', 'unique:detail_members,email_spouse'],
             'phone1_spouse' => 'numeric|digits:10',
             'phone2_spouse' => 'numeric|digits:10',
@@ -367,7 +366,6 @@ class NewMember extends Component
             'last_name_spouse.regex'=>'El campo acepta solo letras.',
             'dni_spouse.numeric' => 'El campo acepta solo números.',
             'dni_spouse.digits' => 'Ingrese  10 digítos.',
-            'passport_spouse.numeric' =>'El campo acepta solo números.',
             'email_spouse.email'=>'Ingrese un correo válido.',
             'email_spouse.unique'=>'El correo ya existe.',
             'phone1_spouse.numeric'=>'El campo acepta solo números.',
@@ -506,12 +504,6 @@ class NewMember extends Component
             'principal_street' => $this->principal_street,
             'secundary_street' => $this->secundary_street,
             'reference_place' => $this->reference_place,
-//            'name_reference'=>$this->name_reference,
-//            'last_name_reference'=>$this->last_name_reference,
-//            'dni_reference'=>$this->dni_reference,
-//            'relationship'=>$this->relationship,
-//            'time_to_meet'=>$this->time_to_meet,
-//            'instruction_reference'=>$this->instruction_reference
         ];
         $member->update($data_member);
         $detail->update($data_deatil);

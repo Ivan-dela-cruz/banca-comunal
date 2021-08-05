@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Transations;
 
 use App\Models\Member;
+use App\summary;
 use App\Models\Transaction;
 use Carbon\Carbon;
 use Livewire\Component;
@@ -84,6 +85,17 @@ class Retreats extends Component
             $this->total_balance = '$ '.$this->balance;
 
             $deposit = Transaction::create($data);
+            $sumary = new summary();
+            $sumary->created_at = $this->date;
+            $sumary->concept=$this->description;
+            $sumary->type='out';
+            $sumary->amount=$this->retreats;
+            $sumary->tax=0;
+            $sumary->account_id=32;
+            $sumary->categories_id=76;
+            $sumary->id_autor=auth()->user()->id;
+            $sumary->future =1;
+            $sumary->save();
             $this->alert('success', 'Retiro registrado con exito');
         }else{
             $this->alert('warning','El miembro no tiene el saldo disponible');

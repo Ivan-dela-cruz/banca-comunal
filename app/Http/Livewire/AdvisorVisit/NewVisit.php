@@ -15,7 +15,7 @@ class NewVisit extends Component
     use WithFileUploads;
 
     //step1
-    public $request_id = null, $credit_type, $name_debtor, $dni_debtor, $amount, $reason_invest, $pay, $deadline, $variable_fee = 0, $credit_segment;
+    public $request_id = null, $credit_type, $name_debtor, $dni_debtor, $amount, $reason_invest, $pay, $deadline=1, $variable_fee = 0, $credit_segment;
 
     //step2
     public $member_id = null, $code, $status, $doc_type='Cédula', $doc_number, $name, $last_name, $instruction, $birth_place, $country, $birth_date;

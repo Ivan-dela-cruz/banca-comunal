@@ -4,6 +4,8 @@ namespace App\Http\Livewire\Transations;
 
 use App\Models\Member;
 use App\Models\Transaction;
+use App\Models\configContable;
+use App\summary;
 use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -86,6 +88,17 @@ class Deposits extends Component
         $this->total_balance = '$ '.$this->balance;
         $deposit = Transaction::create($data);
 
+        $sumary = new summary();
+        $sumary->created_at = $this->date;
+        $sumary->concept=$this->description;
+        $sumary->type='add';
+        $sumary->amount=$this->deposit;
+        $sumary->tax=0;
+        $sumary->account_id=32;
+        $sumary->categories_id=77;
+        $sumary->id_autor=auth()->user()->id;
+        $sumary->future =1;
+        $sumary->save();
         $this->alert('success', 'Deposito registrado con exito');
         $this->resetInputFields();
     }

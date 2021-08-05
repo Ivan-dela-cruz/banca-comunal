@@ -27,7 +27,7 @@
         <div class="grid grid-cols-1 gap-4">
             <div>
                 <label>Descripción</label>
-                <textarea  wire:model="description" type="text" class="input w-full border mt-2" placeholder="Ingrese cédula de identidad"></textarea>
+                <textarea  wire:model="description" type="text" class="input w-full border mt-2" placeholder="Ingrese un texto"></textarea>
             </div>
             <div class="mt-1">
                 <label>Estado</label>

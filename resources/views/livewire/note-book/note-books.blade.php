@@ -95,9 +95,6 @@
                                 <td class="w-20 text-center">
                                     <span class="text-base text-theme-9">$&nbsp;{{ $data->balance }}</span>
                                 </td>
-                                
-                                
-                                
                             </tr>
                         @endforeach
                         </tbody>
